@@ -28,7 +28,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 120px; }
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--white);
@@ -140,10 +140,13 @@
   .filter-btn.active { background: var(--scarlet); border-color: var(--scarlet); color: #fff; }
 
   /* ── TABLE WRAPPER ── */
+  .table-scroll {
+    overflow-x: auto;
+  }
   .table-wrapper {
     max-width: 1600px; margin: 0 auto;
-    overflow-x: auto;
     border: 1px solid var(--rule);
+    min-width: 1400px;
   }
 
   table {
@@ -151,7 +154,6 @@
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
-    min-width: 1400px;
   }
 
   /* Column widths */
@@ -161,6 +163,7 @@
   /* ── HEADER ROW ── */
   thead tr th {
     position: sticky; top: 56px; z-index: 20;
+    box-shadow: 0 2px 0 #333;
     background: var(--black);
     padding: 10px 8px;
     font-size: 9.5px; font-weight: 600;
@@ -273,7 +276,7 @@
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gray);
     border-bottom: 1px solid var(--rule);
-    position: sticky; left: 0;
+    border-top: 3px solid var(--rule);
   }
 
   /* ── LEGEND ── */
@@ -377,7 +380,8 @@
   </div>
 
   <!-- TABLE -->
-  <div class="table-wrapper reveal">
+  <div class="table-scroll reveal">
+  <div class="table-wrapper">
   <table id="outcomes-table">
     <colgroup>
       <col class="col-study">
@@ -408,6 +412,7 @@
     <tbody id="table-body">
     </tbody>
   </table>
+  </div>
   </div>
 
   <!-- LEGEND -->
