@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review & Summary Tables — External Sternal Support Devices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--scarlet:#BB0000;--gray:#666;--gray-light:#f4f3f1;--gray-dark:#3a3a3a;--white:#fdfcfa;--black:#1a1a1a;--rule:#d0ccc6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,252,250,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--scarlet);text-decoration:none;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--scarlet);}
+.page-header{margin-top:56px;background:var(--scarlet);padding:64px 64px 56px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
+.header-eyebrow{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px;position:relative;z-index:1;}
+.header-title{font-family:'EB Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:500;color:#fff;line-height:1.15;margin-bottom:16px;position:relative;z-index:1;max-width:700px;}
+.header-title em{font-style:italic;color:rgba(255,255,255,.7);}
+.header-desc{font-size:13px;line-height:1.7;color:rgba(255,255,255,.65);max-width:620px;position:relative;z-index:1;}
+.stats-strip{background:var(--black);display:flex;border-bottom:1px solid #2a2a2a;flex-wrap:wrap;}
+.strip-stat{flex:1;min-width:120px;padding:20px 28px;border-right:1px solid #2a2a2a;display:flex;flex-direction:column;gap:3px;}
+.strip-stat:last-child{border-right:none;}
+.strip-number{font-family:'EB Garamond',serif;font-size:28px;font-weight:500;color:var(--scarlet);line-height:1;}
+.strip-label{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.main{padding:40px 24px 100px;}
+.controls{max-width:1600px;margin:0 auto 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.controls-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-right:4px;}
+.filter-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;cursor:pointer;border:1px solid var(--rule);background:var(--white);color:var(--gray);transition:all .15s;}
+.filter-btn:hover{border-color:var(--scarlet);color:var(--scarlet);}
+.filter-btn.active{background:var(--scarlet);border-color:var(--scarlet);color:#fff;}
+.table-scroll{overflow-x:auto;max-width:1600px;margin:0 auto;border:1px solid var(--rule);}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:2200px;}
+/* column widths */
+col.c-author{width:170px;}col.c-title{width:260px;}col.c-year{width:52px;}
+col.c-summary{width:240px;}col.c-design{width:160px;}col.c-pop{width:190px;}
+col.c-sr{width:140px;}col.c-int{width:140px;}col.c-norint{width:130px;}
+col.c-outcomes{width:200px;}col.c-methods{width:180px;}col.c-results{width:240px;}
+col.c-cost{width:150px;}col.c-nursing{width:140px;}col.c-sat{width:140px;}
+thead th{position:sticky;top:56px;z-index:20;background:var(--black);padding:10px 10px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:left;border-bottom:2px solid #333;border-right:1px solid #2a2a2a;vertical-align:bottom;}
+thead th.hovered{color:#fff;background:#1a1a1a;}
+.th-inner{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;display:inline-block;padding:4px 0;max-height:130px;overflow:hidden;}
+/* Study type header group */
+thead tr.group-row th{top:56px;}
+.group-th{background:#2a1a1a !important;color:rgba(255,180,180,.7) !important;text-align:center !important;font-size:8.5px;letter-spacing:.1em;}
+tbody tr{transition:background .1s;}
+tbody tr:hover{background:rgba(187,0,0,.025);}
+.cell-study{padding:14px 12px;border-right:2px solid var(--rule);border-bottom:1px solid var(--rule);vertical-align:top;background:var(--white);position:sticky;left:0;z-index:10;}
+tbody tr:nth-child(even) .cell-study{background:var(--gray-light);}
+tbody tr:hover .cell-study{background:#fdf8f8;}
+.study-flag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-bottom:5px;}
+.flag-rct{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.flag-sr{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.flag-meta{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;}
+.flag-guide{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
+.flag-review{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+.flag-retro{background:#fefce8;color:#a16207;border:1px solid #fde68a;}
+.flag-best{background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;}
+.study-name{font-size:11.5px;font-weight:600;color:var(--black);line-height:1.3;margin-bottom:2px;}
+.study-year{font-size:10px;color:var(--scarlet);font-weight:600;}
+td.data-cell{padding:10px 10px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);vertical-align:top;font-size:11px;line-height:1.55;color:var(--gray-dark);}
+td.data-cell.hovered{background:rgba(187,0,0,.03);}
+tbody tr:nth-child(even) td.data-cell{background:var(--gray-light);}
+tbody tr:nth-child(even) td.data-cell.hovered{background:rgba(187,0,0,.04);}
+.na{color:#ccc;font-size:11px;font-style:italic;}
+.study-type-group{background:#2a1a1a14;}
+/* flags legend */
+.legend-area{max-width:1600px;margin:28px auto 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 2px;}
+.legend-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);width:100%;}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--gray-dark);}
+.note-box{max-width:1600px;margin:24px auto 0;background:var(--gray-light);border:1px solid var(--rule);border-left:3px solid var(--scarlet);padding:16px 22px;}
+.note-box-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--scarlet);margin-bottom:8px;}
+.note-box-text{font-size:12px;line-height:1.75;color:var(--gray-dark);}
+.note-box-text strong{color:var(--black);}
+footer{background:var(--black);padding:44px 64px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:64px;}
+.footer-text{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
+.footer-link:hover{color:var(--scarlet);}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:800px){nav{padding:0 20px;}.nav-links{display:none;}.page-header{padding:60px 24px 44px;}.main{padding:28px 8px 80px;}footer{padding:36px 24px;flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">← Back to Project</a>
+  <ul class="nav-links">
+    <li><a href="index.html#overview">Overview</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="levels_of_evidence.html">Levels of Evidence</a></li>
+    <li><a href="outcomes_table.html">Outcome Table</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="header-eyebrow">Deliverable 02 · Evidence Synthesis</div>
+  <h1 class="header-title">Review &amp; <em>Summary Tables</em></h1>
+  <p class="header-desc">All 16 included studies summarized across key domains: study design, population, study type, outcomes, data collection methods, results, costs, nursing involvement, and patient satisfaction.</p>
+</div>
+<div class="stats-strip">
+  <div class="strip-stat"><div class="strip-number">16</div><div class="strip-label">Studies Included</div></div>
+  <div class="strip-stat"><div class="strip-number">6</div><div class="strip-label">RCTs</div></div>
+  <div class="strip-stat"><div class="strip-number">2</div><div class="strip-label">Systematic Reviews / Meta-Analyses</div></div>
+  <div class="strip-stat"><div class="strip-number">3</div><div class="strip-label">Practice Guidelines</div></div>
+  <div class="strip-stat"><div class="strip-number">3</div><div class="strip-label">Reviews of Literature</div></div>
+  <div class="strip-stat"><div class="strip-number">2</div><div class="strip-label">Retrospective / Observational</div></div>
+</div>
+<div class="main">
+  <div class="controls reveal">
+    <span class="controls-label">Filter by type:</span>
+    <button class="filter-btn active" onclick="filterRows('all',this)">All studies</button>
+    <button class="filter-btn" onclick="filterRows('rct',this)">RCTs</button>
+    <button class="filter-btn" onclick="filterRows('review',this)">Reviews &amp; Meta-analyses</button>
+    <button class="filter-btn" onclick="filterRows('guideline',this)">Guidelines</button>
+    <button class="filter-btn" onclick="filterRows('other',this)">Other</button>
+  </div>
+  <div class="table-scroll reveal">
+  <table id="rst">
+    <colgroup>
+      <col class="c-author"><col class="c-title"><col class="c-year">
+      <col class="c-summary"><col class="c-design"><col class="c-pop">
+      <col class="c-sr"><col class="c-int"><col class="c-norint">
+      <col class="c-outcomes"><col class="c-methods"><col class="c-results">
+      <col class="c-cost"><col class="c-nursing"><col class="c-sat">
+    </colgroup>
+    <thead>
+      <tr>
+        <th rowspan="2" style="vertical-align:bottom;min-width:170px"><span class="th-inner">Author</span></th>
+        <th rowspan="2"><span class="th-inner">Title</span></th>
+        <th rowspan="2"><span class="th-inner">Year</span></th>
+        <th rowspan="2"><span class="th-inner">Summary</span></th>
+        <th rowspan="2"><span class="th-inner">Study Design / Level of Evidence</span></th>
+        <th rowspan="2"><span class="th-inner">Population</span></th>
+        <th colspan="3" class="group-th" style="text-align:center;writing-mode:horizontal-tb;white-space:nowrap;padding:6px 8px;">Study Type</th>
+        <th rowspan="2"><span class="th-inner">Outcomes Measured</span></th>
+        <th rowspan="2"><span class="th-inner">Data Collection Methods</span></th>
+        <th rowspan="2"><span class="th-inner">Results</span></th>
+        <th rowspan="2"><span class="th-inner">Discussion of Costs</span></th>
+        <th rowspan="2"><span class="th-inner">Involvement of Nursing Staff</span></th>
+        <th rowspan="2"><span class="th-inner">Patient Satisfaction</span></th>
+      </tr>
+      <tr>
+        <th data-col="sr"><span class="th-inner">Systematic Reviews &amp; Meta-Analyses</span></th>
+        <th data-col="int"><span class="th-inner">Intervention Studies</span></th>
+        <th data-col="norint"><span class="th-inner">Non-Intervention Studies</span></th>
+      </tr>
+    </thead>
+    <tbody id="rst-body"></tbody>
+  </table>
+  </div>
+  <div class="legend-area reveal">
+    <div class="legend-title">Study type key</div>
+    <div class="legend-item"><span class="study-flag flag-rct">RCT</span>Randomized Controlled Trial</div>
+    <div class="legend-item"><span class="study-flag flag-meta">Meta-Analysis</span>Systematic Review &amp; Meta-Analysis</div>
+    <div class="legend-item"><span class="study-flag flag-sr">Cochrane SR</span>Cochrane Systematic Review</div>
+    <div class="legend-item"><span class="study-flag flag-guide">Guideline</span>Practice Guideline / Consensus Statement</div>
+    <div class="legend-item"><span class="study-flag flag-review">Review</span>Literature Review</div>
+    <div class="legend-item"><span class="study-flag flag-best">BET</span>Best Evidence Topic</div>
+    <div class="legend-item"><span class="study-flag flag-retro">Retrospective</span>Retrospective / Observational Study</div>
+  </div>
+  <div class="note-box reveal">
+    <div class="note-box-label">Methodological Notes</div>
+    <p class="note-box-text">
+      <strong>Hjorth (2014)</strong> — company sponsored; results should be interpreted with caution.
+      <strong>El-Ansary (2008, 2015)</strong> — chronic sternal instability population; findings may not generalize to acute post-sternotomy patients.
+      <strong>Katijjahbe (2018)</strong> — no sternal binders used in intervention arm.
+      <strong>Rogers et al. (2024)</strong> — Cochrane review covering 118 RCTs across all SSI prevention interventions; ESSD findings represent a subset.
+      All corrections from accuracy review applied: year errors (Caimmi 2016→2017; Tsang 2026→2016), missing years (Gorlitzer 2010, Selten 2021, Caldonazo 2024), study design reclassifications (Lazar as Practice Guideline; Tsang as BET Review), author list corrections (Rogers et al. lead author; Bouza et al. garbled names), and Vitomskyi title restoration.
+    </p>
+  </div>
+</div>
+<footer>
+  <p class="footer-text">External Sternal Support Devices: A Comprehensive Review · Review &amp; Summary Tables</p>
+  <div style="display:flex;gap:22px;flex-wrap:wrap;">
+    <a href="index.html" class="footer-link">← Home</a>
+    <a href="prisma.html" class="footer-link">PRISMA</a>
+    <a href="levels_of_evidence.html" class="footer-link">Levels of Evidence</a>
+    <a href="outcomes_table.html" class="footer-link">Outcome Table</a>
+    <a href="guidelines_matrix.html" class="footer-link">Guidelines Matrix</a>
+  </div>
+</footer>
+<script>
+const STUDIES=[
+{group:"rct",flag:"flag-rct",flagLabel:"RCT",author:"Caimmi et al., 2017",title:"A randomized trial to assess the contribution of a novel thorax support vest (corset) in preventing mechanical complications of median sternotomy",year:"2017",summary:"A prospective, randomized study assessed the role of a Posthorax support vest in preventing mechanical complications and improving anatomical healing in high-risk cardiac surgery patients.",design:"Randomized Controlled Trial (RCT); Level 2a",pop:"310 high-risk patients post median sternotomy. Group A (n=155): Posthorax vest; Group B (n=155): no vest.",sr:"Not applicable — RCT",int:"Posthorax support vest (Epple, Inc., Vienna, Austria). Worn from chest drain removal through 90 days post-discharge.",norint:"Not applicable",outcomes:"Primary: mechanical sternal complications, quality of sternal healing, re-operation rate, hospitalization duration, re-admission. Secondary: post-operative pain, QoL (EQ-5D). Additional: sternotomy lucency, freedom from mechanical events at 5 years.",methods:"Prospective RCT. EQ-5D for QoL; VAS for pain. Follow-up via outpatient visits and telephone interviews.",results:"No re-operations in Group A vs. 7 in Group B. Mean LOS: 7±2.7 days (A) vs. 12±3.4 days (B), p=0.02. Re-admission: 6 (A) vs. 16 (B). EQ-5D significantly better in Group A for mobility, self-care, freedom from pain/anxiety. Freedom from mechanical events at 5 years: 95.8% (A) vs. 84.7% (B), p<0.001.",cost:"Economic impact discussed — prolonged hospitalization and resource utilization increase costs. No direct cost-benefit analysis.",nursing:"Not explicitly mentioned. Reduction in LOS and re-admissions could imply decreased nursing workload.",sat:"EQ-5D showed better mobility, self-care, and freedom from pain/anxiety in vest group."},
+{group:"rct",flag:"flag-rct",flagLabel:"RCT",author:"Celik et al., 2011",title:"Sternal dehiscence in patients with moderate and severe chronic obstructive pulmonary disease undergoing cardiac surgery: The value of supportive thorax vests",year:"2011",summary:"Moderate to severe COPD is a significant independent risk factor for sternal dehiscence. Thorax support vest combined with Robicsek closure significantly reduces sternal wound complications and mortality in COPD patients.",design:"Dual-design: Study 1 — Retrospective cohort; Study 2 — Prospective RCT. Level 2b (Study 1) / Level 2a (Study 2)",pop:"Study 1: 842 patients (328 COPD, 514 non-COPD). Study 2: 221 patients with moderate/severe COPD. Group 2a (n=100): Posthorax vest; Group 2b (n=121): no additional procedure.",sr:"Not applicable",int:"Study 2: Posthorax vest applied postoperatively with Robicsek closure.",norint:"Study 1: Retrospective evaluation of patient records, July 2004–September 2007.",outcomes:"Incidence of sternal dehiscence; mortality rates; duration of hospitalization.",methods:"Study 1: Retrospective analysis. Study 2: Prospective RCT with randomization; 6-month follow-up. Pearson chi-square, Fisher exact, unpaired t-tests. ATS COPD classification.",results:"Study 1: Dehiscence 7.9% (COPD) vs. 1.2% (non-COPD), p<.001. Mortality with dehiscence: 53.8% (COPD) vs. 33.3% (non-COPD). Study 2: Dehiscence 1% (vest) vs. 11.5% (no vest), p=.002. No deaths in vest group vs. 35.7% mortality in no-vest group. LOS: 13.7 vs. 17.8 days, p=.03.",cost:"Posthorax vest 'still expensive.' NNT=15 patients to prevent 1 complication.",nursing:"Nursing staff involved in vest application. Vest described as easy to use with adjustable fittings.",sat:"Vest easy to use; shorter LOS. One patient with severe COPD preferred vest over reoperation. Not practical for obese female patients."},
+{group:"rct",flag:"flag-rct",flagLabel:"RCT",author:"Gorlitzer et al., 2010",title:"A prospective randomized multicenter trial shows improvement of sternum related complications in cardiac surgery with the Posthorax support vest",year:"2010",summary:"The Posthorax support vest significantly reduces sternum-related complications and shortens hospital stay compared to traditional flexible dressing in a prospective randomized multicenter trial of 1,560 cases.",design:"Prospective Randomized Multicenter Trial (RCT); Level 2a",pop:"1,560 patients post median sternotomy. Group A (n=905): flexible dressing; Group B (n=655): Posthorax vest. Mean age 68 years.",sr:"Not applicable — RCT",int:"Posthorax support vest worn for at least 6 weeks postoperatively.",norint:"Not applicable",outcomes:"Sternal dehiscence; superficial wound complications; deep sternal infections; reoperation rates; hospitalization time; ICU stay.",methods:"Monitoring for 90 days. Medical records; outpatient/telephone follow-up. StatXact v8; Statistica v8. Modified STS risk score.",results:"Total complications: 3.87% (A) vs. 0.61% (B), p=0.047. Dehiscence: 0.77% (A) vs. 0% (B), p=0.046. Deep sternal infections: 1.99% (A) vs. 0% (B), p=0.0001. Mean LOS: 17.33 (A) vs. 14.76 days (B), p=0.04. No significant difference in ICU stay.",cost:"Shorter LOS and lower reoperation rates offset vest cost. Mean LOS with infection: 44.9 days. Mediastinitis costs 240% more; hospital resource utilization +227%.",nursing:"Qualified nursing care at 30 hours/week per 1,000 cardiac procedures necessary.",sat:"Some patients refused vest due to slippage/discomfort. Patients advised to wear vest ≥6 weeks."},
+{group:"rct",flag:"flag-rct",flagLabel:"RCT Multicentre",author:"Gorlitzer et al., 2013",title:"Prevention of sternal wound complications after sternotomy: Results of a large prospective randomized multicentre trial",year:"2013",summary:"The Posthorax support vest significantly reduced deep sternal wound complications in a large prospective randomized multicentre trial of 2,539 patients.",design:"Prospective Randomized Multicentre Trial (RCT); Level 2a",pop:"2,539 patients post median sternotomy. Mean age 67 years, 45% female. 1,351 received vest; 1,188 did not. Majority CABG; also valve replacements.",sr:"Not applicable — RCT",int:"Posthorax support vest. Patients instructed to wear 24h/day for at least 6 weeks.",norint:"Not applicable",outcomes:"Frequency of deep wound complications (mediastinitis and sternal dehiscence); superficial wound complications; relative and absolute risk reduction; hospital LOS; readmission rates; reoperation; risk factors for deep wound infection.",methods:"Monitoring for 90 days. Medical records; outpatient/telephone follow-up. Statistica v10, NCSS8, PASS10. Pearson χ², Mann-Whitney U, logistic regression.",results:"Deep wound complications: 1.04% (vest) vs. 2.27% (no vest), ITT p<0.01. RRR: 54%. ARR: 1.23%. No significant difference in superficial complications. Risk factors: diabetes (OR 2.954), perfusion >100 min (OR 1.967), >200 min (OR 3.838), no vest (OR 2.406).",cost:"Mean LOS for repeat surgery: 49.4 days. Mean re-admission LOS: 41.2 days. CMS reimbursement restrictions noted.",nursing:"Specially trained nurse controlled vest use. Preoperative preparation improved compliance.",sat:"Non-compliance due to discomfort reported. Compliance improved with preoperative preparation. Non-compliance associated with higher complication rates."},
+{group:"rct",flag:"flag-rct",flagLabel:"RCT Pilot",author:"Naismith & Street, 2005",title:"Introducing the Cardibra: A randomised pilot study of a purpose designed support bra for women having cardiac surgery",year:"2005",summary:"The Cardibra may have beneficial effects on pain levels and wound healing up to day 14 after cardiac surgery. Pilot RCT with 10 women in each group.",design:"Randomized Controlled Trial — Pilot Study; Level 2a",pop:"20 female patients post cardiac surgery, tertiary referral centre, Melbourne. Mean age 68.8 years; mean BMI 31.7; bra cup size ≥C.",sr:"Not applicable — pilot RCT",int:"Cardibra (purpose-designed support bra) applied immediately post-surgery. Control: regular bra from day 3.",norint:"Not applicable",outcomes:"Pain levels (Likert scale 1–10); wound healing (nonapproximated edges, redness/swelling area); bra comfort; compliance with wear.",methods:"Repeated measures at 6 time points. Likert pain scale. Wound healing via Flanagan's framework. Compliance: hours worn daily. SPSS v10.",results:"Potential therapeutic effects on pain and wound healing up to day 14. Statistically significant reduction in swelling on days 7 and 42 (p<.05). Higher mean pain score on day 3 in treatment group (unexpected). Better initial compliance in Cardibra group; <50% comfort after day 14.",cost:"Funding by cardiac surgery department. Design simplified to reduce manufacturing costs.",nursing:"Regular bras impede nursing care. Cardibra's front fastening and Velcro facilitate easier nursing access. Instructions provided to nursing staff.",sat:"Days 5 and 7: 70% of Cardibra group comfortable vs. 50% control. By days 14 and 42: <50% of Cardibra group comfortable. Decreased comfort associated with reduced wear time."},
+{group:"rct",flag:"flag-rct",flagLabel:"RCT",author:"Tewarie et al., 2012",title:"Prevention of sternal dehiscence with the Sternum External Fixation (Stern-E-Fix) corset — a randomized trial in 750 patients",year:"2012",summary:"The Stern-E-Fix corset significantly reduces sternal dehiscence and secondary sternal infection in high-risk poststernotomy patients vs. standard elastic thorax bandage. Prospective RCT, n=750.",design:"Randomized Controlled Trial (RCT); Level 2a",pop:"750 male patients post median sternotomy (78% CABG). Group A (n=380): Stern-E-Fix corset; Group B (n=370): elastic thorax bandage. January 2009–June 2011.",sr:"Not applicable — RCT",int:"Stern-E-Fix corset for 6 weeks postoperatively. Control: standard elastic thorax bandage.",norint:"Not applicable",outcomes:"Wound infections; sternal dehiscence; mediastinitis mortality; treatment failure; LOS; reoperation for sternal infection; ventilation time; renal failure incidence.",methods:"Prospective RCT. Daily evaluations. CDC and El Oakley/Wright classifications. Validated questionnaire; telephone interviews. SPSS v19.",results:"Wound infections: 3.42% (A) vs. 9.46% (B). Dehiscence: 1 (A) vs. 22 (B). Mediastinitis mortality: 0 (A) vs. 2 (B). Treatment failure >5× higher in B (p=0.01). Mean LOS: 12.5±7.4 (A) vs. 18±15.1 days (B), p=0.002. Mean ventilation: 1.28 vs. 2.5 days (B), p=0.01. Reoperation: 4× higher in B.",cost:"Average hospitalization cost for wound infections 3× higher than uncomplicated. Stern-E-Fix reduces LOS and hospitalization cost.",nursing:"Regular patient evaluations; telephone interviews post-discharge; physical precautions instruction. >50% of Group B developed dehiscence after discharge during rehabilitation.",sat:"96% of patients in Group A were very pleased and satisfied with the Stern-E-Fix corset."},
+{group:"other",flag:"flag-retro",flagLabel:"Retrospective",author:"Selten et al., 2021",title:"Prevention of sternal wound infections in women using an external sternum fixation corset",year:"2021",summary:"Stern-E-Fix corset significantly reduces sternal wound infections and complications in high-risk female patients after median sternotomy. Retrospective analysis, n=145.",design:"Retrospective cohort study; Level 2b",pop:"145 high-risk female patients post median sternotomy (November 2009–November 2012). Group A (n=71): Stern-E-Fix corset; Group B (n=74): elastic thorax bandage (SanThorax).",sr:"Not applicable — retrospective study",int:"Stern-E-Fix corset vs. elastic thorax bandage (SanThorax) for 6 weeks.",norint:"Retrospective analysis of existing records; data from November 2009 to November 2012.",outcomes:"Incidence of SWI; DSWI; mediastinitis; need for operative wound therapy; antibiotic therapy duration; LOS due to SWI; overall LOS.",methods:"Retrospective analysis. Daily evaluations. CDC guidelines; El Oakley/Wright classification. SPSS Statistics 24. Student's t-test, Chi-square, Fisher's exact test.",results:"SWI: 7% (A) vs. 17.6% (B), p=0.025. DSWI: 1.4% (A) vs. 9.5% (B), p=0.063. Mediastinitis: 0% (A) vs. 5.4% (B), p=0.120. Operative wound therapy: 4.2% (A) vs. 16.2% (B), p=0.026. Overall LOS: 15±9.2 (A) vs. 24.7±24.5 days (B), p=0.006. Antibiotic duration: 10±7.4 (A) vs. 20.2±15.5 days (B), p=0.001.",cost:"Implied cost savings from shorter LOS and reduced surgical interventions/antibiotics. No explicit economic analysis.",nursing:"All patients evaluated daily. Patients instructed on corset/bandage use. Multimorbid women monitored regularly on outpatient basis.",sat:"Not mentioned"},
+{group:"review",flag:"flag-meta",flagLabel:"Systematic Review & Meta-Analysis",author:"Caldonazo et al., 2024",title:"Thorax support vest to prevent sternal wound infections in cardiac surgery patients — a systematic review and meta-analysis",year:"2024",summary:"Meta-analysis of RCTs found TSV use associated with lower DSWI, sternal wound dehiscence, and shorter hospital LOS after cardiac surgery. Evidence not yet conclusive for strong practice recommendations.",design:"Systematic Review and Meta-Analysis of RCTs; Level 1a",pop:"3,820 total patients (4 RCTs). TSV group: n=1,986. Age 63.9–70.4 years; female 30–70.8%; BMI 27.9–30.0; diabetes 29.5–48.5%; COPD 19.7–63.0%.",sr:"Systematic Review and Meta-Analysis. 4 RCTs included. Ovid MEDLINE, EMBASE, Cochrane Library. Cochrane RoB tool.",int:"Thorax support vest (TSV) vs. no vest or elastic bandage.",norint:"Not applicable",outcomes:"Primary: DSWI. Secondary: SSWI, sternal wound dehiscence, hospital LOS.",methods:"Literature search in Ovid MEDLINE, EMBASE, Cochrane Library. Independent screening. Cochrane RoB tool. Random effects models; forest plots; funnel plot; meta-regression; trial sequential analysis (TSA).",results:"DSWI: OR 0.24 (95% CI 0.13–0.43, p<0.01). SSWI: no significant difference. Dehiscence: OR 0.08 (95% CI 0.02–0.27, p<0.01). Hospital LOS: SMD −0.30 (95% CI −0.37 to −0.24, p<0.01). TSA: required n=11,946 vs. 3,820 enrolled — evidence not conclusive.",cost:"Complications noted to increase hospital costs. No specific cost-benefit analysis of TSV.",nursing:"Not mentioned",sat:"Not mentioned"},
+{group:"review",flag:"flag-sr",flagLabel:"Cochrane SR",author:"Rogers et al., 2024",title:"Interventions to prevent surgical site infection in adults undergoing cardiac surgery (Review)",year:"2024",summary:"Cochrane systematic review of 118 RCTs (n=51,854) assessing pre-, intra-, and postoperative interventions to prevent SSI in adults undergoing cardiac surgery. No current standard of care exists.",design:"Cochrane Systematic Review and Meta-Analysis of RCTs and quasi-RCTs; Level 1a",pop:"Adults ≥18 years undergoing any cardiac surgical procedure. 118 trials, n=51,854. Risk factors: high BMI, diabetes, smoking, prolonged cardiopulmonary bypass.",sr:"Cochrane Systematic Review and Meta-Analysis. 118 RCTs and quasi-RCTs; 30 included in quantitative synthesis. CENTRAL, MEDLINE, Embase (inception to May 2021).",int:"Primary objective: clinical effectiveness of pre-, intra-, and postoperative SSI prevention interventions (WHO 2018 broad categories).",norint:"Excluded: cohort, case-control, cross-sectional, controlled pre/post studies.",outcomes:"Total SSI incidence (superficial and deep); all-cause mortality; reoperation for SSI; hospital LOS; hospital readmission; healthcare costs and cost-effectiveness; QoL; adverse effects.",methods:"Data collection forms; independent extraction by two authors. VAS for pain; Southampton wound grading. GRADE for evidence certainty.",results:"Primary results: assessed clinical effectiveness of SSI prevention interventions. Secondary objectives not fully assessed — insufficient studies. Issues with bias and heterogeneity. No significant conclusions on care bundles.",cost:"Annual cost of treating SSIs in cardiac surgery approximately GBP 30 million in UK.",nursing:"Leg wounds closed by dedicated RN first assistant. Wounds inspected by nursing staff at discharge, 1 week, and 3 weeks post-surgery. Wound specialist nurse assessed wounds.",sat:"Not mentioned"},
+{group:"review",flag:"flag-best",flagLabel:"Best Evidence Topic",author:"Tsang et al., 2016",title:"Do external support devices reduce sternal wound complications after cardiac surgery?",year:"2016",summary:"Best Evidence Topic review of 6 RCTs found early poststernotomy use of external non-elastic sternal support devices significantly reduces overall sternal wound complications and may reduce hospital LOS.",design:"Best Evidence Topic (BET) Review; Level 5 — Review of Literature",pop:"Adult patients undergoing sternotomy for cardiac surgery. Sample sizes 20–2,539 across 6 RCTs. Subgroups: COPD patients, female patients with bra cup ≥C.",sr:"BET review — 6 RCTs selected from structured search of 116 papers.",int:"Reviews intervention studies (RCTs) using external non-elastic sternal support devices vs. no support or elastic bandages.",norint:"Not applicable",outcomes:"Overall sternal wound complications; deep sternal wound complications; hospital LOS.",methods:"Structured search per BET protocol (ICVTS). Author, year, study type, population, outcomes, results, and study weaknesses tabulated.",results:"Significant reduction in deep sternal wound complications with external support vs. no support. Non-elastic devices more effective than elastic bandages (4 trials). 3 studies reported significant reduction in mean hospital stay with non-elastic devices.",cost:"Not mentioned",nursing:"A nurse applies the external support device. Patients monitored by a specially trained nurse.",sat:"23.2% refused Posthorax vest due to discomfort. 96% pleased with Stern-E-Fix corset. 17.8% refused vest in another study."},
+{group:"review",flag:"flag-review",flagLabel:"Narrative Review",author:"Vitomskyi, 2022",title:"Limitations in Physical Therapy in Cardiac Surgery Patients",year:"2022",summary:"Conventional restrictions and recommendations for patients after cardiac surgery via sternotomy lack theoretical justification and research to confirm their necessity, as found through a narrative review.",design:"Narrative review; Level 5 — Review of Literature",pop:"Patients who have undergone cardiac surgery via sternotomy; analyzed through narrative review of existing research.",sr:"Not applicable — narrative review",int:"Not applicable",norint:"Narrative review — analysis of existing literature; no human/animal subjects.",outcomes:"Stability of sternal closure after sternotomy; forces on sternum during coughing and physical activities; effectiveness of sternum external fixation (SEF); superficial wound infection; deep sternal complications; sternal wound dehiscence.",methods:"Narrative review design — analysis and comparison of existing literature on sternal closure stability, load during physical therapy and activities, and effectiveness of SEF.",results:"Sternum closure stability after sternotomy is greater than forces exerted during coughing and upper extremity movements. SEF benefits not significant — statistical significance due to large sample sizes. Conventional restrictions lack theoretical justification.",cost:"Wound infection leads to high treatment costs and mortality. No explicit cost-benefit analysis of SEF.",nursing:"Not mentioned",sat:"Conventional restrictive guidelines criticized for reducing self-efficacy and promoting anxiety/depression. Need to change approach to focus on function and quality of life."},
+{group:"review",flag:"flag-review",flagLabel:"Literature Review w/ Recommendations",author:"Brocki et al., 2010",title:"Precautions related to midline sternotomy in cardiac surgery: A review of mechanical stress factors leading to sternal complications",year:"2010",summary:"No evidence found to support weight limitation regarding activity as long as upper arms are kept close to body and activity is within a pain-free range. Oxford CEBM-graded recommendations for post-sternotomy activity precautions developed.",design:"Literature review with graded recommendations (Oxford CEBM); Level 5 — Review of Literature",pop:"Patients who have undergone cardiac surgery via sternotomy. No direct patient population studied.",sr:"Not applicable — literature review",int:"Not applicable",norint:"Literature review — database search (CINAHL, PubMed, Cochrane, PEDRO) plus cardiothoracic centre guidelines from Denmark; January 1992–June 2008.",outcomes:"Sternal instability; sternal dehiscence; incisional pain; sternal wound infection; forces exerted on sternum during coughing and daily activities.",methods:"Three search strategies: database search, Danish cardiothoracic centre activity guidelines, mechanical stress literature review. Graded using Oxford CEBM (Grades A–D).",results:"No evidence supports weight limitation when upper arms close to body and activity within pain-free range. Cough is most important single mechanical stress factor. Self-hugging during coughing recommended. Supportive vest for BMI ≥35 and frequent coughers (Grade D). Supportive bra for cup size ≥D (Grade B). Elbow method for supine-to-sit transfers (Grade D).",cost:"Not mentioned",nursing:"Recommendations relevant to nursing practice regarding patient instruction on sternal precautions and transfers.",sat:"Patient-supportive approach emphasized. Antonovsky SOC framework — precautions should be comprehensible, manageable, and meaningful for patients."},
+{group:"guideline",flag:"flag-guide",flagLabel:"Cochrane SR / Practice Guideline",author:"Bouza et al., 2021",title:"Prevention, diagnosis and management of post-surgical mediastinitis in adults consensus guidelines of SEICAV, SECTCV, and CIBERES",year:"2021",summary:"Consensus guidelines for the prevention, diagnosis, and management of post-surgical mediastinitis in adults, developed by a multidisciplinary group of experts from three Spanish societies.",design:"Consensus Guidelines / Practice Guideline (PICO/GRADE systematic review); Level 1b",pop:"Adults who have undergone cardiac surgery at risk of or having developed post-surgical mediastinitis; frequently frail elderly patients with comorbidities.",sr:"Systematic literature searches: Cochrane Plus Library, Medline/PUBMED, EMBASE, Scopus, Trip database (1970–June 2021). PICO framework. GRADE format for evidence grading.",int:"Reviews RCTs, cohort studies, and case-control studies on prevention, diagnosis, and treatment interventions for PSM.",norint:"Non-analytical studies (clinical cases, case series) and expert opinions also included.",outcomes:"Patient outcomes; process of care; benefits and harm minimization; workload optimization.",methods:"Systematic search of 5 databases; PICO questions assigned to independent reviewer pairs; GRADE format; NICE/SIGN method for quality and risk of bias; rating system 1–4 for study design.",results:"Recommendations include: glycaemic control optimisation, smoking cessation, weight loss, S. aureus eradication, prophylactic NPWT for high-risk patients, postoperative sternal immobilisation for ALL patients, CT scan as first-choice imaging, empirical antibiotics after cultures, sequential oral therapy at 2–3 weeks.",cost:"Molecular PCR techniques noted as more expensive than regular cultures. No detailed cost analysis of recommended treatments.",nursing:"Not mentioned",sat:"Not mentioned"},
+{group:"guideline",flag:"flag-guide",flagLabel:"Practice Guideline",author:"Grant et al., 2024",title:"Perioperative care in cardiac surgery",year:"2024",summary:"ERAS Cardiac / ERAS International / STS joint consensus statement providing evidence-based recommendations for perioperative care in cardiac surgery across preoperative, intraoperative, and postoperative domains.",design:"Practice Guideline / Joint Consensus Statement; Level 1b",pop:"Adult patients undergoing cardiac surgery across the perioperative period.",sr:"Consensus statement based on systematic review of evidence across ERAS domains.",int:"Reviews evidence for pre-, intra-, and postoperative interventions (prehabilitation, anesthesia, ventilation, glycemic control, early mobilization).",norint:"Observational studies, audits, and QI data incorporated.",outcomes:"Hospital LOS; mortality/morbidity; pulmonary complications; glycemic control; patient engagement and quality of life.",methods:"Consensus process with systematic evidence review. Evidence quality rated: High / Moderate / Low.",results:"Key recommendations: lung-protective ventilation (High quality); multidisciplinary team as Heart Team extension (Moderate); TEE for moderate/high risk patients (Moderate); limiting nil-per-os for clear liquids >2h (Low); multicomponent prehabilitation for non-urgent surgery (Low); routine auditing of process measures (Moderate); shared decision-making (Low).",cost:"Not specifically addressed.",nursing:"Multidisciplinary team including dedicated coordinator emphasized. Nursing integral to ERAS bundle implementation.",sat:"Shared decision-making and patient engagement emphasized as core ERAS component."},
+{group:"guideline",flag:"flag-guide",flagLabel:"Practice Guideline",author:"Lazar et al., 2016",title:"Prevention and management of sternal wound infections",year:"2016",summary:"PRISMA-guided systematic literature review providing evidence-based ACC/AHA-graded recommendations for prevention and treatment of sternal wound infections in cardiac surgery. No prior specific guidelines existed.",design:"Expert Consensus Review / Practice Guideline (PRISMA-guided); Level 1b",pop:"Patients undergoing cardiac surgery at risk for sternal wound infections, including those with preoperative hypoalbuminemia, malnutrition, diabetes, and COPD.",sr:"PRISMA-guided systematic literature review (PubMed and Google Scholar to March 2015).",int:"Reviews RCTs and prospective trials: mupirocin, vancomycin, chlorhexidine, figure-of-eight closure, external chest support vests, NPWT.",norint:"Retrospective analyses included (e.g., NPWT studies).",outcomes:"Incidence of SSWI and DSWI; morbidity and mortality; effectiveness of mupirocin, vancomycin, chlorhexidine; impact of figure-of-eight closure; impact of external chest support vests; NPWT survival rates.",methods:"Literature search via PubMed and Google Scholar using MeSH headings. PRISMA reporting. Editorials and noncardiac/nonsternotomy articles excluded.",results:"Significant reduction in DSWI and SSWI with topical vancomycin (p=.02); elimination of superficial infections with vancomycin + tight glycemic control (p<.001). Significant decrease in dehiscence, DSWI, and LOS with external chest support vest. NPWT associated with 6% mortality vs. 25% with debridement/dressing alone.",cost:"Sternal wound infections can increase hospital costs by up to $62,000. CMS will no longer reimburse DSWI following CABG.",nursing:"Continuous insulin infusion in ICU; early extubation and removal of catheters involve nursing staff.",sat:"External chest support vests described as cumbersome; may affect patient compliance post-discharge."},
+{group:"other",flag:"flag-review",flagLabel:"Perspective Paper",author:"El-Ansary et al., 2019",title:"Evidence-based activity and sternal precautions following cardiac surgery",year:"2019",summary:"Perspective paper advocating for evidence-based, less restrictive sternal precautions post-sternotomy focused on function and quality of life rather than blanket restrictions.",design:"Perspective paper / Review; Level 5 — Review of Literature",pop:"Patients post-median sternotomy for cardiac surgery.",sr:"Not applicable",int:"Not applicable",norint:"Perspective / narrative review of evidence on sternal precautions.",outcomes:"Pain; quality of life.",methods:"Review and synthesis of existing evidence on sternal precautions.",results:"Advocates for less restrictive, evidence-based sternal precautions focusing on function and pain-free movement rather than blanket weight and activity restrictions.",cost:"Not mentioned",nursing:"Not mentioned",sat:"Emphasizes improving quality of life and functional recovery."}
+];
+
+const FIELDS=["author","title","year","summary","design","pop","sr","int","norint","outcomes","methods","results","cost","nursing","sat"];
+let activeFilter="all";
+
+function na(v){return(!v||v.trim()===""||v==="Not applicable"||v==="Not mentioned")
+  ?'<span class="na">—</span>'
+  :v.replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function renderTable(){
+  const tbody=document.getElementById("rst-body");
+  tbody.innerHTML="";
+  const filtered=STUDIES.filter(s=>{
+    if(activeFilter==="all")return true;
+    if(activeFilter==="rct")return s.group==="rct";
+    if(activeFilter==="review")return s.group==="review";
+    if(activeFilter==="guideline")return s.group==="guideline";
+    if(activeFilter==="other")return s.group==="other";
+    return true;
+  });
+  filtered.forEach(s=>{
+    const tr=document.createElement("tr");
+    tr.setAttribute("data-group",s.group);
+    let html=`<td class="cell-study"><span class="study-flag ${s.flag}">${s.flagLabel}</span><div class="study-name">${s.author}</div></td>`;
+    FIELDS.slice(1).forEach(f=>{
+      const v=s[f]||"";
+      html+=`<td class="data-cell">${na(v)}</td>`;
+    });
+    tr.innerHTML=html;
+    tbody.appendChild(tr);
+  });
+  attachHover();
+}
+
+function filterRows(type,btn){
+  activeFilter=type;
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderTable();
+}
+
+function attachHover(){
+  document.querySelectorAll("tbody tr").forEach(tr=>{
+    tr.addEventListener("mouseenter",()=>tr.querySelectorAll("td").forEach(td=>td.classList.add("hovered")));
+    tr.addEventListener("mouseleave",()=>tr.querySelectorAll("td").forEach(td=>td.classList.remove("hovered")));
+  });
+}
+
+renderTable();
+
+const reveals=document.querySelectorAll(".reveal");
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add("visible"),i*80);obs.unobserve(e.target);}});
+},{threshold:.05});
+reveals.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

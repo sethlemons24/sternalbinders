@@ -317,88 +317,134 @@
   /* ── DELIVERABLES ── */
   #deliverables { background: var(--gray-light); }
 
-  .deliverables-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
+  /* ── PROCESS FLOW ── */
+  .flow-wrapper {
+    position: relative;
   }
 
-  .deliverable-card {
-    background: var(--white);
-    padding: 36px 32px;
+  .flow-step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0;
     position: relative;
-    transition: background 0.2s;
+    margin-bottom: 0;
+  }
+
+  /* Left spine column */
+  .flow-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .flow-node {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--scarlet);
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 17px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 2;
+    box-shadow: 0 0 0 4px var(--gray-light);
+  }
+
+  .flow-node.node-planned {
+    background: var(--white);
+    color: var(--gray);
+    border: 2px solid var(--rule);
+    box-shadow: 0 0 0 4px var(--gray-light);
+  }
+
+  .flow-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 32px;
+    background: var(--rule);
+    margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .flow-connector.last { display: none; }
+
+  /* Right card column */
+  .flow-card-wrap {
+    padding: 0 0 40px 28px;
+  }
+
+  .flow-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 28px 32px;
     text-decoration: none;
     display: block;
-    cursor: default;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
   }
 
-  .deliverable-card.linked {
-    cursor: pointer;
+  .flow-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--scarlet);
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
-  .deliverable-card.linked:hover {
+  .flow-card.linked:hover {
     background: #fff8f8;
+    border-color: #e8c0c0;
+    box-shadow: 0 4px 20px rgba(187,0,0,0.08);
+  }
+  .flow-card.linked:hover::before { opacity: 1; }
+  .flow-card.linked:hover .flow-open { transform: translateX(4px); }
+
+  .flow-card-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; gap: 12px;
   }
 
-  .deliverable-card.linked:hover .deliverable-arrow { opacity: 1; transform: translateX(0); }
+  .flow-card-left { display: flex; align-items: center; gap: 12px; }
 
-  .deliverable-status {
+  .flow-icon {
+    font-size: 22px; line-height: 1; flex-shrink: 0;
+  }
+
+  .flow-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--black); line-height: 1.2;
+  }
+
+  .flow-status {
     display: inline-block;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 2px;
-    margin-bottom: 20px;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 2px;
+    white-space: nowrap; flex-shrink: 0;
   }
-
-  .status-live { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-  .status-progress { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+  .status-live    { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  .status-progress{ background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
   .status-planned { background: var(--gray-light); color: var(--gray); border: 1px solid var(--rule); }
 
-  .deliverable-icon {
-    font-size: 28px;
-    margin-bottom: 16px;
-    display: block;
-    line-height: 1;
+  .flow-desc {
+    font-size: 13px; line-height: 1.65; color: var(--gray);
+    margin-bottom: 14px; max-width: 680px;
   }
 
-  .deliverable-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--black);
-    line-height: 1.3;
-    margin-bottom: 10px;
-  }
-
-  .deliverable-desc {
-    font-size: 12.5px;
-    line-height: 1.65;
-    color: var(--gray);
-    margin-bottom: 20px;
-  }
-
-  .deliverable-arrow {
-    font-size: 12px;
+  .flow-open {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
     color: var(--scarlet);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: all 0.2s;
     display: inline-block;
+    transition: transform 0.2s;
   }
 
-  .deliverable-arrow-always {
-    font-size: 12px;
-    color: var(--scarlet);
-    font-weight: 600;
-    letter-spacing: 0.05em;
+  .flow-open-muted {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--gray);
     display: inline-block;
   }
 
@@ -515,7 +561,7 @@
     .hero-left { padding: 120px 32px 60px; min-height: 50vh; }
     .hero-right { padding: 60px 32px; }
     .overview-grid { grid-template-columns: 1fr; gap: 40px; }
-    .deliverables-grid { grid-template-columns: 1fr; }
+    .flow-card-wrap { padding-left: 20px; }
     .section-inner { padding: 0 32px; }
     nav { padding: 0 24px; }
     .nav-links { display: none; }
@@ -532,7 +578,7 @@
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
     <li><a href="#pico">PICO</a></li>
-    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#deliverables">Process Flow</a></li>
   </ul>
 </nav>
 
@@ -547,7 +593,7 @@
   <div class="hero-right">
     <div class="stat-grid">
       <div class="stat-cell">
-        <div class="stat-number">15</div>
+        <div class="stat-number">16</div>
         <div class="stat-label">Articles Reviewed</div>
       </div>
       <div class="stat-cell">
@@ -684,59 +730,159 @@
     <div class="section-header reveal">
       <div class="section-number">03</div>
       <div>
-        <h2 class="section-heading">Project Deliverables</h2>
-        <p class="section-sub">Evidence synthesis outputs produced as part of this review. Click any live item to open it.</p>
+        <h2 class="section-heading">Process Flow Summary</h2>
+        <p class="section-sub">A sequential evidence synthesis process. Follow the flow from initial screening through final recommendations.</p>
       </div>
     </div>
-    <div class="deliverables-grid reveal">
 
-      <a href="guidelines_matrix.html" class="deliverable-card linked">
-        <span class="deliverable-status status-live">Live</span>
-        <span class="deliverable-icon">⊞</span>
-        <div class="deliverable-title">Practice Guidelines Matrix</div>
-        <div class="deliverable-desc">Interventions from four formal practice guidelines (Bouza 2021, Brocki 2010, Grant 2024, Lazar 2016) mapped across clinical outcomes with graded evidence strength. Fully interactive with outcome filtering and expandable cells.</div>
-        <span class="deliverable-arrow-always">Open matrix →</span>
-      </a>
+    <div class="flow-wrapper reveal">
 
-      <a href="outcomes_table.html" class="deliverable-card linked">
-        <span class="deliverable-status status-live">Live</span>
-        <span class="deliverable-icon">≡</span>
-        <div class="deliverable-title">Comprehensive Outcome Tables</div>
-        <div class="deliverable-desc">All 16 included studies mapped across 12 clinical outcome domains. Color-coded directional indicators, study type filters, and methodological flags for identified limitations.</div>
-        <span class="deliverable-arrow-always">Open table →</span>
-      </a>
-
-      <a href="levels_of_evidence.html" class="deliverable-card linked">
-        <span class="deliverable-status status-live">Live</span>
-        <span class="deliverable-icon">△</span>
-        <div class="deliverable-title">Levels of Evidence</div>
-        <div class="deliverable-desc">All 16 included studies classified using the Helene Fuld Health Trust / OSU College of Nursing EBP framework, with the evidence pyramid and an interactive study classification matrix.</div>
-        <span class="deliverable-arrow-always">Open table →</span>
-      </a>
-
-      <div class="deliverable-card">
-        <span class="deliverable-status status-progress">In Progress</span>
-        <span class="deliverable-icon">◧</span>
-        <div class="deliverable-title">Evidence Tables — Systematic Reviews</div>
-        <div class="deliverable-desc">Styled HTML evidence tables for systematic reviews and meta-analyses, including AMSTAR 2 quality ratings and pooled effect estimates with heterogeneity reporting.</div>
-        <span class="deliverable-arrow">Coming soon</span>
+      <!-- Step 1: PRISMA -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">1</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="prisma.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">◎</span>
+                <span class="flow-title">PRISMA Flow Diagram</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">Starting point for the review. Documents identification, screening, eligibility assessment, and final inclusion of all 16 studies across six databases and hand searching.</p>
+            <span class="flow-open">Open diagram →</span>
+          </a>
+        </div>
       </div>
 
-      <div class="deliverable-card">
-        <span class="deliverable-status status-progress">In Progress</span>
-        <span class="deliverable-icon">⬡</span>
-        <div class="deliverable-title">Visual Outcome Matrix</div>
-        <div class="deliverable-desc">Color-coded visual matrix (beneficial/harmful/no change/not examined) with animated GIF version that progressively greys out methodologically weaker studies using semi-transparent overlays.</div>
-        <span class="deliverable-arrow">Coming soon</span>
+      <!-- Step 2: Review & Summary Tables -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">2</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="review_summary_table.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">◧</span>
+                <span class="flow-title">Review &amp; Summary Tables</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">All 16 included studies summarized across study design, population, study type, outcomes, data collection methods, results, costs, nursing involvement, and patient satisfaction.</p>
+            <span class="flow-open">Open table →</span>
+          </a>
+        </div>
       </div>
 
-      <a href="prisma.html" class="deliverable-card linked">
-        <span class="deliverable-status status-live">Live</span>
-        <span class="deliverable-icon">◎</span>
-        <div class="deliverable-title">PRISMA Flow Diagram</div>
-        <div class="deliverable-desc">PRISMA 2020 flow diagram documenting identification, screening, eligibility, and inclusion of all 16 studies. Includes database sources, full-text exclusion table, and methodological notes.</div>
-        <span class="deliverable-arrow-always">Open diagram →</span>
-      </a>
+      <!-- Step 3: Levels of Evidence -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">3</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="levels_of_evidence.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">△</span>
+                <span class="flow-title">Levels of Evidence</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">All 16 included studies classified using the Helene Fuld Health Trust / OSU College of Nursing EBP framework. Includes the evidence pyramid and an interactive study classification matrix.</p>
+            <span class="flow-open">Open table →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 4: Comprehensive Outcome Tables -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">4</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="outcomes_table.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">≡</span>
+                <span class="flow-title">Comprehensive Outcome Tables</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">All 16 included studies mapped across 12 clinical outcome domains. Color-coded directional indicators, study type filters, and methodological flags for identified limitations.</p>
+            <span class="flow-open">Open table →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 5: Practice Guidelines Matrix -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">5</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="guidelines_matrix.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">⊞</span>
+                <span class="flow-title">Practice Guidelines Matrix</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">Interventions from four formal practice guidelines (Bouza 2021, Brocki 2010, Grant 2024, Lazar 2016) mapped across clinical outcomes with graded evidence strength. Fully interactive with outcome filtering and expandable cells.</p>
+            <span class="flow-open">Open matrix →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 6: Return on Investment Analysis -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">6</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">$</span>
+                <span class="flow-title">Return on Investment Analysis</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Economic analysis quantifying the institutional cost-benefit of adopting external sternal support devices, incorporating complication rates, re-operation costs, hospital LOS, and device costs.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7: Recommendations -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">7</div>
+          <div class="flow-connector last"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">✦</span>
+                <span class="flow-title">Recommendations</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Evidence-based clinical and institutional recommendations for the adoption of external sternal support devices, synthesizing findings across all prior deliverables into actionable guidance.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
