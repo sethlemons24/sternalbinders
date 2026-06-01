@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>External Sternal Support Devices: A Comprehensive Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --scarlet: #BB0000;
+    --scarlet-deep: #8B0000;
+    --scarlet-light: #D4363636;
+    --gray: #666666;
+    --gray-light: #f4f3f1;
+    --gray-mid: #e8e6e2;
+    --gray-dark: #3a3a3a;
+    --white: #fdfcfa;
+    --black: #1a1a1a;
+    --rule: #d0ccc6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,252,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--scarlet);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--scarlet); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--scarlet);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 64px 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -120px; left: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.08);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 500;
+    line-height: 1.1;
+    color: #fff;
+    position: relative; z-index: 1;
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .hero-rule {
+    width: 48px; height: 2px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 380px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-right {
+    background: var(--gray-light);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 100px 64px 80px 80px;
+    position: relative;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--scarlet), transparent);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .stat-cell {
+    background: var(--white);
+    padding: 28px 24px;
+  }
+
+  .stat-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--scarlet);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .hero-meta {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .meta-row {
+    display: flex; align-items: baseline; gap: 12px;
+    font-size: 12.5px;
+    color: var(--gray);
+  }
+
+  .meta-label {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: var(--gray);
+    min-width: 100px;
+  }
+
+  .meta-value { color: var(--gray-dark); }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 100px 0;
+    position: relative;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  .section-header {
+    display: flex; align-items: flex-start;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+
+  .section-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: var(--rule);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -8px;
+    user-select: none;
+  }
+
+  .section-heading {
+    font-family: 'EB Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* ── OVERVIEW ── */
+  #overview { background: var(--white); }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .overview-body p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--gray-dark);
+    margin-bottom: 20px;
+  }
+
+  .overview-body p:last-child { margin-bottom: 0; }
+
+  .overview-body strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .overview-sidebar {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .sidebar-block {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sidebar-block:last-child { border-bottom: none; }
+
+  .sidebar-block-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--scarlet);
+    margin-bottom: 8px;
+  }
+
+  .sidebar-block-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-block-text {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--gray);
+  }
+
+  /* ── DELIVERABLES ── */
+  #deliverables { background: var(--gray-light); }
+
+  /* ── PROCESS FLOW ── */
+  .flow-wrapper {
+    position: relative;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0;
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  /* Left spine column */
+  .flow-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .flow-node {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--scarlet);
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 17px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 2;
+    box-shadow: 0 0 0 4px var(--gray-light);
+  }
+
+  .flow-node.node-planned {
+    background: var(--white);
+    color: var(--gray);
+    border: 2px solid var(--rule);
+    box-shadow: 0 0 0 4px var(--gray-light);
+  }
+
+  .flow-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 32px;
+    background: var(--rule);
+    margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .flow-connector.last { display: none; }
+
+  /* Right card column */
+  .flow-card-wrap {
+    padding: 0 0 40px 28px;
+  }
+
+  .flow-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 28px 32px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .flow-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--scarlet);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .flow-card.linked:hover {
+    background: #fff8f8;
+    border-color: #e8c0c0;
+    box-shadow: 0 4px 20px rgba(187,0,0,0.08);
+  }
+  .flow-card.linked:hover::before { opacity: 1; }
+  .flow-card.linked:hover .flow-open { transform: translateX(4px); }
+
+  .flow-card-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; gap: 12px;
+  }
+
+  .flow-card-left { display: flex; align-items: center; gap: 12px; }
+
+  .flow-icon {
+    font-size: 22px; line-height: 1; flex-shrink: 0;
+  }
+
+  .flow-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--black); line-height: 1.2;
+  }
+
+  .flow-status {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 2px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .status-live    { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  .status-progress{ background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+  .status-planned { background: var(--gray-light); color: var(--gray); border: 1px solid var(--rule); }
+
+  .flow-desc {
+    font-size: 13px; line-height: 1.65; color: var(--gray);
+    margin-bottom: 14px; max-width: 680px;
+  }
+
+  .flow-open {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    color: var(--scarlet);
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .flow-open-muted {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--gray);
+    display: inline-block;
+  }
+
+  /* ── PICO ── */
+  #pico { background: var(--white); }
+
+  .pico-table {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-collapse: collapse;
+  }
+
+  .pico-table tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+  .pico-table tr:last-child { border-bottom: none; }
+  .pico-table tr:hover { background: var(--gray-light); }
+
+  .pico-table td {
+    padding: 20px 28px;
+    vertical-align: top;
+  }
+
+  .pico-letter {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--scarlet);
+    width: 60px;
+    line-height: 1;
+    padding-top: 18px;
+  }
+
+  .pico-word {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    width: 140px;
+    padding-top: 22px;
+  }
+
+  .pico-content {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-dark);
+  }
+
+  .pico-content strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 56px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-left {
+    max-width: 400px;
+  }
+
+  .footer-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer-right {
+    display: flex; flex-direction: column; gap: 8px; text-align: right;
+  }
+
+  .footer-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--scarlet); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 32px 60px; min-height: 50vh; }
+    .hero-right { padding: 60px 32px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .flow-card-wrap { padding-left: 20px; }
+    .section-inner { padding: 0 32px; }
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    footer { padding: 40px 32px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Sternal Binders · Comprehensive Review</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#pico">PICO</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Systematic Review in Progress</div>
+    <h1 class="hero-title">External Sternal<br>Support Devices:<br><em>A Comprehensive<br>Review</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-subtitle">A critical appraisal of the evidence surrounding external sternal support devices and post-sternotomy outcomes in adult cardiac surgery patients.</p>
+  </div>
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-number">15</div>
+        <div class="stat-label">Articles Reviewed</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Practice Guidelines</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Key Devices</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Outcomes Analyzed</div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-row">
+        <span class="meta-label">Primary Device</span>
+        <span class="meta-value">Posthorax vest; QualiBreath adjustable brace</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Population</span>
+        <span class="meta-value">Adult median sternotomy cardiac surgery patients</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Study Design</span>
+        <span class="meta-value">Systematic review with critical appraisal</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Framework</span>
+        <span class="meta-value">PRISMA · PICO · GRADE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">01</div>
+      <div>
+        <h2 class="section-heading">Project Overview</h2>
+        <p class="section-sub">Background, rationale, and scope of this comprehensive review.</p>
+      </div>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-body reveal">
+        <p>
+          Median sternotomy remains the standard surgical approach for the majority of cardiac procedures, including coronary artery bypass grafting (CABG) and valve surgery. While advances in surgical technique and perioperative care have reduced complication rates, <strong>sternal wound complications — including dehiscence, superficial and deep sternal wound infection (SSWI/DSWI), and mediastinitis — continue to carry significant morbidity and mortality</strong>, with deep infections associated with mortality rates of up to 47% in some series and hospital costs exceeding $62,000 per case.
+        </p>
+        <p>
+          External sternal support devices (ESSDs), including rigid sternal vests (e.g., the Posthorax vest) and adjustable braces (e.g., the QualiBreath brace), have been proposed as a means of reducing post-sternotomy complications by limiting sternal mobility, reducing lateral traction forces, supporting wound healing, and potentially decreasing pain during coughing and mobilization.
+        </p>
+        <p>
+          Despite their clinical use and a growing body of primary literature, the evidence base for ESSDs remains heterogeneous and methodologically varied. <strong>This project provides a comprehensive, critically appraised synthesis of the available evidence</strong> — spanning randomized controlled trials, systematic reviews, meta-analyses, and formal practice guidelines — with particular attention to methodological quality, population generalizability, and clinical significance beyond statistical significance.
+        </p>
+        <p>
+          All included studies are evaluated using validated appraisal tools (Cochrane RoB 2, AMSTAR 2), and effect size calculations (Cohen's d, phi, RR, ARR, NNT) are independently computed to augment reported p-values with clinically actionable metrics.
+        </p>
+      </div>
+      <div class="overview-sidebar reveal">
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Clinical Significance</div>
+          <div class="sidebar-block-title">Why Sternal Complications Matter</div>
+          <div class="sidebar-block-text">DSWI occurs in 1–4% of cardiac surgery cases but carries mortality up to 47%, prolongs hospitalization, and is no longer reimbursed by CMS following CABG — creating both clinical and institutional imperatives for effective prevention.</div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Devices Under Review</div>
+          <div class="sidebar-block-title">Posthorax Vest &amp; QualiBreath Brace</div>
+          <div class="sidebar-block-text">The Posthorax vest (Epple Inc., Vienna) applies anteroposterior stabilization with lateral cushions to limit sternal separation. The QualiBreath brace (EC Medica) is an adjustable device designed to be titrated to patient tolerance. Both are critically distinguished throughout this review.</div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Methodological Note</div>
+          <div class="sidebar-block-title">Critical Appraisal Embedded</div>
+          <div class="sidebar-block-text">Several included studies carry identified limitations: industry sponsorship (Hjorth 2014), wrong population (El-Ansary 2008, 2015), absence of device use in intervention arm (Katijjahbe 2018). These are noted explicitly in all synthesis outputs.</div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Grading Framework</div>
+          <div class="sidebar-block-title">GRADE with Independent Effect Sizes</div>
+          <div class="sidebar-block-text">Outcome certainty is assessed using GRADE. Effect sizes (Cohen's d, phi, RR, ARR, NNT) are independently calculated for all primary outcomes to provide clinical interpretive value beyond reported p-values.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PICO -->
+<section id="pico">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">02</div>
+      <div>
+        <h2 class="section-heading">PICO Framework</h2>
+        <p class="section-sub">The structured clinical question guiding this systematic review.</p>
+      </div>
+    </div>
+    <table class="pico-table reveal">
+      <tr>
+        <td class="pico-letter">P</td>
+        <td class="pico-word">Population</td>
+        <td class="pico-content">
+          <strong>Adult patients undergoing median sternotomy for cardiac surgery</strong>, including coronary artery bypass grafting (CABG), valve procedures, and combined operations. Studies limited to chronic sternal instability populations or non-sternotomy incisions are excluded.
+        </td>
+      </tr>
+      <tr>
+        <td class="pico-letter">I</td>
+        <td class="pico-word">Intervention</td>
+        <td class="pico-content">
+          <strong>Application of an external sternal support device (ESSD)</strong> in the postoperative period, including rigid sternal vests (Posthorax), adjustable sternal braces (QualiBreath), or equivalent external chest stabilization devices worn following sternal closure.
+        </td>
+      </tr>
+      <tr>
+        <td class="pico-letter">C</td>
+        <td class="pico-word">Comparator</td>
+        <td class="pico-content">
+          <strong>Standard postoperative care without an external sternal support device</strong>, or standard elastic thoracic bandage/compression dressing. Studies must include a comparator arm; single-arm observational studies are excluded.
+        </td>
+      </tr>
+      <tr>
+        <td class="pico-letter">O</td>
+        <td class="pico-word">Outcomes</td>
+        <td class="pico-content">
+          <strong>Primary:</strong> Deep sternal wound infection (DSWI), sternal wound dehiscence. <strong>Secondary:</strong> Superficial sternal wound infection (SSWI), mediastinitis, hospital length of stay, sternal instability severity (SIS grading), pain scores, pulmonary function, quality of life, and mortality.
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section id="deliverables">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div>
+        <h2 class="section-heading">Project Deliverables</h2>
+        <p class="section-sub">A sequential evidence synthesis process. Follow the flow from initial screening through final recommendations.</p>
+      </div>
+    </div>
+
+    <div class="flow-wrapper reveal">
+
+      <!-- Step 1: PRISMA -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">1</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="prisma.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">◎</span>
+                <span class="flow-title">PRISMA Flow Diagram</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">Starting point for the review. Documents identification, screening, eligibility assessment, and final inclusion of all 16 studies across six databases and hand searching.</p>
+            <span class="flow-open">Open diagram →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 2: Review & Summary Tables -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">2</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">◧</span>
+                <span class="flow-title">Review &amp; Summary Tables</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Structured narrative tables summarizing study design, population, intervention, comparator, outcomes, key results, and risk of bias across all 16 included studies.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Levels of Evidence -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">3</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="levels_of_evidence.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">△</span>
+                <span class="flow-title">Levels of Evidence</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">All 16 included studies classified using the Helene Fuld Health Trust / OSU College of Nursing EBP framework. Includes the evidence pyramid and an interactive study classification matrix.</p>
+            <span class="flow-open">Open table →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 4: Comprehensive Outcome Tables -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">4</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="outcomes_table.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">≡</span>
+                <span class="flow-title">Comprehensive Outcome Tables</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">All 16 included studies mapped across 12 clinical outcome domains. Color-coded directional indicators, study type filters, and methodological flags for identified limitations.</p>
+            <span class="flow-open">Open table →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 5: Practice Guidelines Matrix -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">5</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <a href="guidelines_matrix.html" class="flow-card linked">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">⊞</span>
+                <span class="flow-title">Practice Guidelines Matrix</span>
+              </div>
+              <span class="flow-status status-live">Live</span>
+            </div>
+            <p class="flow-desc">Interventions from four formal practice guidelines (Bouza 2021, Brocki 2010, Grant 2024, Lazar 2016) mapped across clinical outcomes with graded evidence strength. Fully interactive with outcome filtering and expandable cells.</p>
+            <span class="flow-open">Open matrix →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 6: Return on Investment Analysis -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">6</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">$</span>
+                <span class="flow-title">Return on Investment Analysis</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Economic analysis quantifying the institutional cost-benefit of adopting external sternal support devices, incorporating complication rates, re-operation costs, hospital LOS, and device costs.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7: Recommendations -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node node-planned">7</div>
+          <div class="flow-connector last"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">✦</span>
+                <span class="flow-title">Recommendations</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Evidence-based clinical and institutional recommendations for the adoption of external sternal support devices, synthesizing findings across all prior deliverables into actionable guidance.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-title">External Sternal Support Devices: A Comprehensive Review</div>
+    <p class="footer-text">A systematic review project. All synthesis outputs are for academic and research purposes. Effect sizes and clinical significance metrics are independently calculated from reported data.</p>
+  </div>
+  <div class="footer-right">
+    <a href="#overview" class="footer-link">Overview</a>
+    <a href="#pico" class="footer-link">PICO</a>
+    <a href="#deliverables" class="footer-link">Deliverables</a>
+    <a href="guidelines_matrix.html" class="footer-link">Guidelines Matrix</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
