@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levels of Evidence — External Sternal Support Devices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --scarlet: #BB0000;
+    --gray: #666666;
+    --gray-light: #f4f3f1;
+    --gray-dark: #3a3a3a;
+    --white: #fdfcfa;
+    --black: #1a1a1a;
+    --rule: #d0ccc6;
+
+    /* Level colors matching the pyramid */
+    --l1a-bg: #c0392b; --l1a-text: #fff;
+    --l1b-bg: #e74c3c; --l1b-text: #fff;
+    --l2a-bg: #e67e22; --l2a-text: #fff;
+    --l2b-bg: #f39c12; --l2b-text: #fff;
+    --l5-bg:  #27ae60; --l5-text:  #fff;
+    --ln-bg:  #f4f3f1; --ln-text:  #999;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,252,250,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 500; color: var(--scarlet); text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--scarlet); }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    margin-top: 56px; background: var(--scarlet);
+    padding: 72px 64px 64px; position: relative; overflow: hidden;
+  }
+  .page-header::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; }
+  .page-header::after { content: ''; position: absolute; bottom: -80px; left: 40%; width: 600px; height: 300px; border-radius: 50%; background: rgba(0,0,0,0.07); pointer-events: none; }
+  .header-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; position: relative; z-index: 1; }
+  .header-title { font-family: 'EB Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 500; color: #fff; line-height: 1.15; margin-bottom: 20px; position: relative; z-index: 1; max-width: 700px; }
+  .header-title em { font-style: italic; color: rgba(255,255,255,0.7); }
+  .header-desc { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.65); max-width: 640px; position: relative; z-index: 1; }
+
+  /* ── STATS STRIP ── */
+  .stats-strip { background: var(--black); display: flex; border-bottom: 1px solid #2a2a2a; }
+  .strip-stat { flex: 1; padding: 22px 28px; border-right: 1px solid #2a2a2a; display: flex; flex-direction: column; gap: 4px; }
+  .strip-stat:last-child { border-right: none; }
+  .strip-number { font-family: 'EB Garamond', serif; font-size: 30px; font-weight: 500; color: var(--scarlet); line-height: 1; }
+  .strip-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+  /* ── MAIN ── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 72px 64px 100px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--scarlet);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  /* ── PYRAMID ── */
+  .pyramid-section { margin-bottom: 80px; }
+  .pyramid-frame {
+    border: 1px solid var(--rule); background: #fff;
+    padding: 40px; display: flex; justify-content: center;
+    position: relative;
+  }
+  .pyramid-frame::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--scarlet); }
+  .pyramid-frame img { max-width: 100%; height: auto; display: block; max-height: 520px; }
+  .pyramid-caption { margin-top: 14px; font-size: 12px; color: var(--gray); line-height: 1.6; padding-left: 16px; border-left: 2px solid var(--rule); }
+
+  /* ── MATRIX TABLE ── */
+  .matrix-section { margin-bottom: 64px; }
+
+  .table-scroll { overflow-x: auto; }
+  .matrix-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid var(--rule);
+    min-width: 900px;
+  }
+
+  /* Header */
+  .matrix-table thead th {
+    position: sticky; top: 56px; z-index: 10;
+    background: var(--black);
+    padding: 10px 12px;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    border-bottom: 2px solid #333;
+    border-right: 1px solid #2a2a2a;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+  .matrix-table thead th:first-child {
+    text-align: left; padding-left: 16px;
+    border-right: 2px solid #444;
+    min-width: 280px;
+  }
+  .matrix-table thead th.hovered { color: #fff; background: #1a1a1a; }
+
+  .th-rotate {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    display: inline-block;
+    padding: 4px 0;
+    line-height: 1.3;
+    max-height: 130px;
+  }
+
+  /* Body rows */
+  .matrix-table tbody tr { transition: background 0.1s; }
+  .matrix-table tbody tr:hover { background: rgba(187,0,0,0.025); }
+
+  /* Level header rows */
+  .level-row td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule);
+    border-top: 3px solid var(--rule);
+  }
+  .level-badge-wide {
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .level-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .level-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .level-count {
+    font-size: 11px; font-weight: 600; color: var(--gray);
+    margin-left: 6px;
+  }
+
+  /* Study name cell */
+  .cell-study {
+    padding: 14px 16px;
+    border-right: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .study-name { font-size: 12px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
+  .study-type { font-size: 10.5px; color: var(--gray); line-height: 1.4; }
+
+  /* Check cells */
+  .cell-check {
+    padding: 14px 8px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+    vertical-align: middle;
+    transition: background 0.1s;
+  }
+  .cell-check.hovered { background: rgba(187,0,0,0.04); }
+
+  .check-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 11px; font-weight: 700;
+  }
+  .check-yes { background: #f0fdf4; color: #16a34a; border: 1.5px solid #86efac; }
+  .check-no  { background: var(--gray-light); color: #ccc; border: 1.5px solid var(--rule); }
+
+  /* ── LEVEL KEY ── */
+  .level-key {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+  .key-cell {
+    background: var(--white); padding: 18px 20px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .key-swatch {
+    width: 12px; height: 12px; border-radius: 3px;
+    flex-shrink: 0; margin-top: 3px;
+  }
+  .key-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; }
+  .key-desc { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
+
+  /* ── NOTE BOX ── */
+  .note-box {
+    background: var(--gray-light); border: 1px solid var(--rule);
+    border-left: 3px solid var(--scarlet); padding: 18px 24px; margin-top: 40px;
+  }
+  .note-box-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--scarlet); margin-bottom: 8px; }
+  .note-box-text { font-size: 12.5px; line-height: 1.75; color: var(--gray-dark); }
+  .note-box-text strong { color: var(--black); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--black); padding: 48px 64px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 64px; }
+  .footer-text { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .footer-link { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: var(--scarlet); }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s, transform 0.5s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 800px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .page-header { padding: 60px 24px 48px; }
+    .main { padding: 48px 24px 80px; }
+    .level-key { grid-template-columns: 1fr; }
+    footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">← Back to Project</a>
+  <ul class="nav-links">
+    <li><a href="index.html#overview">Overview</a></li>
+    <li><a href="index.html#pico">PICO</a></li>
+    <li><a href="index.html#deliverables">Deliverables</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+    <li><a href="outcomes_table.html">Outcome Table</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-eyebrow">Deliverable 03 · Evidence Appraisal</div>
+  <h1 class="header-title">Levels of <em>Evidence</em></h1>
+  <p class="header-desc">Each of the 16 included studies classified according to the Helene Fuld Health Trust National Institute for EBP in Nursing &amp; Healthcare levels of evidence framework (The Ohio State University College of Nursing).</p>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="strip-stat"><div class="strip-number">2</div><div class="strip-label">Level 1a — Systematic Review &amp; Meta-Analysis</div></div>
+  <div class="strip-stat"><div class="strip-number">3</div><div class="strip-label">Level 1b — Practice Guideline</div></div>
+  <div class="strip-stat"><div class="strip-number">5</div><div class="strip-label">Level 2a — Randomized Controlled Trial</div></div>
+  <div class="strip-stat"><div class="strip-number">2</div><div class="strip-label">Level 2b — Intervention without Randomization</div></div>
+  <div class="strip-stat"><div class="strip-number">4</div><div class="strip-label">Level 5 — Review of Literature</div></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PYRAMID -->
+  <div class="pyramid-section reveal">
+    <div class="section-label">Helene Fuld Health Trust EBP Levels of Evidence Framework</div>
+    <div class="pyramid-frame">
+      <img src="levels_pyramid.png" alt="Helene Fuld Health Trust National Institute for EBP Levels of Evidence pyramid showing Level 1 (Systematic Review and Meta-Analysis / Meta-Synthesis) through Level 7 (Expert Opinion)">
+    </div>
+    <p class="pyramid-caption">
+      Helene Fuld Health Trust National Institute for EBP in Nursing &amp; Healthcare, College of Nursing, The Ohio State University. Levels of evidence framework used for classification of all included studies in this systematic review.
+    </p>
+  </div>
+
+  <!-- LEVEL KEY -->
+  <div class="section-label reveal">Evidence Level Key — Included Studies</div>
+  <div class="level-key reveal">
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#c0392b"></div>
+      <div>
+        <div class="key-label" style="color:#c0392b">Level 1a</div>
+        <div class="key-desc">Systematic Review &amp; Meta-Analysis — highest level of quantitative evidence synthesis</div>
+      </div>
+    </div>
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#e74c3c"></div>
+      <div>
+        <div class="key-label" style="color:#e74c3c">Level 1b</div>
+        <div class="key-desc">Practice Guideline — based on systematic evidence synthesis with expert consensus</div>
+      </div>
+    </div>
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#e67e22"></div>
+      <div>
+        <div class="key-label" style="color:#e67e22">Level 2a</div>
+        <div class="key-desc">Randomized Controlled Trial — experimental design with random allocation</div>
+      </div>
+    </div>
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#f39c12"></div>
+      <div>
+        <div class="key-label" style="color:#b8770a">Level 2b</div>
+        <div class="key-desc">Intervention Study without Randomization — controlled study without random assignment</div>
+      </div>
+    </div>
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#27ae60"></div>
+      <div>
+        <div class="key-label" style="color:#27ae60">Level 5</div>
+        <div class="key-desc">Review of Literature — narrative or scoping review without formal meta-analytic synthesis</div>
+      </div>
+    </div>
+    <div class="key-cell">
+      <div class="key-swatch" style="background:#e8e6e2; border:1px solid #d0ccc6"></div>
+      <div>
+        <div class="key-label" style="color:#999">Not Applicable</div>
+        <div class="key-desc">Study does not occupy this evidence level</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATRIX TABLE -->
+  <div class="matrix-section reveal">
+    <div class="section-label">Study Classification Matrix</div>
+    <div class="table-scroll">
+    <table class="matrix-table" id="loe-table">
+      <thead>
+        <tr>
+          <th>Study</th>
+          <th data-col="0"><span class="th-rotate">Level 1a — Systematic Review &amp; Meta-Analysis</span></th>
+          <th data-col="1"><span class="th-rotate">Level 1b — Practice Guideline</span></th>
+          <th data-col="2"><span class="th-rotate">Level 2a — Randomized Controlled Trial</span></th>
+          <th data-col="3"><span class="th-rotate">Level 2b — Intervention w/o Randomization</span></th>
+          <th data-col="4"><span class="th-rotate">Level 5 — Review of Literature</span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Level 1a -->
+        <tr class="level-row">
+          <td colspan="6">
+            <div class="level-badge-wide">
+              <div class="level-dot" style="background:#c0392b"></div>
+              <span class="level-label" style="color:#c0392b">Level 1a — Systematic Review &amp; Meta-Analysis</span>
+              <span class="level-count">2 studies</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Caldonazo et al., 2024</div><div class="study-type">Systematic review &amp; meta-analysis — TSV vs. no TSV (4 RCTs, n=3,820)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Rogers et al., 2024</div><div class="study-type">Cochrane systematic review — Interventions to prevent SSI in cardiac surgery (118 RCTs, n=51,854)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+
+        <!-- Level 1b -->
+        <tr class="level-row">
+          <td colspan="6">
+            <div class="level-badge-wide">
+              <div class="level-dot" style="background:#e74c3c"></div>
+              <span class="level-label" style="color:#e74c3c">Level 1b — Practice Guideline</span>
+              <span class="level-count">3 studies</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Bouza et al., 2021</div><div class="study-type">Consensus guidelines — Prevention, diagnosis &amp; management of post-surgical mediastinitis (SEICAV/SECTCV/CIBERES)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Grant et al., 2024</div><div class="study-type">ERAS Cardiac / ERAS International / STS Joint Consensus — Perioperative care in cardiac surgery</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Lazar et al., 2016</div><div class="study-type">Expert consensus review — Prevention &amp; management of sternal wound infections (STS)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+
+        <!-- Level 2a -->
+        <tr class="level-row">
+          <td colspan="6">
+            <div class="level-badge-wide">
+              <div class="level-dot" style="background:#e67e22"></div>
+              <span class="level-label" style="color:#e67e22">Level 2a — Randomized Controlled Trial</span>
+              <span class="level-count">5 studies</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Caimmi et al., 2017</div><div class="study-type">RCT — Posthorax vest vs. no vest, high-risk patients (n=310)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Gorlitzer et al., 2010</div><div class="study-type">RCT — Posthorax vest vs. elastic bandage (n=1,560)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Gorlitzer et al., 2013</div><div class="study-type">RCT multicentre — Posthorax vest vs. no vest (n=2,539)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Naismith &amp; Street, 2005</div><div class="study-type">RCT pilot — Cardibra vs. regular bra, female patients (n=20)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Tewarie et al., 2012</div><div class="study-type">RCT — Stern-E-Fix corset vs. elastic bandage (n=750)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+
+        <!-- Level 2b -->
+        <tr class="level-row">
+          <td colspan="6">
+            <div class="level-badge-wide">
+              <div class="level-dot" style="background:#f39c12"></div>
+              <span class="level-label" style="color:#b8770a">Level 2b — Intervention Study without Randomization</span>
+              <span class="level-count">2 studies</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Celik et al., 2011</div><div class="study-type">RCT + retrospective component — Thorax vest vs. no vest in COPD patients (n=221)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Selten et al., 2021</div><div class="study-type">Retrospective controlled study — Stern-E-Fix vs. elastic bandage, female patients (n=145)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-yes">✓</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-no">—</span></td>
+        </tr>
+
+        <!-- Level 5 -->
+        <tr class="level-row">
+          <td colspan="6">
+            <div class="level-badge-wide">
+              <div class="level-dot" style="background:#27ae60"></div>
+              <span class="level-label" style="color:#27ae60">Level 5 — Review of Literature</span>
+              <span class="level-count">4 studies</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Brocki et al., 2010</div><div class="study-type">Literature review with graded recommendations — Mechanical stress factors &amp; sternal precautions post-sternotomy</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">El-Ansary et al., 2019</div><div class="study-type">Perspective paper — Evidence-based activity &amp; less restrictive sternal precautions post-sternotomy</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Tsang et al., 2016</div><div class="study-type">Best evidence review — External support devices &amp; sternal wound complications (6 RCTs, n=5,826)</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td class="cell-study"><div class="study-name">Vitomskyi, 2022</div><div class="study-type">Narrative review — Critique of limitations in physical therapy post-sternotomy</div></td>
+          <td class="cell-check" data-col="0"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="1"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="2"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="3"><span class="check-mark check-no">—</span></td>
+          <td class="cell-check" data-col="4"><span class="check-mark check-yes">✓</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- NOTE BOX -->
+  <div class="note-box reveal">
+    <div class="note-box-label">Classification Notes</div>
+    <p class="note-box-text">
+      Studies are classified according to the <strong>Helene Fuld Health Trust National Institute for EBP in Nursing &amp; Healthcare Levels of Evidence framework</strong> (The Ohio State University College of Nursing). Classification reflects study design only and does not account for internal validity or risk of bias. Several included studies carry identified methodological limitations that affect the interpretive weight of their findings independent of their design-based level: <strong>Hjorth (2014)</strong> — company sponsored; <strong>El-Ansary (2008, 2015)</strong> — chronic instability population; <strong>Katijjahbe (2018)</strong> — no sternal binders used in intervention arm. These concerns are addressed in detail in the Comprehensive Outcome Table and forthcoming Evidence Tables.
+    </p>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">External Sternal Support Devices: A Comprehensive Review · Levels of Evidence</p>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="index.html" class="footer-link">← Home</a>
+    <a href="outcomes_table.html" class="footer-link">Outcome Table</a>
+    <a href="guidelines_matrix.html" class="footer-link">Guidelines Matrix</a>
+    <a href="prisma.html" class="footer-link">PRISMA</a>
+  </div>
+</footer>
+
+<script>
+// Column hover
+document.querySelectorAll("td[data-col], th[data-col]").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    const col = el.getAttribute("data-col");
+    document.querySelectorAll(`[data-col="${col}"]`).forEach(e => e.classList.add("hovered"));
+  });
+  el.addEventListener("mouseleave", () => {
+    document.querySelectorAll(".hovered").forEach(e => e.classList.remove("hovered"));
+  });
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add("visible"), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
