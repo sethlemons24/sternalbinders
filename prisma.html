@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISMA Flow Diagram — External Sternal Support Devices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --scarlet: #BB0000;
+    --scarlet-deep: #8B0000;
+    --gray: #666666;
+    --gray-light: #f4f3f1;
+    --gray-mid: #e8e6e2;
+    --gray-dark: #3a3a3a;
+    --white: #fdfcfa;
+    --black: #1a1a1a;
+    --rule: #d0ccc6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,252,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--scarlet);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none; align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--scarlet); }
+
+  .nav-back {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--scarlet);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: gap 0.2s;
+  }
+  .nav-back:hover { gap: 10px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    margin-top: 56px;
+    background: var(--scarlet);
+    padding: 72px 64px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 600px; height: 300px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.07);
+    pointer-events: none;
+  }
+
+  .header-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .header-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+    max-width: 700px;
+  }
+
+  .header-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .header-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 580px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--black);
+    display: flex;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .strip-stat {
+    flex: 1;
+    padding: 24px 32px;
+    border-right: 1px solid #2a2a2a;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .strip-stat:last-child { border-right: none; }
+
+  .strip-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--scarlet);
+    line-height: 1;
+  }
+
+  .strip-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 64px 100px;
+  }
+
+  /* ── DIAGRAM SECTION ── */
+  .diagram-section {
+    margin-bottom: 80px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--scarlet);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .diagram-frame {
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .diagram-frame::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--scarlet);
+  }
+
+  .diagram-frame img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .diagram-caption {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.6;
+    padding-left: 16px;
+    border-left: 2px solid var(--rule);
+  }
+
+  /* ── SEARCH DETAILS ── */
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .detail-cell {
+    background: var(--white);
+    padding: 28px 32px;
+  }
+
+  .detail-cell-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--scarlet);
+    margin-bottom: 10px;
+  }
+
+  .detail-cell-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .detail-cell-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--gray-dark);
+  }
+
+  .source-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 8px;
+  }
+
+  .source-list li {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 13px;
+    color: var(--gray-dark);
+  }
+
+  .source-list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--scarlet);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .source-n {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--scarlet);
+    min-width: 36px;
+  }
+
+  /* ── EXCLUSION TABLE ── */
+  .exclusion-table {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .exclusion-table thead tr {
+    background: var(--gray-light);
+    border-bottom: 2px solid var(--rule);
+  }
+
+  .exclusion-table th {
+    padding: 12px 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-align: left;
+  }
+
+  .exclusion-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--gray-dark);
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .exclusion-table tr:last-child td { border-bottom: none; }
+  .exclusion-table tr:hover td { background: var(--gray-light); }
+
+  .exclusion-n {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--scarlet);
+  }
+
+  /* ── NOTES ── */
+  .notes-box {
+    background: var(--gray-light);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--scarlet);
+    padding: 24px 28px;
+    margin-top: 48px;
+  }
+
+  .notes-box-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--scarlet);
+    margin-bottom: 10px;
+  }
+
+  .notes-box-text {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--gray-dark);
+  }
+
+  .notes-box-text strong { color: var(--black); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 48px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--scarlet); }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 800px) {
+    nav { padding: 0 24px; }
+    .page-header { padding: 60px 32px 48px; }
+    .main { padding: 48px 32px 80px; }
+    .details-grid { grid-template-columns: 1fr; }
+    .stats-strip { flex-wrap: wrap; }
+    .strip-stat { min-width: 50%; }
+    footer { padding: 40px 32px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">← Back to Project</a>
+  <ul class="nav-links">
+    <li><a href="index.html#overview">Overview</a></li>
+    <li><a href="index.html#pico">PICO</a></li>
+    <li><a href="index.html#deliverables">Deliverables</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-eyebrow">Deliverable 05 · Systematic Review Methods</div>
+  <h1 class="header-title">PRISMA <em>Flow Diagram</em></h1>
+  <p class="header-desc">Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA 2020) flow diagram documenting the identification, screening, eligibility assessment, and final inclusion of studies in this review.</p>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="strip-stat">
+    <div class="strip-number">182</div>
+    <div class="strip-label">Records Identified</div>
+  </div>
+  <div class="strip-stat">
+    <div class="strip-number">21</div>
+    <div class="strip-label">Duplicates Removed</div>
+  </div>
+  <div class="strip-stat">
+    <div class="strip-number">161</div>
+    <div class="strip-label">Abstracts Screened</div>
+  </div>
+  <div class="strip-stat">
+    <div class="strip-number">30</div>
+    <div class="strip-label">Full-Texts Retrieved</div>
+  </div>
+  <div class="strip-stat">
+    <div class="strip-number">14</div>
+    <div class="strip-label">Full-Texts Excluded</div>
+  </div>
+  <div class="strip-stat">
+    <div class="strip-number">16</div>
+    <div class="strip-label">Included in Review</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- DIAGRAM -->
+  <div class="diagram-section reveal">
+    <div class="section-label">PRISMA 2020 Flow Diagram</div>
+    <div class="diagram-frame">
+      <img src="prisma.png" alt="PRISMA 2020 flow diagram showing identification, screening, and inclusion of studies for the external sternal support devices systematic review">
+    </div>
+    <p class="diagram-caption">
+      Figure 1. PRISMA 2020 flow diagram. Records were identified through six electronic databases (EBSCO, PubMed, Web of Science, Cochrane Library, Embase) and hand searching. Following duplicate removal and two-stage screening, 16 reports were included in the final review.
+    </p>
+  </div>
+
+  <!-- SEARCH DETAILS -->
+  <div class="section-label reveal">Search & Screening Details</div>
+
+  <div class="details-grid reveal">
+    <div class="detail-cell">
+      <div class="detail-cell-label">Database Sources</div>
+      <div class="detail-cell-title">Six Databases + Hand Search</div>
+      <ul class="source-list">
+        <li><span class="source-n">15</span> EBSCO</li>
+        <li><span class="source-n">24</span> PubMed</li>
+        <li><span class="source-n">101</span> Web of Science</li>
+        <li><span class="source-n">2</span> Cochrane Library</li>
+        <li><span class="source-n">25</span> Embase</li>
+        <li><span class="source-n">15</span> Hand Search</li>
+      </ul>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-cell-label">Screening Process</div>
+      <div class="detail-cell-title">Two-Stage Screening</div>
+      <div class="detail-cell-text">
+        Following duplicate removal (n = 21), 161 abstracts were screened against the PICO eligibility criteria. Records failing to meet population (adult median sternotomy), intervention (external sternal support device), or comparator criteria were excluded at the abstract stage (n = 131), leaving 30 records for full-text review.
+      </div>
+    </div>
+  </div>
+
+  <!-- EXCLUSION TABLE -->
+  <div class="section-label reveal">Full-Text Exclusions</div>
+  <table class="exclusion-table reveal">
+    <thead>
+      <tr>
+        <th>Reason for Exclusion</th>
+        <th>n</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wrong Intervention</td>
+        <td><span class="exclusion-n">4</span></td>
+        <td>Studies not involving an external sternal support device as the primary intervention; included general sternal precautions or rehabilitation protocols only.</td>
+      </tr>
+      <tr>
+        <td>Wrong Population</td>
+        <td><span class="exclusion-n">2</span></td>
+        <td>Studies limited to chronic sternal instability populations rather than acute post-sternotomy patients, or non-cardiac surgical populations.</td>
+      </tr>
+      <tr>
+        <td>Conference Abstract</td>
+        <td><span class="exclusion-n">2</span></td>
+        <td>Insufficient methodological detail available for critical appraisal; full publications not identified.</td>
+      </tr>
+      <tr>
+        <td>Foreign Language</td>
+        <td><span class="exclusion-n">1</span></td>
+        <td>Full text not available in English; translation not feasible within scope of review.</td>
+      </tr>
+      <tr>
+        <td>Company Sponsored</td>
+        <td><span class="exclusion-n">1</span></td>
+        <td>Study identified as wholly industry-funded with high risk of bias; excluded from primary synthesis (noted as methodological concern in critical appraisal commentary).</td>
+      </tr>
+      <tr>
+        <td>Background / Non-Primary</td>
+        <td><span class="exclusion-n">4</span></td>
+        <td>Narrative reviews, editorials, or background literature not meeting criteria for primary study or formal systematic review inclusion.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- METHODOLOGICAL NOTE -->
+  <div class="notes-box reveal">
+    <div class="notes-box-label">Methodological Note</div>
+    <p class="notes-box-text">
+      The final included set of <strong>16 reports</strong> spans randomized controlled trials, controlled observational studies, systematic reviews, meta-analyses, and formal practice guidelines. Several included studies carry identified limitations that are explicitly noted throughout the synthesis: <strong>Hjorth (2014)</strong> — company sponsored; <strong>El-Ansary (2008, 2015)</strong> — chronic instability or wrong population; <strong>Katijjahbe (2018)</strong> — no sternal binders used in the intervention arm. These studies are retained in the review but are flagged in all evidence tables and the visual outcome matrix with methodological overlay indicators.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">External Sternal Support Devices: A Comprehensive Review · PRISMA Flow Diagram</p>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="index.html" class="footer-link">← Home</a>
+    <a href="guidelines_matrix.html" class="footer-link">Guidelines Matrix</a>
+    <a href="index.html#deliverables" class="footer-link">All Deliverables</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
