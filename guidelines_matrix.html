@@ -3,87 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Practice Guidelines Matrix — Cardiac Surgery</title>
+<title>Practice Guidelines Matrix — External Sternal Support Devices</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Source Sans 3', sans-serif; background: #0d1117; min-height: 100vh; color: #e2e8f0; padding: 0 0 60px; }
-  .header { background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%); border-bottom: 1px solid #30363d; padding: 36px 40px 28px; position: relative; overflow: hidden; }
-  .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(74,159,212,0.08) 0%, transparent 70%); pointer-events: none; }
-  .header-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #4a9fd4; margin-bottom: 10px; }
-  .header h1 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #f0f6fc; line-height: 1.3; max-width: 700px; }
-  .header-sub { margin-top: 8px; font-size: 13px; color: #8b949e; max-width: 600px; line-height: 1.6; }
-  .article-cards { display: flex; gap: 12px; padding: 20px 40px; flex-wrap: wrap; background: #161b22; border-bottom: 1px solid #21262d; }
-  .article-card { flex: 1; min-width: 220px; max-width: 340px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 14px 16px; }
-  .article-card-title { font-size: 12px; font-weight: 600; color: #f0f6fc; line-height: 1.4; margin-bottom: 4px; }
-  .article-card-journal { font-size: 10.5px; color: #8b949e; line-height: 1.4; margin-bottom: 8px; }
-  .article-badge { display: inline-block; font-size: 9.5px; font-weight: 600; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 3px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); }
-  .controls { padding: 16px 40px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .controls-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8b949e; margin-right: 4px; }
-  .filter-btn { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; cursor: pointer; border: 1px solid #30363d; background: #161b22; color: #8b949e; transition: all 0.15s; }
-  .filter-btn:hover { border-color: #58a6ff; color: #58a6ff; }
-  .filter-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
-  .table-wrapper { padding: 0 24px; overflow-x: auto; }
-  table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-  colgroup col:first-child { width: 180px; }
-  thead tr th { position: sticky; top: 0; z-index: 10; background: #161b22; padding: 12px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: #c9d1d9; text-align: left; border-bottom: 2px solid #30363d; border-right: 1px solid #21262d; vertical-align: bottom; }
-  thead tr th:first-child { width: 180px; min-width: 180px; background: #0d1117; border-right: 2px solid #30363d; }
-  thead tr th.hovered-col { background: #1c2128; color: #58a6ff; }
-  .outcome-label { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; max-height: 160px; overflow: hidden; text-overflow: ellipsis; font-size: 10.5px; line-height: 1.4; display: block; padding: 4px 0; }
-  tbody tr:hover { background: rgba(255,255,255,0.02); }
-  .row-header { position: sticky; left: 0; z-index: 5; padding: 18px 16px; background: #0d1117; border-right: 2px solid #30363d; border-bottom: 1px solid #1c2128; vertical-align: top; }
-  .row-short { font-size: 12px; font-weight: 600; color: #f0f6fc; margin-bottom: 3px; padding-left: 8px; border-left: 3px solid var(--ac, #4a9fd4); }
-  .row-full { font-size: 10px; color: #6e7681; line-height: 1.4; padding-left: 11px; }
-  .matrix-cell { padding: 10px 12px; border-bottom: 1px solid #1c2128; border-right: 1px solid #1c2128; vertical-align: top; min-width: 140px; }
-  .matrix-cell.hovered-col { background: rgba(88,166,255,0.03); }
-  .empty-cell { background: #0a0d11; }
-  .empty-dash { color: #30363d; font-size: 16px; display: block; text-align: center; padding: 8px 0; }
-  .filled-cell { background: #0d1117; }
-  .intervention-list { display: flex; flex-direction: column; gap: 9px; }
-  .intervention-item { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 8px 10px; }
-  .level-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-left: 2px solid; padding-left: 5px; margin-bottom: 5px; line-height: 1.2; }
-  .intervention-text { font-size: 11px; color: #c9d1d9; line-height: 1.5; }
-  .expand-btn { font-family: 'Source Sans 3', sans-serif; font-size: 10px; font-weight: 600; color: #58a6ff; background: none; border: 1px solid #1f6feb; border-radius: 4px; padding: 3px 8px; cursor: pointer; transition: all 0.15s; margin-top: 2px; }
-  .expand-btn:hover { background: rgba(31,111,235,0.13); }
-  .legend { padding: 24px 40px 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .legend-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #6e7681; width: 100%; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #8b949e; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-  .hidden { display: none; }
+:root{--scarlet:#BB0000;--gray:#666;--gray-light:#f4f3f1;--gray-dark:#3a3a3a;--white:#fdfcfa;--black:#1a1a1a;--rule:#d0ccc6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,252,250,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--scarlet);text-decoration:none;}
+.nav-links{display:flex;gap:18px;list-style:none;align-items:center;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--scarlet);}
+
+/* ── PAGE HEADER ── */
+.page-header{margin-top:56px;background:var(--scarlet);padding:64px 64px 56px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
+.page-header::after{content:'';position:absolute;bottom:-80px;left:40%;width:600px;height:300px;border-radius:50%;background:rgba(0,0,0,.07);pointer-events:none;}
+.header-eyebrow{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px;position:relative;z-index:1;}
+.header-title{font-family:'EB Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:500;color:#fff;line-height:1.15;margin-bottom:16px;position:relative;z-index:1;max-width:700px;}
+.header-title em{font-style:italic;color:rgba(255,255,255,.7);}
+.header-desc{font-size:13px;line-height:1.7;color:rgba(255,255,255,.65);max-width:620px;position:relative;z-index:1;}
+
+/* ── ARTICLE CARDS ── */
+.article-cards{display:flex;gap:12px;padding:20px 40px;flex-wrap:wrap;background:var(--gray-light);border-bottom:1px solid var(--rule);}
+.article-card{flex:1;min-width:220px;max-width:340px;background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;}
+.article-card-title{font-size:12px;font-weight:600;color:var(--black);line-height:1.4;margin-bottom:4px;}
+.article-card-journal{font-size:10.5px;color:var(--gray);line-height:1.4;margin-bottom:8px;}
+.article-badge{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.05em;padding:2px 7px;border-radius:2px;background:var(--gray-light);border:1px solid var(--rule);}
+
+/* ── CONTROLS ── */
+.controls{padding:16px 40px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--white);border-bottom:1px solid var(--rule);}
+.controls-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-right:4px;}
+.filter-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;cursor:pointer;border:1px solid var(--rule);background:var(--white);color:var(--gray);transition:all .15s;}
+.filter-btn:hover{border-color:var(--scarlet);color:var(--scarlet);}
+.filter-btn.active{background:var(--scarlet);border-color:var(--scarlet);color:#fff;}
+
+/* ── TABLE ── */
+.table-wrapper{padding:0 24px 0;overflow-x:auto;}
+table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;}
+colgroup col:first-child{width:180px;}
+thead tr th{background:var(--black);padding:12px 14px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#c9d1d9;text-align:left;border-bottom:2px solid #333;border-right:1px solid #333;vertical-align:bottom;}
+thead tr th:first-child{width:180px;min-width:180px;border-right:2px solid #444;}
+thead tr th.hovered-col{background:#2a2a2a;color:#fff;}
+.outcome-label{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;max-height:160px;overflow:hidden;font-size:10.5px;line-height:1.4;display:block;padding:4px 0;}
+tbody tr:nth-child(even){background:var(--gray-light);}
+tbody tr:hover{background:#fdf8f8 !important;}
+.row-header{position:sticky;left:0;z-index:5;padding:18px 16px;background:var(--white);border-right:2px solid var(--rule);border-bottom:1px solid var(--rule);vertical-align:top;}
+tbody tr:nth-child(even) .row-header{background:var(--gray-light);}
+tbody tr:hover .row-header{background:#fdf8f8 !important;}
+.row-short{font-size:12px;font-weight:600;color:var(--black);margin-bottom:3px;padding-left:8px;border-left:3px solid var(--ac,var(--scarlet));}
+.row-full{font-size:10px;color:var(--gray);line-height:1.4;padding-left:11px;}
+.matrix-cell{padding:10px 12px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);vertical-align:top;min-width:140px;}
+.matrix-cell.hovered-col{background:rgba(187,0,0,.03);}
+.empty-cell{background:#f9f8f6;}
+.empty-dash{color:var(--rule);font-size:16px;display:block;text-align:center;padding:8px 0;}
+.filled-cell{background:var(--white);}
+tbody tr:nth-child(even) .filled-cell{background:var(--gray-light);}
+tbody tr:nth-child(even) .empty-cell{background:#f0efed;}
+
+/* ── INTERVENTION CARDS ── */
+.intervention-list{display:flex;flex-direction:column;gap:8px;}
+.intervention-item{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:8px 10px;}
+tbody tr:nth-child(even) .intervention-item{background:var(--gray-light);}
+.level-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-left:2px solid;padding-left:5px;margin-bottom:5px;line-height:1.2;}
+.intervention-text{font-size:11px;color:var(--gray-dark);line-height:1.5;}
+.expand-btn{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:var(--scarlet);background:none;border:1px solid var(--scarlet);border-radius:4px;padding:3px 8px;cursor:pointer;transition:all .15s;margin-top:2px;}
+.expand-btn:hover{background:rgba(187,0,0,.08);}
+
+/* ── LEGEND ── */
+.legend{padding:24px 40px 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.legend-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);width:100%;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--gray-dark);}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+/* ── NEXT SECTION ── */
+.next-section{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--scarlet);text-decoration:none;padding:14px 24px;border:2px solid var(--scarlet);border-radius:4px;transition:all .2s;}
+.next-section:hover{background:var(--scarlet);color:#fff;}
+.next-section-wrap{margin:40px 40px 48px;padding-top:32px;border-top:1px solid var(--rule);display:flex;justify-content:flex-end;}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:44px 64px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.footer-text{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
+.footer-link:hover{color:var(--scarlet);}
+
+.hidden{display:none;}
+@media(max-width:800px){nav{padding:0 20px;}.nav-links{display:none;}.page-header{padding:60px 24px 44px;}footer{padding:40px 24px;flex-direction:column;align-items:flex-start;}}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-eyebrow">Cardiac Surgery · Evidence Synthesis</div>
-  <h1>Practice Guidelines Matrix: Interventions &amp; Evidence Strength</h1>
-  <p class="header-sub">Interventions from four formal practice guidelines mapped across clinical outcomes. Each cell shows the intervention and its graded level of evidence.</p>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">&#8592; Back to Project</a>
+  <ul class="nav-links">
+    <li><a href="prior_analysis.html">Prior</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-eyebrow">Process Flow &mdash; Step 5 &middot; Evidence Synthesis</div>
+  <h1 class="header-title">Practice Guidelines <em>Matrix</em></h1>
+  <p class="header-desc">Interventions from four formal practice guidelines mapped across clinical outcomes. Each cell shows the intervention and its graded level of evidence.</p>
 </div>
 
+<!-- ARTICLE CARDS -->
 <div class="article-cards">
   <div class="article-card" style="border-left:3px solid #9b72d4">
     <div class="article-card-title">Prevention, Diagnosis and Management of Post-Surgical Mediastinitis</div>
-    <div class="article-card-journal">J Clin Med · SEICAV / SECTCV / CIBERES Consensus Guidelines</div>
+    <div class="article-card-journal">J Clin Med &middot; SEICAV / SECTCV / CIBERES Consensus Guidelines</div>
     <span class="article-badge" style="color:#9b72d4">GRADE / SIGN System</span>
   </div>
   <div class="article-card" style="border-left:3px solid #e07b3a">
     <div class="article-card-title">Precautions Related to Midline Sternotomy in Cardiac Surgery</div>
-    <div class="article-card-journal">Eur J Cardiovasc Nurs · Literature Review with Graded Recommendations</div>
-    <span class="article-badge" style="color:#e07b3a">Oxford CEBM Grades A–D</span>
+    <div class="article-card-journal">Eur J Cardiovasc Nurs &middot; Literature Review with Graded Recommendations</div>
+    <span class="article-badge" style="color:#e07b3a">Oxford CEBM Grades A&ndash;D</span>
   </div>
-  <div class="article-card" style="border-left:3px solid #4dbf8a">
+  <div class="article-card" style="border-left:3px solid #2e8b57">
     <div class="article-card-title">Perioperative Care in Cardiac Surgery</div>
-    <div class="article-card-journal">Ann Thorac Surg · ERAS Cardiac / ERAS International / STS Joint Consensus</div>
-    <span class="article-badge" style="color:#4dbf8a">High / Moderate / Low</span>
+    <div class="article-card-journal">Ann Thorac Surg &middot; ERAS Cardiac / ERAS International / STS Joint Consensus</div>
+    <span class="article-badge" style="color:#2e8b57">High / Moderate / Low</span>
   </div>
-  <div class="article-card" style="border-left:3px solid #4a9fd4">
+  <div class="article-card" style="border-left:3px solid var(--scarlet)">
     <div class="article-card-title">Prevention and Management of Sternal Wound Infections</div>
-    <div class="article-card-journal">J Thorac Cardiovasc Surg · Expert Consensus Review (STS)</div>
-    <span class="article-badge" style="color:#4a9fd4">ACC/AHA Class System</span>
+    <div class="article-card-journal">J Thorac Cardiovasc Surg &middot; Expert Consensus Review (STS)</div>
+    <span class="article-badge" style="color:var(--scarlet)">ACC/AHA Class System</span>
   </div>
 </div>
 
+<!-- CONTROLS -->
 <div class="controls">
   <span class="controls-label">Filter outcome:</span>
   <button class="filter-btn active" onclick="filterOutcome(null, this)">All outcomes</button>
@@ -99,6 +159,7 @@
   <button class="filter-btn" onclick="filterOutcome('Activity &amp; Sternal Precautions', this)">Activity &amp; Sternal Precautions</button>
 </div>
 
+<!-- TABLE -->
 <div class="table-wrapper">
 <table id="matrix-table">
 <colgroup>
@@ -107,7 +168,7 @@
 </colgroup>
 <thead>
 <tr>
-  <th style="vertical-align:bottom;padding-bottom:12px"><span style="font-size:10px;color:#6e7681;letter-spacing:0.08em;text-transform:uppercase">Guideline Article</span></th>
+  <th style="vertical-align:bottom;padding-bottom:12px"><span style="font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase">Guideline Article</span></th>
   <th data-col="Deep Sternal Wound Infection (DSWI)"><span class="outcome-label">Deep Sternal Wound Infection (DSWI)</span></th>
   <th data-col="Superficial Sternal Wound Infection (SSWI)"><span class="outcome-label">Superficial Sternal Wound Infection (SSWI)</span></th>
   <th data-col="Sternal Wound Dehiscence"><span class="outcome-label">Sternal Wound Dehiscence</span></th>
@@ -124,6 +185,7 @@
 </table>
 </div>
 
+<!-- LEGEND -->
 <div class="legend">
   <div class="legend-label">Evidence strength guide</div>
   <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div>Strongest evidence / Class I / High quality / Grade A</div>
@@ -134,281 +196,55 @@
   <div class="legend-item"><div class="legend-dot" style="background:#6b7280"></div>Uncertain / Insufficient evidence</div>
 </div>
 
+<!-- NEXT SECTION -->
+<div class="next-section-wrap">
+  <a href="index.html#deliverables" class="next-section">
+    Advance to the next section &nbsp; &#8594;
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">External Sternal Support Devices: A Literature Review with Critical Appraisal &middot; Practice Guidelines Matrix</p>
+  <div style="display:flex;gap:22px;flex-wrap:wrap;">
+    <a href="index.html" class="footer-link">&#8592; Home</a>
+    <a href="outcomes_table.html" class="footer-link">Outcome Tables</a>
+    <a href="levels_of_evidence.html" class="footer-link">Levels of Evidence</a>
+    <a href="prisma.html" class="footer-link">PRISMA</a>
+  </div>
+</footer>
+
 <script>
-const COLOR_ORDER = ["#16a34a","#ca8a04","#ea580c","#dc2626","#2563eb","#6b7280"];
-function sortByColor(items) {
-  return [...items].sort((a,b) => COLOR_ORDER.indexOf(a.lc) - COLOR_ORDER.indexOf(b.lc));
+const COLOR_ORDER=["#16a34a","#ca8a04","#ea580c","#dc2626","#2563eb","#6b7280"];
+function sortByColor(items){return[...items].sort((a,b)=>COLOR_ORDER.indexOf(a.lc)-COLOR_ORDER.indexOf(b.lc));}
+const OUTCOMES=["Deep Sternal Wound Infection (DSWI)","Superficial Sternal Wound Infection (SSWI)","Sternal Wound Dehiscence","Mediastinitis","Hospital Length of Stay","Mortality / Morbidity","Pulmonary Complications","Glycemic Control","Antimicrobial Prophylaxis","Activity & Sternal Precautions"];
+const ARTICLES=[{id:"bouza",short:"Bouza et al., 2021",full:"Prevention, Diagnosis and Management of Post-Surgical Mediastinitis",accent:"#9b72d4"},{id:"brocki",short:"Brocki et al., 2010",full:"Precautions Related to Midline Sternotomy in Cardiac Surgery",accent:"#e07b3a"},{id:"grant",short:"Grant et al., 2024",full:"Perioperative Care in Cardiac Surgery",accent:"#2e8b57"},{id:"lazar",short:"Lazar et al., 2016",full:"Prevention and Management of Sternal Wound Infections",accent:"#BB0000"}];
+const MATRIX={bouza:{"Deep Sternal Wound Infection (DSWI)":{interventions:[{text:"Topical mupirocin (nasal) + chlorhexidine (skin)",level:"LoE 1+ · Strong · High quality",lc:"#16a34a"},{text:"Prophylactic NPWT in high-risk patients",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Stable wound closure; systematic NPWT closure in obese patients",level:"LoE 2++ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Topical antibiotics on surgical site prior to closure — insufficient evidence",level:"LoE 2+ · Not recommended",lc:"#dc2626"}]},"Superficial Sternal Wound Infection (SSWI)":{interventions:[{text:"PCR-based screening for S. aureus carriage",level:"LoE 1++ · Strong · High quality",lc:"#16a34a"},{text:"Hair removal with depilatory cream or electric razor (NOT blade)",level:"LoE 1+ · Strong · High quality",lc:"#16a34a"},{text:"Chlorhexidine over povidone-iodine for skin preparation",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"},{text:"S. aureus nasal carriage screening and eradication",level:"LoE 1− · Strong · Moderate quality",lc:"#ca8a04"}]},"Sternal Wound Dehiscence":{interventions:[{text:"Surgical steel wires — technique of choice for closure",level:"LoE 1+ · Strong · High quality",lc:"#16a34a"},{text:"Postoperative sternal immobilisation systems in ALL patients",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"}]},"Mediastinitis":{interventions:[{text:"CT scan as first-choice imaging (≥2 weeks post-op)",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Antibiotic mediastinal irrigation — insufficient evidence",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"},{text:"MRI NOT recommended routinely",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"},{text:"Early empirical antimicrobials at clinical suspicion (after cultures)",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"},{text:"Sequential oral antimicrobial treatment in stable patients",level:"LoE 2− · Strong · Low quality",lc:"#ea580c"},{text:"Mediastinal lavage NOT recommended routinely",level:"LoE 2+ · Strong · Low quality",lc:"#dc2626"},{text:"Povidone-iodine should NOT be used in any case",level:"LoE 2+ · Strong · Low quality",lc:"#dc2626"},{text:"Plain X-ray NOT recommended as first-choice",level:"LoE 2+ · Not recommended",lc:"#dc2626"},{text:"Include MRSA coverage in empirical Tx for critically ill",level:"LoE 4 · Conditioned · Very low quality",lc:"#2563eb"},{text:"Antifungal NOT systematic — only high-risk fungal cases",level:"LoE 4 · Conditioned · Very low quality",lc:"#2563eb"},{text:"Duration: 4–6 weeks (switch to oral at week 2–3 if feasible)",level:"LoE 4 · Conditioned · Very low quality",lc:"#2563eb"}]},"Hospital Length of Stay":{interventions:[{text:"Postoperative sternal immobilisation systems (reduces re-admission)",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"}]},"Mortality / Morbidity":{interventions:[{text:"Optimise preoperative glycaemic control (HbA1c >6.5–7%) in diabetic patients",level:"LoE 2++ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Smoking cessation ≥30 days before surgery",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Weight loss preoperatively in obese/overweight patients",level:"LoE 2++ · Strong · Moderate quality",lc:"#ca8a04"}]},"Pulmonary Complications":{interventions:null},"Glycemic Control":{interventions:[{text:"Intraoperative blood glucose 110–180 mg/dL via continuous insulin infusion",level:"LoE 2+ · Strong · Moderate quality",lc:"#ca8a04"},{text:"Preoperative glycaemic optimisation (HbA1c >6.5–7%) in diabetics",level:"LoE 2++ · Strong · Moderate quality",lc:"#ca8a04"}]},"Antimicrobial Prophylaxis":{interventions:[{text:"Topical mupirocin (nasal) + chlorhexidine (skin) decontamination",level:"LoE 1+ · Strong · High quality",lc:"#16a34a"},{text:"Systematic decontamination when carrier status cannot be assessed timely",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"},{text:"Beta-lactams preferred for methicillin-sensitive staphylococcal mediastinitis",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"},{text:"Glycopeptides/lipoglycopeptides for methicillin-resistant staphylococcal infections",level:"LoE 3 · Strong · Low quality",lc:"#ea580c"}]},"Activity & Sternal Precautions":{interventions:null}},brocki:{"Deep Sternal Wound Infection (DSWI)":{interventions:[{text:"Women with bra size ≥D: wear supportive brassiere with full chest circumference support for 6–8 weeks",level:"Grade B · Level 3b studies",lc:"#ca8a04"},{text:"Frequent coughers: wear supportive vest encircling full thorax for 6–8 weeks",level:"Grade D · Level 4 studies",lc:"#2563eb"},{text:"BMI ≥35: wear supportive vest for sternal protection for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"}]},"Superficial Sternal Wound Infection (SSWI)":{interventions:[{text:"Avoid bilateral/backwards arm movements beyond pain-free limits for 10 days to prevent skin breakdown",level:"Grade D · Level 4 studies",lc:"#2563eb"}]},"Sternal Wound Dehiscence":{interventions:[{text:"Women with bra size ≥D: wear supportive brassiere with full chest circumference support for 6–8 weeks",level:"Grade B · Level 3b studies",lc:"#ca8a04"},{text:"Self-hugging posture when coughing/sneezing for initial 6–8 weeks",level:"Grade D · Level 4 studies",lc:"#2563eb"},{text:"Loaded arm movements only at pain-free level with upper arms close to body for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"},{text:"Use elbow method (leg rolling + counterweighting) for supine-to-sit transfers for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"},{text:"BMI ≥35: wear supportive vest for sternal protection for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"}]},"Mediastinitis":{interventions:null},"Hospital Length of Stay":{interventions:null},"Mortality / Morbidity":{interventions:null},"Pulmonary Complications":{interventions:[{text:"Frequent coughers: wear supportive vest to enable more effective bronchial clearance by reducing cough pain",level:"Grade D · Level 4 studies",lc:"#2563eb"}]},"Glycemic Control":{interventions:null},"Antimicrobial Prophylaxis":{interventions:null},"Activity & Sternal Precautions":{interventions:[{text:"No weight restriction for arm activity as long as upper arms are kept close to body and within pain-free range",level:"Grade D · Expert opinion · No evidence found supporting weight limits",lc:"#2563eb"},{text:"Self-hugging when coughing/sneezing for initial 6–8 weeks",level:"Grade D · Level 4 studies",lc:"#2563eb"},{text:"Avoid bilateral arm movement in horizontal/backwards/overhead direction for 10 days or until wound healed",level:"Grade D · Level 4 studies",lc:"#2563eb"},{text:"Loaded arm activities only with elbows close to body for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"},{text:"Use elbow method (leg rolling + counterweighting) for supine-to-sit transfers",level:"Grade D · Expert opinion",lc:"#2563eb"},{text:"Women bra size ≥D: supportive front-fastening brassiere for 6–8 weeks",level:"Grade B · Level 3b studies",lc:"#ca8a04"},{text:"BMI ≥35: supportive vest for 6–8 weeks",level:"Grade D · Expert opinion",lc:"#2563eb"},{text:"Frequent coughers: supportive vest encircling full thorax for 6–8 weeks",level:"Grade D · Level 4 studies",lc:"#2563eb"}]}},grant:{"Deep Sternal Wound Infection (DSWI)":{interventions:null},"Superficial Sternal Wound Infection (SSWI)":{interventions:null},"Sternal Wound Dehiscence":{interventions:null},"Mediastinitis":{interventions:null},"Hospital Length of Stay":{interventions:[{text:"Multifaceted preoperative screening and risk assessment",level:"Moderate quality",lc:"#ca8a04"},{text:"Routine auditing of perioperative process adherence",level:"Moderate quality",lc:"#ca8a04"},{text:"Multicomponent prehabilitation prior to nonurgent surgery",level:"Low quality",lc:"#ea580c"},{text:"Shared decision-making and patient engagement",level:"Low quality",lc:"#ea580c"}]},"Mortality / Morbidity":{interventions:[{text:"Multidisciplinary team (incl. dedicated coordinator) as Heart Team extension",level:"Moderate quality",lc:"#ca8a04"},{text:"TEE for moderate or high perioperative risk patients",level:"Moderate quality",lc:"#ca8a04"},{text:"Routine auditing of perioperative process measure adherence and outcomes",level:"Moderate quality",lc:"#ca8a04"},{text:"Limiting nil-per-os for clear liquids (>2h before surgery)",level:"Low quality",lc:"#ea580c"}]},"Pulmonary Complications":{interventions:[{text:"Lung-protective mechanical ventilation (low tidal volume, PEEP, driving pressure <16 cmH₂O)",level:"HIGH quality",lc:"#16a34a"},{text:"Role of ventilation during cardiopulmonary bypass — uncertain",level:"Moderate quality · Uncertain",lc:"#6b7280"}]},"Glycemic Control":{interventions:[{text:"Multicomponent prehabilitation may optimise metabolic status pre-surgery",level:"Low quality",lc:"#ea580c"}]},"Antimicrobial Prophylaxis":{interventions:null},"Activity & Sternal Precautions":{interventions:null}},lazar:{"Deep Sternal Wound Infection (DSWI)":{interventions:[{text:"Intranasal mupirocin (24h pre-op, ×5 days)",level:"Class I / LoE B",lc:"#16a34a"},{text:"IV cephalosporin within 60 min of incision, ≤48h",level:"Class I / LoE A",lc:"#16a34a"},{text:"Topical vancomycin to sternal edges",level:"Class I / LoE B",lc:"#16a34a"},{text:"Continuous insulin infusion (glucose <180 mg/dL)",level:"Class I / LoE A",lc:"#16a34a"},{text:"Robicsek weave sternal closure (high-risk/fractures)",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"NPWT when delayed sternal closure anticipated",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"External chest support vest",level:"Class IIb / LoE B",lc:"#ea580c"},{text:"Avoid bone wax on sternal edges",level:"Class III / LoE B",lc:"#dc2626"},{text:"Avoid dilute povidone-iodine irrigation for DSWI",level:"Class III / LoE B",lc:"#dc2626"}]},"Superficial Sternal Wound Infection (SSWI)":{interventions:[{text:"Nasal swab/PCR testing for all cardiac patients",level:"Class I / LoE A",lc:"#16a34a"},{text:"Treat all distant extrathoracic infections pre-op",level:"Class I / LoE C",lc:"#16a34a"},{text:"Chlorhexidine bath/shower night before surgery",level:"Class IIb / LoE B",lc:"#ea580c"}]},"Sternal Wound Dehiscence":{interventions:[{text:"Robicsek weave for multiple sternal fractures",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"NPWT dressing barrier (sponge-to-heart)",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"Figure-of-eight sternal closure technique",level:"Class IIb / LoE B",lc:"#ea580c"},{text:"Rigid sternal fixation (bands/plates) for high-risk patients",level:"Class IIb / LoE B",lc:"#ea580c"},{text:"External chest support vest",level:"Class IIb / LoE B",lc:"#ea580c"}]},"Mediastinitis":{interventions:[{text:"NPWT initiated when delayed sternal closure anticipated",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"Dressing barrier between sponge and heart/great vessels",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"Avoid dilute povidone-iodine irrigation",level:"Class III / LoE B",lc:"#dc2626"}]},"Hospital Length of Stay":{interventions:[{text:"External chest support vest",level:"Class IIb / LoE B",lc:"#ea580c"},{text:"Early extubation (reduces wound complications)",level:"No formal class — supporting evidence cited",lc:"#6b7280"},{text:"Early removal of urinary/central venous catheters",level:"No formal class — supporting evidence cited",lc:"#6b7280"}]},"Mortality / Morbidity":{interventions:[{text:"Smoke cessation + pulmonary toilet (if delay safe)",level:"Class I / LoE B",lc:"#16a34a"},{text:"Postpone surgery for enteral nutrition if hypoalbuminemic (7–10 days)",level:"Class I / LoE B",lc:"#16a34a"},{text:"Hemostasis to avoid return to OR for bleeding",level:"No formal class — principle stated",lc:"#6b7280"}]},"Pulmonary Complications":{interventions:null},"Glycemic Control":{interventions:[{text:"Continuous insulin infusion intra-op and ≥24h post-op to maintain glucose <180 mg/dL",level:"Class I / LoE A",lc:"#16a34a"}]},"Antimicrobial Prophylaxis":{interventions:[{text:"IV cephalosporin within 60 min, ≤48h, weight-based",level:"Class I / LoE A",lc:"#16a34a"},{text:"Vancomycin IV 60–120 min pre-incision, ≤1 add'l dose",level:"Class I / LoE A",lc:"#16a34a"},{text:"Continue antibiotics no longer than 48h post-op",level:"Class I / LoE A",lc:"#16a34a"},{text:"Vancomycin only for β-lactam allergy or high MRSA risk",level:"Class IIa / LoE B",lc:"#ca8a04"},{text:"Add aminoglycoside for gram-negative coverage when vancomycin is primary",level:"Class IIa / LoE C",lc:"#ca8a04"},{text:"Vancomycin NOT sole prophylactic antibiotic",level:"Class III / LoE B",lc:"#dc2626"}]},"Activity & Sternal Precautions":{interventions:[{text:"External chest support vest postoperatively",level:"Class IIb / LoE B",lc:"#ea580c"}]}}};
+
+let activeFilter=null;
+function buildInterventionHTML(items){
+  const sorted=sortByColor(items);
+  const preview=sorted.slice(0,2);
+  const extra=sorted.slice(2);
+  let html='<div class="intervention-list">';
+  preview.forEach(item=>{html+=`<div class="intervention-item"><div class="level-badge" style="border-left-color:${item.lc};color:${item.lc}">${item.level}</div><div class="intervention-text">${item.text}</div></div>`;});
+  if(extra.length>0){const extraId='ex_'+Math.random().toString(36).slice(2,8);html+=`<div id="${extraId}" class="hidden">`;extra.forEach(item=>{html+=`<div class="intervention-item"><div class="level-badge" style="border-left-color:${item.lc};color:${item.lc}">${item.level}</div><div class="intervention-text">${item.text}</div></div>`;});html+=`</div><button class="expand-btn" onclick="toggleExpand('${extraId}', this)">&#9660; +${extra.length} more</button>`;}
+  html+='</div>';return html;
 }
-
-const OUTCOMES = [
-  "Deep Sternal Wound Infection (DSWI)",
-  "Superficial Sternal Wound Infection (SSWI)",
-  "Sternal Wound Dehiscence",
-  "Mediastinitis",
-  "Hospital Length of Stay",
-  "Mortality / Morbidity",
-  "Pulmonary Complications",
-  "Glycemic Control",
-  "Antimicrobial Prophylaxis",
-  "Activity & Sternal Precautions"
-];
-
-// Alphabetical by last name: Bouza, Brocki, Grant, Lazar
-const ARTICLES = [
-  { id:"bouza", short:"Bouza et al., 2021", full:"Prevention, Diagnosis and Management of Post-Surgical Mediastinitis", accent:"#9b72d4" },
-  { id:"brocki", short:"Brocki et al., 2010", full:"Precautions Related to Midline Sternotomy in Cardiac Surgery", accent:"#e07b3a" },
-  { id:"grant", short:"Grant et al., 2024", full:"Perioperative Care in Cardiac Surgery", accent:"#4dbf8a" },
-  { id:"lazar", short:"Lazar et al., 2016", full:"Prevention and Management of Sternal Wound Infections", accent:"#4a9fd4" }
-];
-
-const MATRIX = {
-  bouza: {
-    "Deep Sternal Wound Infection (DSWI)": { interventions: [
-      { text:"Topical mupirocin (nasal) + chlorhexidine (skin)", level:"LoE 1+ · Strong · High quality", lc:"#16a34a" },
-      { text:"Prophylactic NPWT in high-risk patients", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Stable wound closure; systematic NPWT closure in obese patients", level:"LoE 2++ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Topical antibiotics on surgical site prior to closure — insufficient evidence", level:"LoE 2+ · Not recommended", lc:"#dc2626" }
-    ]},
-    "Superficial Sternal Wound Infection (SSWI)": { interventions: [
-      { text:"PCR-based screening for S. aureus carriage", level:"LoE 1++ · Strong · High quality", lc:"#16a34a" },
-      { text:"Hair removal with depilatory cream or electric razor (NOT blade)", level:"LoE 1+ · Strong · High quality", lc:"#16a34a" },
-      { text:"Chlorhexidine over povidone-iodine for skin preparation", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"S. aureus nasal carriage screening and eradication", level:"LoE 1− · Strong · Moderate quality", lc:"#ca8a04" }
-    ]},
-    "Sternal Wound Dehiscence": { interventions: [
-      { text:"Surgical steel wires — technique of choice for closure", level:"LoE 1+ · Strong · High quality", lc:"#16a34a" },
-      { text:"Postoperative sternal immobilisation systems in ALL patients", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" }
-    ]},
-    "Mediastinitis": { interventions: [
-      { text:"CT scan as first-choice imaging (≥2 weeks post-op)", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Antibiotic mediastinal irrigation — insufficient evidence", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" },
-      { text:"MRI NOT recommended routinely", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" },
-      { text:"Early empirical antimicrobials at clinical suspicion (after cultures)", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" },
-      { text:"Sequential oral antimicrobial treatment in stable patients", level:"LoE 2− · Strong · Low quality", lc:"#ea580c" },
-      { text:"Mediastinal lavage NOT recommended routinely", level:"LoE 2+ · Strong · Low quality", lc:"#dc2626" },
-      { text:"Povidone-iodine should NOT be used in any case", level:"LoE 2+ · Strong · Low quality", lc:"#dc2626" },
-      { text:"Plain X-ray NOT recommended as first-choice", level:"LoE 2+ · Not recommended", lc:"#dc2626" },
-      { text:"Include MRSA coverage in empirical Tx for critically ill", level:"LoE 4 · Conditioned · Very low quality", lc:"#2563eb" },
-      { text:"Antifungal NOT systematic — only high-risk fungal cases", level:"LoE 4 · Conditioned · Very low quality", lc:"#2563eb" },
-      { text:"Duration: 4–6 weeks (switch to oral at week 2–3 if feasible)", level:"LoE 4 · Conditioned · Very low quality", lc:"#2563eb" }
-    ]},
-    "Hospital Length of Stay": { interventions: [
-      { text:"Postoperative sternal immobilisation systems (reduces re-admission)", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" }
-    ]},
-    "Mortality / Morbidity": { interventions: [
-      { text:"Optimise preoperative glycaemic control (HbA1c >6.5–7%) in diabetic patients", level:"LoE 2++ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Smoking cessation ≥30 days before surgery", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Weight loss preoperatively in obese/overweight patients", level:"LoE 2++ · Strong · Moderate quality", lc:"#ca8a04" }
-    ]},
-    "Pulmonary Complications": { interventions: null },
-    "Glycemic Control": { interventions: [
-      { text:"Intraoperative blood glucose 110–180 mg/dL via continuous insulin infusion", level:"LoE 2+ · Strong · Moderate quality", lc:"#ca8a04" },
-      { text:"Preoperative glycaemic optimisation (HbA1c >6.5–7%) in diabetics", level:"LoE 2++ · Strong · Moderate quality", lc:"#ca8a04" }
-    ]},
-    "Antimicrobial Prophylaxis": { interventions: [
-      { text:"Topical mupirocin (nasal) + chlorhexidine (skin) decontamination", level:"LoE 1+ · Strong · High quality", lc:"#16a34a" },
-      { text:"Systematic decontamination when carrier status cannot be assessed timely", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" },
-      { text:"Beta-lactams preferred for methicillin-sensitive staphylococcal mediastinitis", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" },
-      { text:"Glycopeptides/lipoglycopeptides for methicillin-resistant staphylococcal infections", level:"LoE 3 · Strong · Low quality", lc:"#ea580c" }
-    ]},
-    "Activity & Sternal Precautions": { interventions: null }
-  },
-
-  brocki: {
-    "Deep Sternal Wound Infection (DSWI)": { interventions: [
-      { text:"Women with bra size ≥D: wear supportive brassiere with full chest circumference support for 6–8 weeks", level:"Grade B · Level 3b studies", lc:"#ca8a04" },
-      { text:"Frequent coughers: wear supportive vest encircling full thorax for 6–8 weeks", level:"Grade D · Level 4 studies", lc:"#2563eb" },
-      { text:"BMI ≥35: wear supportive vest for sternal protection for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" }
-    ]},
-    "Superficial Sternal Wound Infection (SSWI)": { interventions: [
-      { text:"Avoid bilateral/backwards arm movements beyond pain-free limits for 10 days (until wound healed) to prevent skin breakdown", level:"Grade D · Level 4 studies", lc:"#2563eb" }
-    ]},
-    "Sternal Wound Dehiscence": { interventions: [
-      { text:"Self-hugging posture when coughing/sneezing for initial 6–8 weeks", level:"Grade D · Level 4 studies", lc:"#2563eb" },
-      { text:"Loaded arm movements only at pain-free level with upper arms close to body for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" },
-      { text:"Use elbow method (leg rolling + counterweighting) for supine-to-sit transfers for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" },
-      { text:"Women with bra size ≥D: wear supportive brassiere with full chest circumference support for 6–8 weeks", level:"Grade B · Level 3b studies", lc:"#ca8a04" },
-      { text:"BMI ≥35: wear supportive vest for sternal protection for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" }
-    ]},
-    "Mediastinitis": { interventions: null },
-    "Hospital Length of Stay": { interventions: null },
-    "Mortality / Morbidity": { interventions: null },
-    "Pulmonary Complications": { interventions: [
-      { text:"Frequent coughers: wear supportive vest to enable more effective bronchial clearance by reducing cough pain", level:"Grade D · Level 4 studies", lc:"#2563eb" }
-    ]},
-    "Glycemic Control": { interventions: null },
-    "Antimicrobial Prophylaxis": { interventions: null },
-    "Activity & Sternal Precautions": { interventions: [
-      { text:"No weight restriction for arm activity as long as upper arms are kept close to body and within pain-free range", level:"Grade D · Expert opinion · No evidence found supporting weight limits", lc:"#2563eb" },
-      { text:"Self-hugging when coughing/sneezing for initial 6–8 weeks", level:"Grade D · Level 4 studies", lc:"#2563eb" },
-      { text:"Avoid bilateral arm movement in horizontal/backwards/overhead direction for 10 days or until wound healed", level:"Grade D · Level 4 studies", lc:"#2563eb" },
-      { text:"Loaded arm activities only with elbows close to body for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" },
-      { text:"Use elbow method (leg rolling + counterweighting) for supine-to-sit transfers", level:"Grade D · Expert opinion", lc:"#2563eb" },
-      { text:"Women bra size ≥D: supportive front-fastening brassiere for 6–8 weeks", level:"Grade B · Level 3b studies", lc:"#ca8a04" },
-      { text:"BMI ≥35: supportive vest for 6–8 weeks", level:"Grade D · Expert opinion", lc:"#2563eb" },
-      { text:"Frequent coughers: supportive vest encircling full thorax for 6–8 weeks", level:"Grade D · Level 4 studies", lc:"#2563eb" }
-    ]}
-  },
-
-  grant: {
-    "Deep Sternal Wound Infection (DSWI)": { interventions: null },
-    "Superficial Sternal Wound Infection (SSWI)": { interventions: null },
-    "Sternal Wound Dehiscence": { interventions: null },
-    "Mediastinitis": { interventions: null },
-    "Hospital Length of Stay": { interventions: [
-      { text:"Multifaceted preoperative screening and risk assessment", level:"Moderate quality", lc:"#ca8a04" },
-      { text:"Routine auditing of perioperative process adherence", level:"Moderate quality", lc:"#ca8a04" },
-      { text:"Multicomponent prehabilitation prior to nonurgent surgery", level:"Low quality", lc:"#ea580c" },
-      { text:"Shared decision-making and patient engagement", level:"Low quality", lc:"#ea580c" }
-    ]},
-    "Mortality / Morbidity": { interventions: [
-      { text:"Multidisciplinary team (incl. dedicated coordinator) as Heart Team extension", level:"Moderate quality", lc:"#ca8a04" },
-      { text:"TEE for moderate or high perioperative risk patients", level:"Moderate quality", lc:"#ca8a04" },
-      { text:"Routine auditing of perioperative process measure adherence and outcomes", level:"Moderate quality", lc:"#ca8a04" },
-      { text:"Limiting nil-per-os for clear liquids (>2h before surgery)", level:"Low quality", lc:"#ea580c" }
-    ]},
-    "Pulmonary Complications": { interventions: [
-      { text:"Lung-protective mechanical ventilation (low tidal volume, PEEP, driving pressure <16 cmH\u2082O)", level:"HIGH quality", lc:"#16a34a" },
-      { text:"Role of ventilation during cardiopulmonary bypass — uncertain", level:"Moderate quality · Uncertain", lc:"#6b7280" }
-    ]},
-    "Glycemic Control": { interventions: [
-      { text:"Multicomponent prehabilitation may optimise metabolic status pre-surgery", level:"Low quality", lc:"#ea580c" }
-    ]},
-    "Antimicrobial Prophylaxis": { interventions: null },
-    "Activity & Sternal Precautions": { interventions: null }
-  },
-
-  lazar: {
-    "Deep Sternal Wound Infection (DSWI)": { interventions: [
-      { text:"Intranasal mupirocin (24h pre-op, ×5 days)", level:"Class I / LoE B", lc:"#16a34a" },
-      { text:"IV cephalosporin within 60 min of incision, ≤48h", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Topical vancomycin to sternal edges", level:"Class I / LoE B", lc:"#16a34a" },
-      { text:"Continuous insulin infusion (glucose <180 mg/dL)", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Robicsek weave sternal closure (high-risk/fractures)", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"NPWT when delayed sternal closure anticipated", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"External chest support vest", level:"Class IIb / LoE B", lc:"#ea580c" },
-      { text:"Avoid bone wax on sternal edges", level:"Class III / LoE B", lc:"#dc2626" },
-      { text:"Avoid dilute povidone-iodine irrigation for DSWI", level:"Class III / LoE B", lc:"#dc2626" }
-    ]},
-    "Superficial Sternal Wound Infection (SSWI)": { interventions: [
-      { text:"Nasal swab/PCR testing for all cardiac patients", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Treat all distant extrathoracic infections pre-op", level:"Class I / LoE C", lc:"#16a34a" },
-      { text:"Chlorhexidine bath/shower night before surgery", level:"Class IIb / LoE B", lc:"#ea580c" }
-    ]},
-    "Sternal Wound Dehiscence": { interventions: [
-      { text:"Robicsek weave for multiple sternal fractures", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"NPWT dressing barrier (sponge-to-heart)", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"Figure-of-eight sternal closure technique", level:"Class IIb / LoE B", lc:"#ea580c" },
-      { text:"Rigid sternal fixation (bands/plates) for high-risk patients", level:"Class IIb / LoE B", lc:"#ea580c" },
-      { text:"External chest support vest", level:"Class IIb / LoE B", lc:"#ea580c" }
-    ]},
-    "Mediastinitis": { interventions: [
-      { text:"NPWT initiated when delayed sternal closure anticipated", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"Dressing barrier between sponge and heart/great vessels", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"Avoid dilute povidone-iodine irrigation", level:"Class III / LoE B", lc:"#dc2626" }
-    ]},
-    "Hospital Length of Stay": { interventions: [
-      { text:"External chest support vest", level:"Class IIb / LoE B", lc:"#ea580c" },
-      { text:"Early extubation (reduces wound complications)", level:"No formal class — supporting evidence cited", lc:"#6b7280" },
-      { text:"Early removal of urinary/central venous catheters", level:"No formal class — supporting evidence cited", lc:"#6b7280" }
-    ]},
-    "Mortality / Morbidity": { interventions: [
-      { text:"Smoke cessation + pulmonary toilet (if delay safe)", level:"Class I / LoE B", lc:"#16a34a" },
-      { text:"Postpone surgery for enteral nutrition if hypoalbuminemic (7–10 days)", level:"Class I / LoE B", lc:"#16a34a" },
-      { text:"Hemostasis to avoid return to OR for bleeding", level:"No formal class — principle stated", lc:"#6b7280" }
-    ]},
-    "Pulmonary Complications": { interventions: null },
-    "Glycemic Control": { interventions: [
-      { text:"Continuous insulin infusion intra-op and ≥24h post-op to maintain glucose <180 mg/dL", level:"Class I / LoE A", lc:"#16a34a" }
-    ]},
-    "Antimicrobial Prophylaxis": { interventions: [
-      { text:"IV cephalosporin within 60 min, ≤48h, weight-based", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Vancomycin IV 60–120 min pre-incision, ≤1 add'l dose", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Continue antibiotics no longer than 48h post-op", level:"Class I / LoE A", lc:"#16a34a" },
-      { text:"Vancomycin only for β-lactam allergy or high MRSA risk", level:"Class IIa / LoE B", lc:"#ca8a04" },
-      { text:"Add aminoglycoside for gram-negative coverage when vancomycin is primary", level:"Class IIa / LoE C", lc:"#ca8a04" },
-      { text:"Vancomycin NOT sole prophylactic antibiotic", level:"Class III / LoE B", lc:"#dc2626" }
-    ]},
-    "Activity & Sternal Precautions": { interventions: [
-      { text:"External chest support vest postoperatively", level:"Class IIb / LoE B", lc:"#ea580c" }
-    ]}
-  }
-};
-
-let activeFilter = null;
-
-function buildInterventionHTML(items) {
-  const sorted = sortByColor(items);
-  const preview = sorted.slice(0, 2);
-  const extra = sorted.slice(2);
-  let html = '<div class="intervention-list">';
-  preview.forEach(item => {
-    html += `<div class="intervention-item"><div class="level-badge" style="border-left-color:${item.lc};color:${item.lc}">${item.level}</div><div class="intervention-text">${item.text}</div></div>`;
+function toggleExpand(id,btn){const el=document.getElementById(id);if(el.classList.contains('hidden')){el.classList.remove('hidden');btn.textContent='\u25b2 Show less';}else{el.classList.add('hidden');const count=el.querySelectorAll('.intervention-item').length;btn.textContent='\u25bc +'+count+' more';}}
+function renderTable(){
+  const visibleOutcomes=activeFilter?OUTCOMES.filter(o=>o===activeFilter):OUTCOMES;
+  document.querySelectorAll('thead th[data-col]').forEach(th=>{const col=th.getAttribute('data-col');th.style.display=(!activeFilter||col===activeFilter)?'':'none';});
+  const tbody=document.getElementById('matrix-body');tbody.innerHTML='';
+  ARTICLES.forEach(article=>{
+    const tr=document.createElement('tr');
+    let rowHTML=`<td class="row-header" style="--ac:${article.accent}"><div class="row-short">${article.short}</div><div class="row-full">${article.full}</div></td>`;
+    visibleOutcomes.forEach(outcome=>{const cell=MATRIX[article.id][outcome];if(!cell||!cell.interventions){rowHTML+=`<td class="matrix-cell empty-cell" data-col="${outcome}"><span class="empty-dash">\u2014</span></td>`;}else{rowHTML+=`<td class="matrix-cell filled-cell" data-col="${outcome}">${buildInterventionHTML(cell.interventions)}</td>`;}});
+    tr.innerHTML=rowHTML;tbody.appendChild(tr);
   });
-  if (extra.length > 0) {
-    const extraId = 'ex_' + Math.random().toString(36).slice(2,8);
-    html += `<div id="${extraId}" class="hidden">`;
-    extra.forEach(item => {
-      html += `<div class="intervention-item"><div class="level-badge" style="border-left-color:${item.lc};color:${item.lc}">${item.level}</div><div class="intervention-text">${item.text}</div></div>`;
-    });
-    html += `</div><button class="expand-btn" onclick="toggleExpand('${extraId}', this)">&#9660; +${extra.length} more</button>`;
-  }
-  html += '</div>';
-  return html;
+  document.querySelectorAll('td[data-col], th[data-col]').forEach(el=>{el.addEventListener('mouseenter',()=>{const col=el.getAttribute('data-col');document.querySelectorAll(`[data-col="${col}"]`).forEach(e=>e.classList.add('hovered-col'));});el.addEventListener('mouseleave',()=>{document.querySelectorAll('.hovered-col').forEach(e=>e.classList.remove('hovered-col'));});});
 }
-
-function toggleExpand(id, btn) {
-  const el = document.getElementById(id);
-  if (el.classList.contains('hidden')) {
-    el.classList.remove('hidden');
-    btn.textContent = '\u25b2 Show less';
-  } else {
-    el.classList.add('hidden');
-    const count = el.querySelectorAll('.intervention-item').length;
-    btn.textContent = '\u25bc +' + count + ' more';
-  }
-}
-
-function renderTable() {
-  const visibleOutcomes = activeFilter ? OUTCOMES.filter(o => o === activeFilter) : OUTCOMES;
-  document.querySelectorAll('thead th[data-col]').forEach(th => {
-    const col = th.getAttribute('data-col');
-    th.style.display = (!activeFilter || col === activeFilter) ? '' : 'none';
-  });
-  const tbody = document.getElementById('matrix-body');
-  tbody.innerHTML = '';
-  ARTICLES.forEach(article => {
-    const tr = document.createElement('tr');
-    let rowHTML = `<td class="row-header" style="--ac:${article.accent}"><div class="row-short">${article.short}</div><div class="row-full">${article.full}</div></td>`;
-    visibleOutcomes.forEach(outcome => {
-      const cell = MATRIX[article.id][outcome];
-      if (!cell || !cell.interventions) {
-        rowHTML += `<td class="matrix-cell empty-cell" data-col="${outcome}"><span class="empty-dash">\u2014</span></td>`;
-      } else {
-        rowHTML += `<td class="matrix-cell filled-cell" data-col="${outcome}">${buildInterventionHTML(cell.interventions)}</td>`;
-      }
-    });
-    tr.innerHTML = rowHTML;
-    tbody.appendChild(tr);
-  });
-  document.querySelectorAll('td[data-col], th[data-col]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      const col = el.getAttribute('data-col');
-      document.querySelectorAll(`[data-col="${col}"]`).forEach(e => e.classList.add('hovered-col'));
-    });
-    el.addEventListener('mouseleave', () => {
-      document.querySelectorAll('.hovered-col').forEach(e => e.classList.remove('hovered-col'));
-    });
-  });
-}
-
-function filterOutcome(outcome, btn) {
-  activeFilter = outcome;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderTable();
-}
-
+function filterOutcome(outcome,btn){activeFilter=outcome;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTable();}
 renderTable();
 </script>
 </body>
