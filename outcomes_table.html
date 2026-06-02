@@ -50,7 +50,7 @@
     font-size: 15px; font-weight: 500;
     color: var(--scarlet); text-decoration: none;
   }
-  .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 18px; list-style: none; align-items: center; }
   .nav-links a {
     font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--gray);
@@ -162,8 +162,6 @@
 
   /* ── HEADER ROW ── */
   thead tr th {
-    position: sticky; top: 56px; z-index: 20;
-    box-shadow: 0 2px 0 #333;
     background: var(--black);
     padding: 10px 8px;
     font-size: 9.5px; font-weight: 600;
@@ -333,6 +331,9 @@
     .main { padding: 32px 8px 80px; }
     footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
   }
+  .next-section { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--scarlet); text-decoration: none; padding: 14px 24px; border: 2px solid var(--scarlet); border-radius: 4px; transition: all 0.2s; }
+  .next-section:hover { background: var(--scarlet); color: #fff; }
+  .next-section-wrap { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; justify-content: flex-end; max-width: 1600px; margin-left: auto; margin-right: auto; margin-bottom: 48px; padding-right: 4px; }
 </style>
 </head>
 <body>
@@ -341,11 +342,14 @@
 <nav>
   <a href="index.html" class="nav-brand">← Back to Project</a>
   <ul class="nav-links">
-    <li><a href="index.html#overview">Overview</a></li>
-    <li><a href="index.html#pico">PICO</a></li>
-    <li><a href="index.html#deliverables">Deliverables</a></li>
-    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+    <li><a href="prior_analysis.html">Prior</a></li>
     <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
   </ul>
 </nav>
 
@@ -436,17 +440,13 @@
     </div>
   </div>
 
-  <!-- METHODOLOGICAL NOTE -->
-  <div class="note-box reveal">
-    <div class="note-box-label">Methodological Notes</div>
-    <p class="note-box-text">
-      Studies marked with a limitation flag carry identified methodological concerns that affect the weight of their findings.
-      <strong>Hjorth (2014)</strong> — company sponsored; results should be interpreted with caution.
-      <strong>El-Ansary (2008, 2015)</strong> — chronic sternal instability population; findings may not generalize to acute post-sternotomy patients.
-      <strong>Katijjahbe (2018)</strong> — no sternal binders were actually used in the intervention arm despite the study being categorized under ESSD literature.
-      <strong>Rogers et al. (2024)</strong> — Cochrane review covering 118 RCTs across all SSI prevention interventions; ESSD findings represent a subset.
-      Directional indicators reflect the overall reported findings and do not substitute for quantitative effect size analysis. For independently calculated effect sizes (Cohen's d, phi, RR, ARR, NNT) see the Evidence Tables.
-    </p>
+
+
+  <!-- NEXT SECTION LINK -->
+  <div class="next-section-wrap">
+    <a href="guidelines_matrix.html" class="next-section">
+      Advance to the next section &nbsp; &#8594;
+    </a>
   </div>
 
 </div><!-- /main -->
