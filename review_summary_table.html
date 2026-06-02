@@ -13,8 +13,8 @@ html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,252,250,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;}
 .nav-brand{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--scarlet);text-decoration:none;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .2s;}
+.nav-links{display:flex;gap:18px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--scarlet);}
 .page-header{margin-top:56px;background:var(--scarlet);padding:64px 64px 56px;position:relative;overflow:hidden;}
 .page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
@@ -66,17 +66,23 @@ footer{background:var(--black);padding:44px 64px;display:flex;justify-content:sp
 .footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
 .footer-link:hover{color:var(--scarlet);}
 @media(max-width:800px){nav{padding:0 20px;}.nav-links{display:none;}.page-header{padding:60px 24px 44px;}.main{padding:28px 8px 80px;}footer{padding:36px 24px;flex-direction:column;align-items:flex-start;}}
+.next-section{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--scarlet);text-decoration:none;padding:14px 24px;border:2px solid var(--scarlet);border-radius:4px;transition:all .2s;}
+.next-section:hover{background:var(--scarlet);color:#fff;}
+.next-section-wrap{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule);display:flex;justify-content:flex-end;max-width:1600px;margin-left:auto;margin-right:auto;}
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html" class="nav-brand">&#8592; Back to Project</a>
   <ul class="nav-links">
-    <li><a href="index.html#overview">Overview</a></li>
+    <li><a href="prior_analysis.html">Prior</a></li>
     <li><a href="prisma.html">PRISMA</a></li>
-    <li><a href="levels_of_evidence.html">Levels of Evidence</a></li>
-    <li><a href="outcomes_table.html">Outcome Table</a></li>
-    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
   </ul>
 </nav>
 <div class="page-header">
@@ -146,6 +152,14 @@ footer{background:var(--black);padding:44px 64px;display:flex;justify-content:sp
     <div class="legend-item"><span class="study-flag flag-retro">Retrospective</span>Retrospective / Observational Study</div>
   </div>
 </div>
+
+  <!-- NEXT SECTION LINK -->
+  <div class="next-section-wrap">
+    <a href="levels_of_evidence.html" class="next-section">
+      Advance to the next section &nbsp; &#8594;
+    </a>
+  </div>
+
 <footer>
   <p class="footer-text">External Sternal Support Devices: A Comprehensive Review &middot; Review &amp; Summary Tables</p>
   <div style="display:flex;gap:22px;flex-wrap:wrap;">
