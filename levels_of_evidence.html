@@ -38,8 +38,8 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav-brand { font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 500; color: var(--scarlet); text-decoration: none; }
-  .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-links { display: flex; gap: 18px; list-style: none; align-items: center; }
+  .nav-links a { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--scarlet); }
 
   /* ── PAGE HEADER ── */
@@ -96,7 +96,6 @@
 
   /* Header */
   .matrix-table thead th {
-    position: sticky; top: 56px; z-index: 10;
     background: var(--black);
     padding: 10px 12px;
     font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
@@ -106,6 +105,7 @@
     border-right: 1px solid #2a2a2a;
     vertical-align: bottom;
     white-space: nowrap;
+    height: 260px;
   }
   .matrix-table thead th:first-child {
     text-align: left; padding-left: 16px;
@@ -121,7 +121,6 @@
     display: inline-block;
     padding: 4px 0;
     line-height: 1.3;
-    max-height: 130px;
   }
 
   /* Body rows */
@@ -221,6 +220,9 @@
     .level-key { grid-template-columns: 1fr; }
     footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
   }
+  .next-section { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--scarlet); text-decoration: none; padding: 14px 24px; border: 2px solid var(--scarlet); border-radius: 4px; transition: all 0.2s; }
+  .next-section:hover { background: var(--scarlet); color: #fff; }
+  .next-section-wrap { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; justify-content: flex-end; }
 </style>
 </head>
 <body>
@@ -229,12 +231,14 @@
 <nav>
   <a href="index.html" class="nav-brand">← Back to Project</a>
   <ul class="nav-links">
-    <li><a href="index.html#overview">Overview</a></li>
-    <li><a href="index.html#pico">PICO</a></li>
-    <li><a href="index.html#deliverables">Deliverables</a></li>
-    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
-    <li><a href="outcomes_table.html">Outcome Table</a></li>
+    <li><a href="prior_analysis.html">Prior</a></li>
     <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
   </ul>
 </nav>
 
@@ -521,11 +525,13 @@
   </div>
 
   <!-- NOTE BOX -->
-  <div class="note-box reveal">
-    <div class="note-box-label">Classification Notes</div>
-    <p class="note-box-text">
-      Studies are classified according to the <strong>Helene Fuld Health Trust National Institute for EBP in Nursing &amp; Healthcare Levels of Evidence framework</strong> (The Ohio State University College of Nursing). Classification reflects study design only and does not account for internal validity or risk of bias. Several included studies carry identified methodological limitations that affect the interpretive weight of their findings independent of their design-based level: <strong>Hjorth (2014)</strong> — company sponsored; <strong>El-Ansary (2008, 2015)</strong> — chronic instability population; <strong>Katijjahbe (2018)</strong> — no sternal binders used in intervention arm. These concerns are addressed in detail in the Comprehensive Outcome Table and forthcoming Evidence Tables.
-    </p>
+
+
+  <!-- NEXT SECTION LINK -->
+  <div class="next-section-wrap">
+    <a href="outcomes_table.html" class="next-section">
+      Advance to the next section &nbsp; &#8594;
+    </a>
   </div>
 
 </div><!-- /main -->
