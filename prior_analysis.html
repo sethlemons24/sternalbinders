@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prior Analysis — External Sternal Support Devices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --scarlet:#BB0000;--scarlet-deep:#8B0000;
+  --gray:#666;--gray-light:#f4f3f1;--gray-mid:#e8e6e2;--gray-dark:#3a3a3a;
+  --white:#fdfcfa;--black:#1a1a1a;--rule:#d0ccc6;
+  --green:#15803d;--green-bg:#f0fdf4;--green-border:#86efac;
+  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fca5a5;
+  --blue:#1d4ed8;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --gray-pill:#6b7280;--gray-pill-bg:#f4f3f1;--gray-pill-border:#d0ccc6;
+  --excluded-bg:#f0f0f0;--excluded-text:#999;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,252,250,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;color:var(--scarlet);text-decoration:none;}
+.nav-links{display:flex;gap:18px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--scarlet);}
+.next-section{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--scarlet);text-decoration:none;padding:14px 24px;border:2px solid var(--scarlet);border-radius:4px;transition:all .2s;margin-top:8px;}
+.next-section:hover{background:var(--scarlet);color:#fff;}
+.next-section-wrap{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule);}
+
+/* ── PAGE HEADER ── */
+.page-header{margin-top:56px;background:var(--scarlet);padding:72px 64px 64px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
+.page-header::after{content:'';position:absolute;bottom:-80px;left:40%;width:600px;height:300px;border-radius:50%;background:rgba(0,0,0,.07);pointer-events:none;}
+.header-eyebrow{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;position:relative;z-index:1;}
+.header-title{font-family:'EB Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:500;color:#fff;line-height:1.15;margin-bottom:20px;position:relative;z-index:1;max-width:700px;}
+.header-title em{font-style:italic;color:rgba(255,255,255,.7);}
+.header-desc{font-size:14px;line-height:1.7;color:rgba(255,255,255,.65);max-width:640px;position:relative;z-index:1;}
+
+/* ── TIMELINE STRIP ── */
+.timeline-strip{background:var(--black);display:flex;border-bottom:1px solid #2a2a2a;}
+.tl-item{flex:1;padding:22px 28px;border-right:1px solid #2a2a2a;display:flex;flex-direction:column;gap:4px;}
+.tl-item:last-child{border-right:none;}
+.tl-year{font-family:'EB Garamond',serif;font-size:28px;font-weight:500;color:var(--scarlet);line-height:1;}
+.tl-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+
+/* ── MAIN ── */
+.main{max-width:1200px;margin:0 auto;padding:72px 64px 100px;}
+
+/* ── SECTION LABEL ── */
+.section-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--scarlet);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+
+/* ── NARRATIVE BLOCK ── */
+.narrative{margin-bottom:56px;}
+.narrative-step{display:flex;gap:28px;margin-bottom:48px;position:relative;}
+.step-number{font-family:'EB Garamond',serif;font-size:56px;font-weight:400;color:var(--rule);line-height:1;flex-shrink:0;width:52px;text-align:right;margin-top:-4px;user-select:none;}
+.step-content{flex:1;}
+.step-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-bottom:12px;background:var(--gray-light);color:var(--gray);border:1px solid var(--rule);}
+.step-tag.tag-2023{background:#fff7ed;color:#c2410c;border-color:#fed7aa;}
+.step-tag.tag-2026{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
+.step-heading{font-family:'EB Garamond',serif;font-size:26px;font-weight:500;color:var(--black);line-height:1.25;margin-bottom:12px;}
+.step-body{font-size:14px;line-height:1.8;color:var(--gray-dark);max-width:700px;}
+.step-body + .step-body{margin-top:12px;}
+.step-divider{width:100%;height:1px;background:var(--rule);margin:48px 0;}
+
+/* ── TABLE SHARED ── */
+.table-outer{overflow-x:auto;border:1px solid var(--rule);margin-bottom:12px;}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:900px;}
+thead th{position:sticky;top:0;z-index:10;background:var(--black);padding:10px 12px;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:left;border-bottom:2px solid #333;border-right:1px solid #2a2a2a;vertical-align:bottom;white-space:nowrap;}
+thead th.th-center{text-align:center;}
+.th-rotate{writing-mode:vertical-rl;transform:rotate(180deg);display:inline-block;padding:4px 0;max-height:110px;font-size:8.5px;}
+tbody tr{transition:background .1s;}
+tbody tr:nth-child(even){background:var(--gray-light);}
+tbody tr:hover{background:#fdf8f8 !important;}
+td{padding:12px 12px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);vertical-align:top;font-size:12px;line-height:1.6;color:var(--gray-dark);}
+td.td-center{text-align:center;vertical-align:middle;}
+.table-caption{font-size:11.5px;color:var(--gray);line-height:1.6;padding-left:14px;border-left:2px solid var(--rule);margin-bottom:40px;}
+
+/* ── SUMMARY TABLE ── */
+.td-study{min-width:200px;max-width:220px;}
+.study-name{font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px;}
+.study-meta{font-size:10.5px;color:var(--gray);line-height:1.4;}
+.study-tag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 5px;border-radius:2px;margin-top:4px;}
+.tag-white-paper{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.tag-case{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
+.tag-rct{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.tag-lit-review{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+.tag-cross{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.tag-perspective{background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;}
+.td-outcome{font-size:11.5px;}
+.td-results{font-size:11px;line-height:1.6;}
+.td-comments{font-size:11px;line-height:1.6;color:var(--gray);min-width:180px;}
+
+/* ── OUTCOME MATRIX TABLE ── */
+.pill{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;width:28px;height:28px;border-radius:50%;}
+.pill-up-good{background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border);}
+.pill-down-good{background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border);}
+.pill-equal{background:var(--blue-bg);color:var(--blue);border:1.5px solid var(--blue-border);}
+.pill-ne{background:var(--gray-pill-bg);color:var(--gray-pill);border:1.5px solid var(--gray-pill-border);font-size:9px;}
+.pill-na{background:var(--gray-pill-bg);color:#ccc;border:1.5px dashed #ccc;font-size:9px;}
+
+/* ── EXCLUSION TABLE ── */
+.excluded-row td{background:var(--excluded-bg) !important;color:var(--excluded-text) !important;position:relative;}
+.excluded-row:hover td{background:#e8e8e8 !important;}
+.excluded-row .study-name{color:var(--excluded-text);}
+.excluded-row .study-meta{color:#bbb;}
+.excluded-label{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;background:#e0e0e0;color:#888;border:1px solid #ccc;margin-top:4px;}
+.included-row td{background:var(--white);}
+.included-row:nth-child(even) td{background:var(--gray-light);}
+.included-row:hover td{background:#fdf8f8 !important;}
+
+/* ── LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:48px;}
+.legend-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);width:100%;}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-dark);}
+
+/* ── PICO BOX ── */
+.pico-box{border:1px solid var(--rule);margin-bottom:40px;}
+.pico-row{display:grid;grid-template-columns:44px 140px 1fr;border-bottom:1px solid var(--rule);}
+.pico-row:last-child{border-bottom:none;}
+.pico-row:hover{background:var(--gray-light);}
+.pico-letter{font-family:'EB Garamond',serif;font-size:28px;font-weight:500;color:var(--scarlet);padding:16px 14px;line-height:1;}
+.pico-word{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);padding:20px 12px;align-self:center;}
+.pico-text{font-size:13px;line-height:1.7;color:var(--gray-dark);padding:16px 16px;}
+
+/* ── FOOTNOTE ── */
+.footnote-box{background:var(--gray-light);border:1px solid var(--rule);border-left:3px solid var(--scarlet);padding:20px 24px;margin-bottom:48px;}
+.footnote-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--scarlet);margin-bottom:10px;}
+.footnote-text{font-size:12.5px;line-height:1.75;color:var(--gray-dark);}
+.footnote-text strong{color:var(--black);}
+.footnote-text p+p{margin-top:10px;}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:48px 64px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:64px;}
+.footer-text{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
+.footer-link:hover{color:var(--scarlet);}
+
+@media(max-width:800px){
+  nav{padding:0 20px;}.nav-links{display:none;}
+  .page-header{padding:60px 24px 48px;}
+  .main{padding:48px 24px 80px;}
+  .narrative-step{flex-direction:column;gap:12px;}
+  .step-number{font-size:36px;width:auto;text-align:left;}
+  footer{padding:40px 24px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">&#8592; Back to Project</a>
+  <ul class="nav-links">
+    <li><a href="prior_analysis.html">Prior</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-eyebrow">Process Flow &mdash; Step 1</div>
+  <h1 class="header-title">Prior <em>Analysis</em></h1>
+  <p class="header-desc">A review of the foundational literature conducted prior to the formal critical appraisal, documenting the evidence base that informed the current review's scope, PICO question, and study selection criteria.</p>
+</div>
+
+<!-- TIMELINE STRIP -->
+<div class="timeline-strip">
+  <div class="tl-item"><div class="tl-year">2023&ndash;24</div><div class="tl-label">Initial Literature Review Conducted</div></div>
+  <div class="tl-item"><div class="tl-year">2025</div><div class="tl-label">PICO Criteria Formalized &amp; Updated</div></div>
+  <div class="tl-item"><div class="tl-year">2026</div><div class="tl-label">Updated Critical Appraisal Initiated</div></div>
+  <div class="tl-item"><div class="tl-year">6</div><div class="tl-label">Articles Reviewed in Prior Analysis</div></div>
+  <div class="tl-item"><div class="tl-year">4</div><div class="tl-label">Excluded on Updated PICO Criteria</div></div>
+  <div class="tl-item"><div class="tl-year">2</div><div class="tl-label">Carried Forward into Current Review</div></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ── PART 1: 2023–24 Review ── -->
+  <div class="narrative-step">
+    <div class="step-number">1</div>
+    <div class="step-content">
+      <span class="step-tag tag-2023">2023 &ndash; 2024</span>
+      <h2 class="step-heading">Initial Literature Review</h2>
+      <p class="step-body">In 2023&ndash;2024, a literature review was conducted to evaluate whether external sternal support devices should be incorporated as part of a care bundle aimed at reducing sternal surgical site infections following cardiac surgery. The review examined six articles spanning a range of study designs, including white papers, case studies, randomized controlled trials, literature reviews, and perspective papers.</p>
+      <p class="step-body">The articles were selected to characterize the existing evidence on external sternal binders &mdash; including the QualiBreath adjustable brace, Posthorax vest, Stern-E-Fix (SEF), and HeartHugger &mdash; and their association with sternal wound complications, pain, physical function, and quality of life.</p>
+    </div>
+  </div>
+
+  <!-- SUMMARY TABLE -->
+  <div class="section-label">Article Summaries &mdash; Initial Review</div>
+  <div class="table-outer">
+  <table>
+    <colgroup>
+      <col style="width:210px"><col style="width:180px"><col style="width:200px"><col style="width:300px"><col style="width:220px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Author, Year, Journal, Study Type</th>
+        <th>Population Group</th>
+        <th>Outcomes</th>
+        <th>Key Results</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">Hjorth, D. (2014)</div>
+          <div class="study-meta">Qualiteam White Paper</div>
+          <span class="study-tag tag-white-paper">White Paper</span>
+        </td>
+        <td>Sternotomy patients (general postoperative population); synthesis of multiple published studies</td>
+        <td class="td-outcome">Sternal wound infection (DSWI &amp; SSWI); pulmonary complications; persistent postoperative pain; external chest support device effectiveness; health care costs</td>
+        <td class="td-results">DSWI incidence: 0.3&ndash;7.3% at 90 days; additional cost $41,500&ndash;$88,800/case. PPC incidence: 8&ndash;79%; additional cost ~$28,700/case. Persistent pain: 11&ndash;56%; additional cost $4,500&ndash;$7,700/case. For 1,000 annual sternotomies: ~$2.5M (DSWI), ~$12.5M (PPC), ~$2.0M (pain). QualiBreath reduced sternal gap by 20% vs. no support. Posthorax vest significantly reduced DSWI across 3 trials (refusal rates 24&ndash;31%). QualiBreath highest-rated device on all self-report measures.</td>
+        <td class="td-comments">Industry-sponsored (Qualiteam). No original data. Concludes QualiBreath is superior. Notes comfort and patient adherence essential for home use. Criticizes heart-shaped pillows as infection risk and ineffective.</td>
+      </tr>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">El-Ansary et al. (2015)</div>
+          <div class="study-meta">Int J Therapy &amp; Rehabilitation</div>
+          <span class="study-tag tag-case">Case Study</span>
+        </td>
+        <td>Single 75-year-old male, 9 months post 3rd median sternotomy for coronary revascularization. Comorbidities: obesity (BMI 37), T2DM, COPD, hypertension, prior stroke with right hemiparesis. Presenting with SIS grade 3 (complete sternal instability).</td>
+        <td class="td-outcome">Sternal instability (SIS grade 0&ndash;4); pain with activity and at rest (NRS 0&ndash;10); functional recovery / ADLs; sleep quality; sternal healing (real-time ultrasound)</td>
+        <td class="td-results">With QualiBreath brace: pain reduced from 7/10 to 2/10 with activity. Uninterrupted sleep; improved confidence with everyday tasks. At 2-year follow-up: SIS grade 3 &rarr; 1. Ultrasound confirmed 8mm sternal gap persisted but with fibrous connective tissue union.</td>
+        <td class="td-comments">Single case report; no control group; limited generalizability. Treatment commenced 9 months post-surgery. Demonstrates interdisciplinary approach. Ultrasound highlighted as valid, non-invasive monitoring tool.</td>
+      </tr>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">Katijjahbe et al. (2018)</div>
+          <div class="study-meta">Journal of Physiotherapy (SMART Trial)</div>
+          <span class="study-tag tag-rct">RCT</span>
+        </td>
+        <td>72 adults post cardiac surgery via median sternotomy (CABG, valve, or combined). Mean age 63&ndash;64 years; predominantly male (86&ndash;94%); mean BMI ~30&ndash;31. Two metropolitan hospitals, Melbourne, Australia.</td>
+        <td class="td-outcome">Primary: physical function (SPPB). Secondary: upper limb function; hand grip strength; pain (NRS); kinesiophobia (Tampa Scale-11); health-related QoL (SF-36); sternal stability (Modified SIS); adherence; adverse events</td>
+        <td class="td-results">No significant between-group difference in SPPB at 4 weeks (MD 1.0) or 12 weeks (MD 0.4). Both groups improved significantly over time. Sternal instability: 1 patient per group (3%) at Weeks 4 and 12. Deep sternal wound complications: 1 per group. Adherence: 81% (experimental) vs. 70% (control).</td>
+        <td class="td-comments">First RCT comparing standard vs. modified sternal precautions. No external chest support device was part of either intervention. Study likely underpowered; ceiling effect on SPPB by Week 4. Concludes modified precautions equally safe and appropriate.</td>
+      </tr>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">Brocki et al. (2010)</div>
+          <div class="study-meta">Eur J Cardiovascular Nursing</div>
+          <span class="study-tag tag-lit-review">Literature Review</span>
+        </td>
+        <td>No single patient population; literature review of adult cardiac surgery patients post median sternotomy. Search: CINAHL, PubMed, Cochrane, PEDro; January 1992&ndash;June 2008.</td>
+        <td class="td-outcome">Mechanical stress factors causing sternal dehiscence, instability, incisional pain, and wound infection. Evidence base for activity precautions: coughing; obesity; loaded arm movements; skin stress; macromastia; supine-to-sit transfers.</td>
+        <td class="td-results">Coughing: greatest single stressor; intrathoracic pressure rises to 300 mmHg. No evidence supports weight restriction if arms kept close to body within pain-free range. Vest recommended for frequent coughers, BMI &ge;35, bra cup &ge;D. Self-hugging during cough protective; elbow method for transfers recommended. Skin healing: ~10 days; sternal bone healing: 28&ndash;35 days.</td>
+        <td class="td-comments">Evidence levels range 3b&ndash;5 (low); most recommendations Grade D. Macromastia recommendation Grade B. No original data collected. Concludes precautions should focus on possibilities, not restrictions. Antonovsky's SOC framework used to support patient-centered approach.</td>
+      </tr>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">El-Ansary et al. (2008)</div>
+          <div class="study-meta">Arch Physical Medicine &amp; Rehabilitation</div>
+          <span class="study-tag tag-cross">Cross-Sectional Randomized</span>
+        </td>
+        <td>15 patients with chronic sternal instability &ge;8 weeks post median sternotomy (12 men, 3 women). Age: 49&ndash;80 years. All scored &ge;2 on SIS. Comorbidities: obesity, diabetes, COPD, osteoporosis.</td>
+        <td class="td-outcome">Sternal separation (mm) by real-time ultrasound during functional tasks and arm elevation. Self-report (100mm VAS): comfort, pain attenuation, feeling of support, ease of upper-limb movement, ease of breathing. Across 4 conditions: no support, sports tape, compression garment, adjustable brace.</td>
+        <td class="td-results">Sternal separation: No support 13.6mm | Sports tape 13.4mm | Compression garment 11.9mm | QualiBreath brace 11.0mm. Brace vs. no support: &minus;2.7mm (~20% reduction, p&lt;0.04). Self-report composite mean: No support 5.5 | Brace 8.4. Brace rated highest on all 5 VAS subscales. 13/15 subjects would have chosen a device immediately post-surgery.</td>
+        <td class="td-comments">Small sample (n=15); chronic instability only; no acute group. Within-subject randomized order design. Sports tape caused more discomfort than no support. All 3 women preferred a support bra over any tested device.</td>
+      </tr>
+      <tr>
+        <td class="td-study">
+          <div class="study-name">El-Ansary et al. (2019)</div>
+          <div class="study-meta">Physical Therapy (PTJ)</div>
+          <span class="study-tag tag-perspective">Perspective Paper</span>
+        </td>
+        <td>No single study population; narrative review and perspective synthesis. Target population: adults undergoing cardiac surgery via median sternotomy (&gt;1 million procedures/year worldwide).</td>
+        <td class="td-outcome">Sternal complications and risk factors; impact of surgery on symptoms, physical activity, and QoL; clinical application and rationale of sternal precautions; influence of upper body functional tasks on sternal forces; proposal of clinical paradigm shift toward early upper body activity</td>
+        <td class="td-results">Sternal complication incidence: 1&ndash;8% worldwide; unchanged over 2 decades. Persistent post-sternotomy pain: incidence 21&ndash;66%. Arm muscle mass reduced by 55% at 1 year post-surgery. Common symptoms: fatigue (83%), difficulty sleeping (56%), shoulder pain (54%), weakness (50%). SP rationale lacks robust RCT support. QualiBreath brace significantly reduced sternal separation and improved pain in chronic instability.</td>
+        <td class="td-comments">Perspective paper; no original data collected. Multi-institutional author group. Proposes individualized, progressive, activity-based rehabilitation. Recommends early screening for sternal risk factors and SIS use at discharge and outpatient rehab.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="table-caption">Table 1. Brief article summaries from the 2023&ndash;2024 initial literature review. Six articles were identified spanning white papers, case studies, randomized controlled trials, literature reviews, and perspective papers.</p>
+
+  <!-- ── PART 2: OUTCOME TABLE ── -->
+  <div class="narrative-step">
+    <div class="step-number">2</div>
+    <div class="step-content">
+      <span class="step-tag tag-2023">2023 &ndash; 2024</span>
+      <h2 class="step-heading">Outcomes Analysis</h2>
+      <p class="step-body">Following the article summaries, outcomes across the six studies were systematically coded and mapped against eleven clinical outcome domains. Directional indicators were applied to characterize the clinical direction of each reported finding: a beneficial change (whether an increase or decrease) was noted where evidence was present, with outcomes not examined in a given study marked as NE.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Outcome Matrix &mdash; Initial Review (All 6 Articles)</div>
+
+  <div class="legend">
+    <div class="legend-title">Legend</div>
+    <div class="legend-item"><span class="pill pill-down-good">&#8595;</span> Beneficial decrease (e.g., fewer infections, less pain)</div>
+    <div class="legend-item"><span class="pill pill-up-good">&#8593;</span> Beneficial increase (e.g., improved function, QoL)</div>
+    <div class="legend-item"><span class="pill pill-equal">=</span> No statistically significant change</div>
+    <div class="legend-item"><span class="pill pill-ne">NE</span> Not examined / not reported</div>
+  </div>
+
+  <div class="table-outer">
+  <table id="outcome-table-1">
+    <colgroup>
+      <col style="width:190px">
+      <col style="width:80px">
+      <col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Study</th>
+        <th>External Sternal Binder</th>
+        <th class="th-center"><span class="th-rotate">Sternal Wound Infection</span></th>
+        <th class="th-center"><span class="th-rotate">Sternal Dehiscence / Instability</span></th>
+        <th class="th-center"><span class="th-rotate">Sternal Separation (mm)</span></th>
+        <th class="th-center"><span class="th-rotate">Pulmonary Complications</span></th>
+        <th class="th-center"><span class="th-rotate">Post-op Pain</span></th>
+        <th class="th-center"><span class="th-rotate">Physical Function / ADLs</span></th>
+        <th class="th-center"><span class="th-rotate">Quality of Life</span></th>
+        <th class="th-center"><span class="th-rotate">Health Care Costs</span></th>
+        <th class="th-center"><span class="th-rotate">Upper Limb Function / Strength</span></th>
+        <th class="th-center"><span class="th-rotate">Kinesiophobia / Fear of Movement</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="study-name">Hjorth (2014)</div><div class="study-meta">White Paper / Literature Review<br>N = N/A</div></td>
+        <td style="font-size:11px;">YES — QualiBreath, Posthorax, Stern-E-Fix, HeartHugger</td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+      </tr>
+      <tr>
+        <td><div class="study-name">El-Ansary et al. (2015)</div><div class="study-meta">Case Study<br>N = 1</div></td>
+        <td style="font-size:11px;">YES — QualiBreath</td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+      </tr>
+      <tr>
+        <td><div class="study-name">Katijjahbe et al. (2018)</div><div class="study-meta">RCT — SMART Trial<br>N = 72</div></td>
+        <td style="font-size:11px;">NO — No external binder used in either group</td>
+        <td class="td-center"><span class="pill pill-equal">=</span></td>
+        <td class="td-center"><span class="pill pill-equal">=</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+      </tr>
+      <tr>
+        <td><div class="study-name">Brocki et al. (2010)</div><div class="study-meta">Literature Review<br>N = N/A</div></td>
+        <td style="font-size:11px;">YES — Generic thoracic vest; bra for macromastia</td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+      </tr>
+      <tr>
+        <td><div class="study-name">El-Ansary et al. (2008)</div><div class="study-meta">Cross-Sectional Randomized<br>N = 15</div></td>
+        <td style="font-size:11px;">YES — QualiBreath, compression garment, sports tape</td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+      </tr>
+      <tr>
+        <td><div class="study-name">El-Ansary et al. (2019)</div><div class="study-meta">Perspective Paper<br>N = N/A</div></td>
+        <td style="font-size:11px;">YES — QualiBreath, Posthorax, generic support</td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="table-caption">Table 2. Outcome matrix from the 2023&ndash;2024 initial literature review. Directional indicators reflect reported findings across all six articles prior to PICO-based exclusions.</p>
+
+  <div class="step-divider"></div>
+
+  <!-- ── PART 3: 2026 Updated Review ── -->
+  <div class="narrative-step">
+    <div class="step-number">3</div>
+    <div class="step-content">
+      <span class="step-tag tag-2026">2026</span>
+      <h2 class="step-heading">Updated Critical Appraisal &amp; PICO Review</h2>
+      <p class="step-body">In 2026, the original articles and conclusions were revisited as part of an updated literature review and critical appraisal. The PICO criteria were formally defined and applied retrospectively to the six prior analysis articles, resulting in the exclusion of four studies that fell outside the updated eligibility criteria.</p>
+      <p class="step-body">These exclusions were made strictly on the basis of pre-specified PICO criteria and <strong>were not made on the basis of study quality</strong>. Two articles — Brocki et al. (2010) and El-Ansary et al. (2019) — met the updated criteria and were carried forward into the current critical appraisal.</p>
+    </div>
+  </div>
+
+  <!-- UPDATED PICO -->
+  <div class="section-label">Updated PICO Criteria</div>
+  <div class="pico-box">
+    <div class="pico-row">
+      <div class="pico-letter">P</div>
+      <div class="pico-word">Population</div>
+      <div class="pico-text">Adults undergoing cardiac surgery via median sternotomy in the <strong>acute and subacute post-surgical period</strong>.</div>
+    </div>
+    <div class="pico-row">
+      <div class="pico-letter">I</div>
+      <div class="pico-word">Intervention</div>
+      <div class="pico-text">Use of an <strong>external sternal support device</strong> (sternal binder, vest, or brace).</div>
+    </div>
+    <div class="pico-row">
+      <div class="pico-letter">C</div>
+      <div class="pico-word">Comparator</div>
+      <div class="pico-text">No external sternal support device, alternative device, or standard care.</div>
+    </div>
+    <div class="pico-row">
+      <div class="pico-letter">O</div>
+      <div class="pico-word">Outcomes</div>
+      <div class="pico-text">Sternal wound infection, dehiscence/instability, sternal separation, pulmonary complications, post-operative pain, physical function, quality of life, health care costs, upper limb function, and kinesiophobia.</div>
+    </div>
+  </div>
+
+  <!-- EXCLUSION OUTCOME TABLE -->
+  <div class="section-label">Outcome Matrix with Exclusions Applied</div>
+
+  <div class="table-outer">
+  <table id="outcome-table-2">
+    <colgroup>
+      <col style="width:210px">
+      <col style="width:80px">
+      <col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px"><col style="width:72px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Study</th>
+        <th>External Sternal Binder</th>
+        <th class="th-center"><span class="th-rotate">Sternal Wound Infection</span></th>
+        <th class="th-center"><span class="th-rotate">Sternal Dehiscence / Instability</span></th>
+        <th class="th-center"><span class="th-rotate">Sternal Separation (mm)</span></th>
+        <th class="th-center"><span class="th-rotate">Pulmonary Complications</span></th>
+        <th class="th-center"><span class="th-rotate">Post-op Pain</span></th>
+        <th class="th-center"><span class="th-rotate">Physical Function / ADLs</span></th>
+        <th class="th-center"><span class="th-rotate">Quality of Life</span></th>
+        <th class="th-center"><span class="th-rotate">Health Care Costs</span></th>
+        <th class="th-center"><span class="th-rotate">Upper Limb Function / Strength</span></th>
+        <th class="th-center"><span class="th-rotate">Kinesiophobia / Fear of Movement</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- EXCLUDED -->
+      <tr class="excluded-row">
+        <td><div class="study-name">Hjorth (2014)</div><div class="study-meta">White Paper / Literature Review<br>N = N/A</div><span class="excluded-label">Excluded: Industry White Paper</span></td>
+        <td style="font-size:11px;color:#bbb;">YES — QualiBreath, Posthorax, Stern-E-Fix, HeartHugger</td>
+        <td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td>
+      </tr>
+      <tr class="excluded-row">
+        <td><div class="study-name">El-Ansary et al. (2015)</div><div class="study-meta">Case Study<br>N = 1</div><span class="excluded-label">Excluded: Population (Chronic Instability)</span></td>
+        <td style="font-size:11px;color:#bbb;">YES — QualiBreath</td>
+        <td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td>
+      </tr>
+      <tr class="excluded-row">
+        <td><div class="study-name">Katijjahbe et al. (2018)</div><div class="study-meta">RCT — SMART Trial<br>N = 72</div><span class="excluded-label">Excluded: Intervention (No Binder Used)</span></td>
+        <td style="font-size:11px;color:#bbb;">NO — No external binder used in either group</td>
+        <td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td>
+      </tr>
+      <!-- INCLUDED -->
+      <tr class="included-row">
+        <td><div class="study-name">Brocki et al. (2010)</div><div class="study-meta">Literature Review<br>N = N/A</div></td>
+        <td style="font-size:11px;"><strong>YES</strong> — Generic thoracic vest; bra for macromastia</td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+      </tr>
+      <tr class="excluded-row">
+        <td><div class="study-name">El-Ansary et al. (2008)</div><div class="study-meta">Cross-Sectional Randomized<br>N = 15</div><span class="excluded-label">Excluded: Population (Chronic Instability)</span></td>
+        <td style="font-size:11px;color:#bbb;">YES — QualiBreath, compression garment, sports tape</td>
+        <td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td><td class="td-center"><span class="pill pill-na">—</span></td>
+      </tr>
+      <tr class="included-row">
+        <td><div class="study-name">El-Ansary et al. (2019)</div><div class="study-meta">Perspective Paper<br>N = N/A</div></td>
+        <td style="font-size:11px;"><strong>YES</strong> — QualiBreath, Posthorax, generic support</td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-ne">NE</span></td>
+        <td class="td-center"><span class="pill pill-up-good">&#8593;</span></td>
+        <td class="td-center"><span class="pill pill-down-good">&#8595;</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="table-caption">Table 3. Outcome matrix with PICO-based exclusions applied. Grey rows indicate studies excluded from the primary evidence synthesis. Exclusions reflect eligibility criteria only and not study quality.</p>
+
+  <!-- FOOTNOTE -->
+  <div class="footnote-box">
+    <div class="footnote-label">Footnote &mdash; Excluded Studies</div>
+    <p class="footnote-text">Four studies are displayed with grey overlays indicating exclusion from the primary evidence synthesis. These studies were excluded based on pre-specified PICO criteria and <strong>were not excluded on the basis of study quality</strong>.</p>
+    <p class="footnote-text"><strong>Hjorth (2014):</strong> Excluded on the basis of study design. This document is an industry-sponsored white paper produced by the manufacturer of the QualiBreath device and was not subjected to independent peer review. It does not constitute primary research or an independent systematic review.</p>
+    <p class="footnote-text"><strong>El-Ansary et al. (2008) and El-Ansary et al. (2015):</strong> Excluded on the basis of population. Both studies examined patients with chronic sternal instability &mdash; a population presenting with persistent, established instability months to years after the initial surgical procedure. This falls outside the target population of this review, which focuses on the acute and subacute post-surgical period. The findings of these studies remain clinically valuable within their own context and have been described narratively in this review.</p>
+    <p class="footnote-text"><strong>Katijjahbe et al. (2018):</strong> Excluded on the basis of intervention. This randomized controlled trial compared standard versus modified sternal precautions (activity restrictions) and did not include the use of an external sternal support device in either group. It is an important study within the sternal precautions literature and its findings are discussed in the narrative context of this review.</p>
+  </div>
+
+  <!-- NEXT SECTION LINK -->
+  <div class="next-section-wrap">
+    <a href="prisma.html" class="next-section">
+      Move to the next section &nbsp; &#8594;
+    </a>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">External Sternal Support Devices: A Literature Review with Critical Appraisal &middot; Prior Analysis</p>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="index.html" class="footer-link">&#8592; Home</a>
+    <a href="prisma.html" class="footer-link">PRISMA</a>
+    <a href="review_summary_table.html" class="footer-link">Summary Tables</a>
+    <a href="outcomes_table.html" class="footer-link">Outcome Table</a>
+    <a href="guidelines_matrix.html" class="footer-link">Guidelines Matrix</a>
+  </div>
+</footer>
+
+</body>
+</html>
