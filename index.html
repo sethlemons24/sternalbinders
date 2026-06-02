@@ -52,13 +52,13 @@
   }
 
   .nav-links {
-    display: flex; gap: 32px; list-style: none;
+    display: flex; gap: 18px; list-style: none;
   }
 
   .nav-links a {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--gray);
     text-decoration: none;
@@ -576,9 +576,14 @@
 <nav>
   <a href="#" class="nav-brand">Sternal Binders · Comprehensive Review</a>
   <ul class="nav-links">
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#pico">PICO</a></li>
-    <li><a href="#deliverables">Process Flow</a></li>
+    <li><a href="#deliverables">Prior</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="#deliverables">ROI</a></li>
+    <li><a href="#deliverables">Recs</a></li>
   </ul>
 </nav>
 
@@ -636,7 +641,7 @@
     <div class="section-header reveal">
       <div class="section-number">01</div>
       <div>
-        <h2 class="section-heading">Project Overview</h2>
+        <h2 class="section-heading"><span style="color:var(--scarlet);font-size:0.7em;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px;font-family:'DM Sans',sans-serif;font-weight:600;">01</span>Project Overview</h2>
         <p class="section-sub">Background, rationale, and scope of this comprehensive review.</p>
       </div>
     </div>
@@ -687,7 +692,7 @@
     <div class="section-header reveal">
       <div class="section-number">02</div>
       <div>
-        <h2 class="section-heading">PICO Framework</h2>
+        <h2 class="section-heading"><span style="color:var(--scarlet);font-size:0.7em;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px;font-family:'DM Sans',sans-serif;font-weight:600;">02</span>PICO Framework</h2>
         <p class="section-sub">The structured clinical question guiding this systematic review.</p>
       </div>
     </div>
@@ -730,17 +735,38 @@
     <div class="section-header reveal">
       <div class="section-number">03</div>
       <div>
-        <h2 class="section-heading">Process Flow Summary</h2>
+        <h2 class="section-heading"><span style="color:var(--scarlet);font-size:0.7em;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px;font-family:'DM Sans',sans-serif;font-weight:600;">03</span>Process Flow Summary</h2>
         <p class="section-sub">A sequential evidence synthesis process. Follow the flow from initial screening through final recommendations.</p>
       </div>
     </div>
 
     <div class="flow-wrapper reveal">
 
-      <!-- Step 1: PRISMA -->
+      <!-- Step 1: Prior Analysis -->
       <div class="flow-step">
         <div class="flow-spine">
           <div class="flow-node">1</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-card-wrap">
+          <div class="flow-card">
+            <div class="flow-card-top">
+              <div class="flow-card-left">
+                <span class="flow-icon">&#128269;</span>
+                <span class="flow-title">Prior Analysis</span>
+              </div>
+              <span class="flow-status status-planned">Planned</span>
+            </div>
+            <p class="flow-desc">Review of existing literature, institutional data, and background evidence that informed the scope and research question of this systematic review prior to formal screening.</p>
+            <span class="flow-open-muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: PRISMA -->
+      <div class="flow-step">
+        <div class="flow-spine">
+          <div class="flow-node">2</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -758,10 +784,10 @@
         </div>
       </div>
 
-      <!-- Step 2: Review & Summary Tables -->
+      <!-- Step 3: Review & Summary Tables -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node node-planned">2</div>
+          <div class="flow-node">3</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -779,10 +805,10 @@
         </div>
       </div>
 
-      <!-- Step 3: Levels of Evidence -->
+      <!-- Step 4: Levels of Evidence -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node">3</div>
+          <div class="flow-node">4</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -800,10 +826,10 @@
         </div>
       </div>
 
-      <!-- Step 4: Comprehensive Outcome Tables -->
+      <!-- Step 5: Comprehensive Outcome Tables -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node">4</div>
+          <div class="flow-node">5</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -821,10 +847,10 @@
         </div>
       </div>
 
-      <!-- Step 5: Practice Guidelines Matrix -->
+      <!-- Step 6: Practice Guidelines Matrix -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node">5</div>
+          <div class="flow-node">6</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -842,10 +868,10 @@
         </div>
       </div>
 
-      <!-- Step 6: Return on Investment Analysis -->
+      <!-- Step 7: Return on Investment Analysis -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node node-planned">6</div>
+          <div class="flow-node node-planned">7</div>
           <div class="flow-connector"></div>
         </div>
         <div class="flow-card-wrap">
@@ -863,10 +889,10 @@
         </div>
       </div>
 
-      <!-- Step 7: Recommendations -->
+      <!-- Step 8: Recommendations -->
       <div class="flow-step">
         <div class="flow-spine">
-          <div class="flow-node node-planned">7</div>
+          <div class="flow-node node-planned">8</div>
           <div class="flow-connector last"></div>
         </div>
         <div class="flow-card-wrap">
