@@ -49,13 +49,13 @@
   }
 
   .nav-links {
-    display: flex; gap: 32px; list-style: none; align-items: center;
+    display: flex; gap: 18px; list-style: none; align-items: center;
   }
 
   .nav-links a {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--gray);
     text-decoration: none;
@@ -411,6 +411,9 @@
     .strip-stat { min-width: 50%; }
     footer { padding: 40px 32px; flex-direction: column; align-items: flex-start; }
   }
+  .next-section { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--scarlet); text-decoration: none; padding: 14px 24px; border: 2px solid var(--scarlet); border-radius: 4px; transition: all 0.2s; }
+  .next-section:hover { background: var(--scarlet); color: #fff; }
+  .next-section-wrap { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; justify-content: flex-end; max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 64px; padding-right: 64px; margin-bottom: 48px; }
 </style>
 </head>
 <body>
@@ -419,10 +422,14 @@
 <nav>
   <a href="index.html" class="nav-brand">← Back to Project</a>
   <ul class="nav-links">
-    <li><a href="index.html#overview">Overview</a></li>
-    <li><a href="index.html#pico">PICO</a></li>
-    <li><a href="index.html#deliverables">Deliverables</a></li>
-    <li><a href="guidelines_matrix.html">Guidelines Matrix</a></li>
+    <li><a href="prior_analysis.html">Prior</a></li>
+    <li><a href="prisma.html">PRISMA</a></li>
+    <li><a href="review_summary_table.html">Summary</a></li>
+    <li><a href="levels_of_evidence.html">Levels</a></li>
+    <li><a href="outcomes_table.html">Outcomes</a></li>
+    <li><a href="guidelines_matrix.html">Guidelines</a></li>
+    <li><a href="index.html#deliverables">ROI</a></li>
+    <li><a href="index.html#deliverables">Recs</a></li>
   </ul>
 </nav>
 
@@ -544,6 +551,13 @@
     </tbody>
   </table>
 
+  </div>
+
+  <!-- NEXT SECTION LINK -->
+  <div class="next-section-wrap">
+    <a href="review_summary_table.html" class="next-section">
+      Advance to the next section &nbsp; &#8594;
+    </a>
   </div>
 
 </div>
