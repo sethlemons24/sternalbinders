@@ -442,10 +442,11 @@
 
 
 
+  
   <!-- ── RCT COMPARISON TABLE ── -->
   <div style="margin-top:64px;">
     <div class="section-label reveal" style="max-width:1600px;margin-left:auto;margin-right:auto;">RCT Comparative Evidence Table</div>
-    <p style="max-width:1600px;margin:0 auto 20px;font-size:13px;line-height:1.7;color:#3a3a3a;">Effect sizes independently calculated for all randomized controlled trials. Includes Cohen&rsquo;s d, phi, relative risk, absolute risk reduction, and number needed to treat to supplement reported p-values with clinically actionable metrics.</p>
+    <p style="max-width:1600px;margin:0 auto 20px;font-size:13px;line-height:1.7;color:#3a3a3a;">Effect sizes independently calculated for all randomized controlled trials. Includes phi (&phi;), relative risk, absolute risk reduction, and number needed to treat to supplement reported p-values with clinically actionable metrics.</p>
     <div style="max-width:1600px;margin:0 auto;background:#f5f5f5;padding:24px;border:1px solid #d0ccc6;">
       <style>
         /* ── RCT TABLE SCOPED STYLES ── */
@@ -480,6 +481,8 @@
     background: var(--paper);
     font-family: 'DM Sans', sans-serif;
     color: var(--grey-dark);
+    padding: 44px 28px;
+    min-height: 100vh;
   }
 
   /* ── MASTHEAD ── */
@@ -937,10 +940,10 @@
           <div class="cs-row">
             <span class="cs-pill pill-yellow">RR = 0.46</span>
             <span class="cs-pill pill-red">ARR = 1.23%</span>
-            <span class="cs-pill pill-red">φ = 0.031 (small)</span>
-            <span class="cs-pill pill-red">NNT = 82</span>
+            <span class="cs-pill pill-red">φ = 0.05 (small)</span>
+            <span class="cs-pill pill-red">NNT = 81</span>
           </div>
-          <div class="cs-note">Small phi; large NNT reflects low baseline event rate in unselected population. RR reduction of 54% is clinically meaningful despite modest absolute difference.</div>
+          <div class="cs-note">Small phi; large NNT reflects low baseline event rate in unselected population. RR reduction of 54% is clinically meaningful despite modest absolute difference. φ corrected from previously reported 0.031 per audit recalculation.</div>
         </div>
         <!-- Superficial -->
         <div class="cs-block cs-small">
@@ -954,10 +957,10 @@
         <div class="cs-block cs-small">
           <div class="cs-outcome">Hospital LOS</div>
           <div class="cs-row">
-            <span class="cs-pill pill-red">Cohen's d = 0.20 (small)</span>
+            <span class="cs-pill pill-red">Cohen's d = 0.19 (small)</span>
             <span class="cs-pill pill-na">NNT — continuous outcome</span>
           </div>
-          <div class="cs-note">Pooled SD ≈13.2 d (from ±7.7 and ±17.5). Mean reduction of 2.6 days; small effect size due to wide SD in control group. NNT not calculable for continuous outcomes.</div>
+          <div class="cs-note">Pooled SD ≈ 13.5 d (from ±7.7 and ±17.5). Mean reduction of 2.6 days; small effect size due to wide SD in control group. NNT not calculable for continuous outcomes.</div>
         </div>
         <!-- Compliant subgroup -->
         <div class="cs-block cs-small">
@@ -1020,9 +1023,9 @@
           <div class="stat-desc">Pearson χ²; Mann–Whitney U; mean ± SD. P&lt;0.05 significant.</div>
         </div>
         <hr class="cell-divider">
-        <div class="stat-block result-good">
+        <div class="stat-block result-neutral">
           <div class="stat-name">Sternal dehiscence</div>
-          <div class="stat-desc">SEF 0.26% (1/380) vs. Bandage 5.95% (22/370); treatment failure 5× higher in control (p=0.01).</div>
+          <div class="stat-desc">SEF 0.26% (1/380) vs. Bandage 5.95% (22/370); treatment failure p=0.056 (NS). No dedicated dehiscence p-value reported. Note: p=0.01 in this paper applies to ventilation time only.</div>
         </div>
         <div class="stat-block result-neutral">
           <div class="stat-name">Mediastinitis mortality</div>
@@ -1039,15 +1042,15 @@
       </td>
       <td>
         <!-- Dehiscence -->
-        <div class="cs-block cs-medium">
+        <div class="cs-block cs-small">
           <div class="cs-outcome">Sternal dehiscence</div>
           <div class="cs-row">
-            <span class="cs-pill pill-green">RR = 0.044</span>
-            <span class="cs-pill pill-yellow">ARR = 5.69%</span>
-            <span class="cs-pill pill-yellow">φ = 0.178 (small–medium)</span>
-            <span class="cs-pill pill-yellow">NNT = 18</span>
+            <span class="cs-pill pill-red">RR = 0.044</span>
+            <span class="cs-pill pill-red">ARR = 5.69%</span>
+            <span class="cs-pill pill-red">φ = 0.165 (small–medium)</span>
+            <span class="cs-pill pill-red">NNT = 18 (NS)</span>
           </div>
-          <div class="cs-note">96% relative risk reduction. NNT of 18 is clinically actionable — treat ~18 high-risk males to prevent 1 dehiscence requiring reoperation.</div>
+          <div class="cs-note">No dedicated p-value for dehiscence counts. Closest reported figure (treatment failure) is p=0.056 — technically non-significant. All pills marked red per NS override rule. 96% relative risk reduction in raw counts is noted but cannot be confirmed as statistically significant. φ corrected from 0.178 per audit recalculation.</div>
         </div>
         <!-- Mortality -->
         <div class="cs-block cs-small">
@@ -1150,7 +1153,7 @@
           <div class="cs-row">
             <span class="cs-pill pill-green">RR = 0.087</span>
             <span class="cs-pill pill-green">ARR = 10.6%</span>
-            <span class="cs-pill pill-yellow">φ = 0.199 (small–medium)</span>
+            <span class="cs-pill pill-yellow">φ = 0.209 (small–medium)</span>
             <span class="cs-pill pill-green">NNT = 10</span>
           </div>
           <div class="cs-note">Very large relative risk reduction (91%) in an enriched high-risk COPD population. NNT of 10 is highly actionable — among the strongest signals in this literature.</div>
@@ -1454,7 +1457,7 @@
 
   <!-- ── SR COMPARISON TABLE ── -->
   <div style="margin-top:56px;">
-    <div class="section-label reveal" style="max-width:1600px;margin-left:auto;margin-right:auto;">Systematic Reviews &amp; Meta-Analyses — Comparative Evidence Table</div>
+    <div class="section-label reveal" style="max-width:1600px;margin-left:auto;margin-right:auto;">Systematic Reviews &amp; Meta-Analyses &mdash; Comparative Evidence Table</div>
     <p style="max-width:1600px;margin:0 auto 20px;font-size:13px;line-height:1.7;color:#3a3a3a;">Evidence synthesis from systematic reviews and meta-analyses. Pooled effect estimates, heterogeneity statistics, and trial sequential analysis findings presented alongside clinical significance assessment.</p>
     <div style="max-width:1600px;margin:0 auto;background:#f5f5f5;padding:24px;border:1px solid #d0ccc6;">
       <style>
@@ -1479,6 +1482,7 @@
     font-family: 'DM Sans', sans-serif;
     color: var(--ink);
     padding: 48px 32px;
+    min-height: 100vh;
   }
 
   .masthead {
