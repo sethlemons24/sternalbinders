@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCT Comparison Table — Ohio State</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── OSU PALETTE ──────────────────────────────────────────
+     Scarlet  #BB0000   Grey     #666666
+     Dark     #212121   Silver   #E8E8E8
+     Off-white#F5F5F5   Divider  #CCCCCC
+  ──────────────────────────────────────────────────────── */
+  :root {
+    --scarlet:      #BB0000;
+    --scarlet-dark: #8B0000;
+    --scarlet-lite: #F9EBEB;
+    --grey:         #666666;
+    --grey-dark:    #212121;
+    --grey-mid:     #444444;
+    --grey-lite:    #F0F0F0;
+    --silver:       #E0E0E0;
+    --divider:      #CCCCCC;
+    --paper:        #F5F5F5;
+    --cell-bg:      #FFFFFF;
+
+    /* semantic result colours stay green/yellow/red */
+    --good-bg:    #EBF7F0; --good-border: #1a7a4a; --good-txt: #155a38;
+    --neutral-bg: #FDFAF0; --neutral-border: #a07d12; --neutral-txt: #7a5f0e;
+    --bad-bg:     #FDF0F0; --bad-border:  #BB0000; --bad-txt:   #8B0000;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--grey-dark);
+    padding: 44px 28px;
+    min-height: 100vh;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    margin-bottom: 10px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid var(--scarlet);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .masthead-left { flex: 1; }
+
+  .masthead h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--grey-dark);
+    line-height: 1.2;
+  }
+
+  .masthead h1 em { font-style: italic; color: var(--scarlet); }
+
+  .masthead p {
+    font-size: 11px;
+    color: var(--grey);
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .osu-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .osu-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--scarlet);
+  }
+
+  .osu-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--scarlet);
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin: 14px 0 16px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .legend-good    { color: var(--good-txt);    background: var(--good-bg);    border-color: var(--good-border); }
+  .legend-neutral { color: var(--neutral-txt); background: var(--neutral-bg); border-color: var(--neutral-border); }
+  .legend-bad     { color: var(--bad-txt);     background: var(--bad-bg);     border-color: var(--bad-border); }
+
+  /* ── TABLE WRAPPER ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 2px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.10);
+    border-top: 4px solid var(--scarlet);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    line-height: 1.55;
+    background: var(--cell-bg);
+  }
+
+  /* ── COLUMN WIDTHS ── */
+  col.col-study    { width: 11%; }
+  col.col-type     { width: 11%; }
+  col.col-pico     { width: 15%; }
+  col.col-outcomes { width: 18%; }
+  col.col-stats    { width: 22%; }
+  col.col-clinical { width: 23%; }
+
+  /* ── HEADER ── */
+  thead tr.header-row th {
+    background: var(--scarlet);
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    padding: 13px 14px;
+    text-align: left;
+    border-right: 1px solid rgba(255,255,255,0.18);
+  }
+
+  thead tr.header-row th:last-child { border-right: none; }
+
+  /* ── ROWS ── */
+  tbody tr { border-bottom: 1px solid var(--divider); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) td           { background: #fafafa; }
+  tbody tr:nth-child(even) td.study-cell { background: #f0e8e8; }
+
+  td {
+    padding: 16px 14px;
+    vertical-align: top;
+    border-right: 1px solid var(--silver);
+    color: var(--grey-dark);
+  }
+
+  td:last-child { border-right: none; }
+
+  /* ── ARTICLE CELL ── */
+  td.study-cell {
+    background: #FAF0F0;
+    border-right: 3px solid var(--scarlet);
+    min-width: 120px;
+  }
+
+  .study-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13.5px;
+    color: var(--scarlet-dark);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .study-journal {
+    font-size: 10.5px;
+    color: var(--grey);
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .study-badge {
+    display: inline-block;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-top: 2px;
+  }
+
+  .badge-rct-multi  { background: var(--scarlet);  color: #fff; }
+  .badge-rct-single { background: var(--grey-mid); color: #fff; }
+  .badge-retro      { background: #8B6914;          color: #fff; }
+
+  /* ── LABELS / VALUES ── */
+  .label {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 2px;
+    margin-top: 9px;
+    display: block;
+  }
+
+  .label:first-child { margin-top: 0; }
+
+  .value {
+    font-size: 12px;
+    color: var(--grey-dark);
+    line-height: 1.55;
+  }
+
+  /* ── OUTCOME LISTS ── */
+  ul.outcome-list { padding-left: 13px; margin: 2px 0; }
+
+  ul.outcome-list li {
+    font-size: 12px;
+    margin-bottom: 3px;
+    color: var(--grey-dark);
+    line-height: 1.5;
+  }
+
+  ul.outcome-list li span.primary-tag {
+    font-weight: 700;
+    color: var(--scarlet);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  ul.outcome-list li span.secondary-tag {
+    font-weight: 600;
+    color: var(--grey);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── STAT BLOCKS (method strip) ── */
+  .stat-block {
+    margin-bottom: 7px;
+    padding: 8px 11px;
+    background: var(--grey-lite);
+    border-left: 3px solid var(--grey);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .stat-block:last-child { margin-bottom: 0; }
+
+  .stat-block .stat-name {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    margin-bottom: 2px;
+  }
+
+  .stat-block .stat-desc {
+    font-size: 11.5px;
+    color: var(--grey-dark);
+    line-height: 1.5;
+  }
+
+  /* ── RESULT BLOCKS (colour-coded) ── */
+  .stat-block.result-good    { border-left-color: var(--good-border);    background: var(--good-bg); }
+  .stat-block.result-good    .stat-name { color: var(--good-txt); }
+  .stat-block.result-neutral { border-left-color: var(--neutral-border); background: var(--neutral-bg); }
+  .stat-block.result-neutral .stat-name { color: var(--neutral-txt); }
+  .stat-block.result-bad     { border-left-color: var(--bad-border);     background: var(--bad-bg); }
+  .stat-block.result-bad     .stat-name { color: var(--bad-txt); }
+
+  /* ── CLINICAL SIGNIFICANCE BLOCKS ── */
+  .cs-block {
+    margin-bottom: 7px;
+    padding: 8px 11px;
+    background: #fafafa;
+    border-left: 3px solid var(--grey);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .cs-block:last-child { margin-bottom: 0; }
+
+  /* Large significance — green */
+  .cs-block.cs-large {
+    background: var(--good-bg) !important;
+    border-left-color: var(--good-border) !important;
+  }
+  .cs-block.cs-large .cs-outcome { color: var(--good-txt) !important; }
+
+  /* Medium significance — yellow */
+  .cs-block.cs-medium {
+    background: var(--neutral-bg) !important;
+    border-left-color: var(--neutral-border) !important;
+  }
+  .cs-block.cs-medium .cs-outcome { color: var(--neutral-txt) !important; }
+
+  /* Small / no significance — red */
+  .cs-block.cs-small {
+    background: var(--bad-bg) !important;
+    border-left-color: var(--bad-border) !important;
+  }
+  .cs-block.cs-small .cs-outcome { color: var(--bad-txt) !important; }
+
+  .cs-block .cs-outcome {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    margin-bottom: 3px;
+  }
+
+  .cs-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+  }
+
+  .cs-pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* Independent pill colours — based on effect size of that specific value */
+  .pill-green { background: #d0f0e0; color: #0f4f2a; border: 1px solid #6cc49a; }
+  .pill-yellow { background: #faefc0; color: #5c3d00; border: 1px solid #d4a820; }
+  .pill-red   { background: #fad0d0; color: #6b0000; border: 1px solid #d06060; }
+  .pill-na    { background: var(--grey-lite); color: var(--grey); border: 1px solid var(--divider); font-style: italic; }
+
+  .cs-note {
+    font-size: 10.5px;
+    color: var(--grey);
+    line-height: 1.45;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* ── MISC ── */
+  .cell-divider {
+    border: none;
+    border-top: 1px dashed var(--divider);
+    margin: 9px 0;
+  }
+
+  .notable {
+    font-size: 10.5px;
+    font-style: italic;
+    color: var(--grey);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .footnote {
+    margin-top: 18px;
+    font-size: 10.5px;
+    color: var(--grey);
+    border-top: 2px solid var(--scarlet);
+    padding-top: 12px;
+    line-height: 1.65;
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-left">
+    <h1>Randomized Controlled Trials — <em>Comparative Evidence Table</em></h1>
+    <p>Sternal wound complications following median sternotomy &nbsp;·&nbsp; Extracted from project library</p>
+  </div>
+</div>
+
+<div class="legend">
+  <strong style="font-size:11px;color:var(--grey-mid);align-self:center;">Statistical Results:</strong>
+  <span class="legend-item legend-good">&#9646; Significant improvement</span>
+  <span class="legend-item legend-neutral">&#9646; No change / non-significant</span>
+  <span class="legend-item legend-bad">&#9646; Worsening / harm</span>
+  <span style="width:1px;background:var(--divider);margin:0 4px;align-self:stretch;display:inline-block;"></span>
+  <strong style="font-size:11px;color:var(--grey-mid);align-self:center;">Clinical Significance:</strong>
+  <span class="legend-item legend-good">&#9646; Large (d≥0.80 / φ≥0.30 / NNT≤10)</span>
+  <span class="legend-item legend-neutral">&#9646; Medium (d 0.50–0.79 / NNT 11–25)</span>
+  <span class="legend-item legend-bad">&#9646; Small / none (d&lt;0.50 / NNT&gt;25 / NS)</span>
+</div>
+
+<div class="table-wrap">
+<table>
+  <colgroup>
+    <col class="col-study">
+    <col class="col-type">
+    <col class="col-pico">
+    <col class="col-outcomes">
+    <col class="col-stats">
+    <col class="col-clinical">
+  </colgroup>
+
+  <thead>
+    <tr class="header-row">
+      <th>Article</th>
+      <th>Study Type</th>
+      <th>Focus / PICO</th>
+      <th>Outcomes</th>
+      <th>Statistical Results</th>
+      <th>Clinical Significance</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ROW 1: Gorlitzer 2013
+    ══════════════════════════════════════════════════════════ -->
+    <tr>
+      <td class="study-cell">
+        <div class="study-title">Gorlitzer et al., 2013</div>
+        <div class="study-journal">Interact CardioVasc Thorac Surg</div>
+        <span class="study-badge badge-rct-multi">RCT · Multicentre</span>
+      </td>
+      <td>
+        <span class="label">Design</span>
+        <span class="value">Prospective, randomized multicentre trial; per-protocol and ITT analyses both reported</span>
+        <span class="label">N</span>
+        <span class="value">2,539 randomized; 1,351 vest / 1,188 no vest. Of vest group: 933 compliant (Group A), 202 refused (BR), 216 did not receive (BN)</span>
+        <span class="label">Follow-up</span>
+        <span class="value">90 days</span>
+        <span class="label">Setting</span>
+        <span class="value">6 centres, Austria/Germany (Sept 2007 – Mar 2010)</span>
+        <span class="label">Blinding</span>
+        <span class="value">Unblinded; STS infection risk score equally distributed</span>
+      </td>
+      <td>
+        <span class="label">Intervention</span>
+        <span class="value">Posthorax® support vest 24 h/day for ≥6 weeks</span>
+        <span class="label">Comparator</span>
+        <span class="value">No vest</span>
+        <span class="label">Population</span>
+        <span class="value">Adults post-sternotomy; age 67±11 y, 45% female; diabetes, obesity, COPD, CRF, PVD equally distributed; EuroSCORE matched</span>
+        <span class="label">Exclusion</span>
+        <span class="value">Age &lt;20, congenital HD, emergent reanimation, chest irradiation, failed vest use within 72 h</span>
+      </td>
+      <td>
+        <ul class="outcome-list">
+          <li><span class="primary-tag">Primary ·</span> Deep wound complications (dWC): mediastinitis + dehiscence</li>
+          <li><span class="secondary-tag">Secondary ·</span> Superficial wound complications</li>
+          <li><span class="secondary-tag">Secondary ·</span> Hospital LOS</li>
+          <li><span class="secondary-tag">Secondary ·</span> ICU stay</li>
+          <li><span class="secondary-tag">Secondary ·</span> Reoperation rate</li>
+          <li><span class="secondary-tag">Secondary ·</span> Risk factors (logistic regression)</li>
+        </ul>
+        <p class="notable">Subanalysis: Group A vs. BR/BN with matched preoperative risk.</p>
+      </td>
+      <td>
+        <div class="stat-block">
+          <div class="stat-name">Statistical tests</div>
+          <div class="stat-desc">Pearson χ²; Mann–Whitney U; Miettinen–Nurminen RR + 95% CI; logistic regression. ITT primary. P&lt;0.05 significant.</div>
+        </div>
+        <hr class="cell-divider">
+        <div class="stat-block result-good">
+          <div class="stat-name">Deep wound complications (ITT)</div>
+          <div class="stat-desc">Vest 1.04% vs. No-vest 2.27% (p&lt;0.01).</div>
+        </div>
+        <div class="stat-block result-neutral">
+          <div class="stat-name">Superficial complications</div>
+          <div class="stat-desc">Vest 1.55% vs. No-vest 1.09% (p=0.388). No difference.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Hospital LOS</div>
+          <div class="stat-desc">14.76±7.7 d vs. 17.33±17.5 d (p=0.017).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Compliant subgroup (A vs. BR/BN)</div>
+          <div class="stat-desc">dWC 0% vs. 3.46% (BR, p&lt;0.01); 0% vs. 3.24% (BN, p&lt;0.01). ~99% RR reduction.</div>
+        </div>
+      </td>
+      <td>
+        <!-- dWC ITT -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Deep wound complications (ITT)</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-yellow">RR = 0.46</span>
+            <span class="cs-pill pill-red">ARR = 1.23%</span>
+            <span class="cs-pill pill-red">φ = 0.05 (small)</span>
+            <span class="cs-pill pill-red">NNT = 81</span>
+          </div>
+          <div class="cs-note">Small phi; large NNT reflects low baseline event rate in unselected population. RR reduction of 54% is clinically meaningful despite modest absolute difference. φ corrected from previously reported 0.031 per audit recalculation.</div>
+        </div>
+        <!-- Superficial -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Superficial complications</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-na">Not significant (p=0.388)</span>
+          </div>
+          <div class="cs-note">No effect size calculated; ARR = −0.46% favoring control (trivial, non-significant). NNT not applicable.</div>
+        </div>
+        <!-- LOS -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Hospital LOS</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">Cohen's d = 0.19 (small)</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Pooled SD ≈ 13.5 d (from ±7.7 and ±17.5). Mean reduction of 2.6 days; small effect size due to wide SD in control group. NNT not calculable for continuous outcomes.</div>
+        </div>
+        <!-- Compliant subgroup -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Compliant subgroup (A vs. BR)</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">ARR = 3.46%</span>
+            <span class="cs-pill pill-red">NNT = 29</span>
+          </div>
+          <div class="cs-note">Per-protocol estimate; zero events in Group A means OR/RR undefined (zero numerator). ARR-based NNT is valid. Substantially stronger signal than ITT estimate.</div>
+        </div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ROW 2: Tewarie 2012
+    ══════════════════════════════════════════════════════════ -->
+    <tr>
+      <td class="study-cell">
+        <div class="study-title">Tewarie et al., 2012</div>
+        <div class="study-journal">J Cardiothorac Surg</div>
+        <span class="study-badge badge-rct-single">RCT · Single Centre</span>
+      </td>
+      <td>
+        <span class="label">Design</span>
+        <span class="value">Prospective, randomized single-centre trial; CONSORT-reported</span>
+        <span class="label">N</span>
+        <span class="value">750 males; SEF n=380 / Bandage n=370</span>
+        <span class="label">Follow-up</span>
+        <span class="value">Mean 8 weeks (range 6–12 wk)</span>
+        <span class="label">Setting</span>
+        <span class="value">RWTH Aachen, Germany (Jan 2009 – Jun 2011)</span>
+        <span class="label">Blinding</span>
+        <span class="value">Unblinded; males only; matched closure and antibiotic protocol</span>
+      </td>
+      <td>
+        <span class="label">Intervention</span>
+        <span class="value">Stern-E-Fix corset, 6 weeks from POD 1</span>
+        <span class="label">Comparator</span>
+        <span class="value">Standard elastic thorax bandage, 6 weeks</span>
+        <span class="label">Population</span>
+        <span class="value">High-risk males post-sternotomy; 78% CABG; obesity, COPD, diabetes, smoking equally distributed</span>
+        <span class="label">Exclusion</span>
+        <span class="value">Female patients excluded entirely</span>
+      </td>
+      <td>
+        <ul class="outcome-list">
+          <li><span class="primary-tag">Primary ·</span> Sternal dehiscence (requiring reoperation)</li>
+          <li><span class="primary-tag">Primary ·</span> Mediastinitis / DSWI</li>
+          <li><span class="secondary-tag">Secondary ·</span> Superficial wound infection</li>
+          <li><span class="secondary-tag">Secondary ·</span> Mechanical ventilation time</li>
+          <li><span class="secondary-tag">Secondary ·</span> Hospital LOS</li>
+          <li><span class="secondary-tag">Secondary ·</span> Treatment failure</li>
+          <li><span class="secondary-tag">Secondary ·</span> Mediastinitis-related mortality</li>
+        </ul>
+        <p class="notable">Total wound infections 3.42% vs. 9.46%; individual p-values not reported per endpoint.</p>
+      </td>
+      <td>
+        <div class="stat-block">
+          <div class="stat-name">Statistical tests</div>
+          <div class="stat-desc">Pearson χ²; Mann–Whitney U; mean ± SD. P&lt;0.05 significant.</div>
+        </div>
+        <hr class="cell-divider">
+        <div class="stat-block result-neutral">
+          <div class="stat-name">Sternal dehiscence</div>
+          <div class="stat-desc">SEF 0.26% (1/380) vs. Bandage 5.95% (22/370); treatment failure p=0.056 (NS). No dedicated dehiscence p-value reported. Note: p=0.01 in this paper applies to ventilation time only.</div>
+        </div>
+        <div class="stat-block result-neutral">
+          <div class="stat-name">Mediastinitis mortality</div>
+          <div class="stat-desc">SEF 0 vs. Bandage 2 deaths. No p-value; non-significant trend.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Ventilation time</div>
+          <div class="stat-desc">1.28 d vs. 2.5 d (p=0.01).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Hospital LOS</div>
+          <div class="stat-desc">12.5±7.4 d vs. 18±15.1 d (p=0.002).</div>
+        </div>
+      </td>
+      <td>
+        <!-- Dehiscence -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Sternal dehiscence</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">RR = 0.044</span>
+            <span class="cs-pill pill-red">ARR = 5.69%</span>
+            <span class="cs-pill pill-red">φ = 0.165 (small–medium)</span>
+            <span class="cs-pill pill-red">NNT = 18 (NS)</span>
+          </div>
+          <div class="cs-note">No dedicated p-value for dehiscence counts. Closest reported figure (treatment failure) is p=0.056 — technically non-significant. All pills marked red per NS override rule. 96% relative risk reduction in raw counts is noted but cannot be confirmed as statistically significant. φ corrected from 0.178 per audit recalculation.</div>
+        </div>
+        <!-- Mortality -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Mediastinitis mortality</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-na">No p-value reported</span>
+          </div>
+          <div class="cs-note">Event counts only (0 vs. 2). Cannot calculate effect size or NNT without denominator-based proportions and a p-value. Directionally favorable.</div>
+        </div>
+        <!-- Vent time -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">Ventilation time</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-na">SDs not reported — d incalculable</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Mean difference = 1.22 days (49% reduction). Cohen's d cannot be computed: paper reports means only, no SDs for ventilation time. NNT not applicable to continuous outcomes.</div>
+        </div>
+        <!-- LOS -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">Hospital LOS</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">Cohen's d = 0.47 (medium)</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Pooled SD ≈ 11.7 d (from ±7.4 and ±15.1). Mean reduction of 5.5 days; medium effect. NNT not applicable to continuous outcomes.</div>
+        </div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ROW 3: Celik 2011
+    ══════════════════════════════════════════════════════════ -->
+    <tr>
+      <td class="study-cell">
+        <div class="study-title">Celik et al., 2011</div>
+        <div class="study-journal">J Thorac Cardiovasc Surg</div>
+        <span class="study-badge badge-rct-single">RCT · Single Centre</span>
+      </td>
+      <td>
+        <span class="label">Design</span>
+        <span class="value">Study 1: retrospective cohort (n=842). Study 2: prospective RCT (n=221). Only Study 2 is an RCT.</span>
+        <span class="label">N (RCT)</span>
+        <span class="value">221 analysed; Vest n=100 / No vest n=121. 23 withdrawals (mostly obese females).</span>
+        <span class="label">Follow-up</span>
+        <span class="value">6 months</span>
+        <span class="label">Setting</span>
+        <span class="value">Single centre, Turkey; computer-generated randomization</span>
+        <span class="label">Blinding</span>
+        <span class="value">Unblinded; all Robiscek closure</span>
+      </td>
+      <td>
+        <span class="label">Intervention</span>
+        <span class="value">Posthorax® vest (wear duration not stated)</span>
+        <span class="label">Comparator</span>
+        <span class="value">No vest (standard care)</span>
+        <span class="label">Population</span>
+        <span class="value">Moderate-to-severe COPD (FEV1 &lt;70%); ~67 y; diabetes ~44%, PAD ~27%, osteoporosis ~34%, CABG ~65%. Groups balanced.</span>
+        <span class="label">Key context</span>
+        <span class="value">Study 1 showed COPD patients had 7× higher dehiscence rate than non-COPD, justifying COPD-only RCT</span>
+      </td>
+      <td>
+        <ul class="outcome-list">
+          <li><span class="primary-tag">Primary ·</span> Composite sternal wound complications</li>
+          <li><span class="secondary-tag">Secondary ·</span> DSWI</li>
+          <li><span class="secondary-tag">Secondary ·</span> SSWI</li>
+          <li><span class="secondary-tag">Secondary ·</span> Sternal dehiscence</li>
+          <li><span class="secondary-tag">Secondary ·</span> Hospital LOS</li>
+          <li><span class="secondary-tag">Secondary ·</span> NNT</li>
+        </ul>
+        <p class="notable">El Oakley &amp; Wright classification used. FEV1 subgroups correlated with dehiscence rate (p=0.002) in Study 1.</p>
+      </td>
+      <td>
+        <div class="stat-block">
+          <div class="stat-name">Statistical tests</div>
+          <div class="stat-desc">Pearson χ² and Fisher's exact (categorical); unpaired t-test (continuous). Per-protocol analysis. Power 86% for 11% difference in dWC.</div>
+        </div>
+        <hr class="cell-divider">
+        <div class="stat-block result-good">
+          <div class="stat-name">Overall sternal wound complications</div>
+          <div class="stat-desc">Vest 1% (1/100) vs. No-vest 11.5% (14/121); p=0.002. RRR 93.4%.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">DSWI</div>
+          <div class="stat-desc">Vest 0% vs. No-vest 6.6% (8/121); p=0.009.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Hospital LOS</div>
+          <div class="stat-desc">13.7±6.7 d vs. 17.8±15.4 d (p=0.03).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">NNT (reported by authors)</div>
+          <div class="stat-desc">NNT=15 to prevent 1 sternal complication in moderate-to-severe COPD.</div>
+        </div>
+      </td>
+      <td>
+        <!-- Composite SWC -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">Composite sternal wound complications</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-green">RR = 0.087</span>
+            <span class="cs-pill pill-green">ARR = 10.6%</span>
+            <span class="cs-pill pill-yellow">φ = 0.209 (small–medium)</span>
+            <span class="cs-pill pill-green">NNT = 10</span>
+          </div>
+          <div class="cs-note">Very large relative risk reduction (91%) in an enriched high-risk COPD population. NNT of 10 is highly actionable — among the strongest signals in this literature.</div>
+        </div>
+        <!-- DSWI -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">DSWI</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-yellow">ARR = 6.6%</span>
+            <span class="cs-pill pill-yellow">NNT = 15</span>
+            <span class="cs-pill pill-na">OR/RR undefined (zero cell)</span>
+          </div>
+          <div class="cs-note">Zero events in vest group prevents ratio-based effect size calculation. ARR-based NNT = 15 (matches authors' reported value). Clinically significant prevention of the most severe complication.</div>
+        </div>
+        <!-- LOS -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Hospital LOS</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">Cohen's d = 0.35 (small–medium)</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Pooled SD ≈ 11.8 d (from ±6.7 and ±15.4). Mean reduction 4.1 days; small-to-medium effect. Wide SD in control group (COPD patients: prolonged stays) attenuates d. NNT not applicable.</div>
+        </div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ROW 4: Caimmi 2017
+    ══════════════════════════════════════════════════════════ -->
+    <tr>
+      <td class="study-cell">
+        <div class="study-title">Caimmi et al., 2017</div>
+        <div class="study-journal">Cardiol Ther</div>
+        <span class="study-badge badge-rct-single">RCT · Single Centre</span>
+      </td>
+      <td>
+        <span class="label">Design</span>
+        <span class="value">Prospective, randomized single-centre; CONSORT-reported; randomization after chest drain removal</span>
+        <span class="label">N</span>
+        <span class="value">310; Vest n=155 / No vest n=155</span>
+        <span class="label">Follow-up</span>
+        <span class="value">Mean 2.4±2.1 y (range 0.83–5.25 y); 100% complete</span>
+        <span class="label">Setting</span>
+        <span class="value">University Hospital of Novara, Italy</span>
+        <span class="label">Blinding</span>
+        <span class="value">Unblinded; infectious/mediastinitis events excluded by design to isolate mechanical endpoint</span>
+      </td>
+      <td>
+        <span class="label">Intervention</span>
+        <span class="value">Posthorax® vest until 90 days post-discharge</span>
+        <span class="label">Comparator</span>
+        <span class="value">No vest</span>
+        <span class="label">Population</span>
+        <span class="value">High-risk adults ≥1 factor: diabetes, BMI ≥25, BIMA, COPD (FEV1 &lt;75%). Mixed procedures. Groups balanced.</span>
+        <span class="label">Unique feature</span>
+        <span class="value">Solely mechanical endpoint by design; QoL measured via EQ-5D at discharge</span>
+      </td>
+      <td>
+        <ul class="outcome-list">
+          <li><span class="primary-tag">Primary ·</span> Mechanical dehiscence ≥2 mm at discharge</li>
+          <li><span class="primary-tag">Primary ·</span> Re-operation for mechanical complications</li>
+          <li><span class="primary-tag">Primary ·</span> Hospital LOS &amp; re-admission LOS</li>
+          <li><span class="secondary-tag">Secondary ·</span> Re-admission for sternal complications</li>
+          <li><span class="secondary-tag">Secondary ·</span> Postoperative pain (analgesic requests)</li>
+          <li><span class="secondary-tag">Secondary ·</span> Quality of life (EQ-5D)</li>
+          <li><span class="secondary-tag">Long-term ·</span> 5-year freedom from mechanical events (KM)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="stat-block">
+          <div class="stat-name">Statistical tests</div>
+          <div class="stat-desc">χ²; unpaired t-test or Mann–Whitney; Kaplan–Meier + log-rank. Power 0.70 (3% vs. 10% assumed event rate).</div>
+        </div>
+        <hr class="cell-divider">
+        <div class="stat-block result-good">
+          <div class="stat-name">Dehiscence ≥2 mm at discharge</div>
+          <div class="stat-desc">Vest 4.5% (7/155) vs. No-vest 20% (31/155); p=0.005.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Re-operation for mechanical complications</div>
+          <div class="stat-desc">Vest 0/155 vs. No-vest 7/155; p not calculable (zero events).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Hospital LOS</div>
+          <div class="stat-desc">7±2.7 d vs. 12±3.4 d (p=0.02).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Re-admission for sternal complications</div>
+          <div class="stat-desc">Vest 6 vs. No-vest 16 (p=0.05). Re-admission LOS: 8±3.2 d vs. 24±7.0 d (p=0.05).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">5-year freedom from mechanical events</div>
+          <div class="stat-desc">Vest 95.8±6.1% vs. No-vest 84.7±5.3% (p=0.001).</div>
+        </div>
+      </td>
+      <td>
+        <!-- Dehiscence -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">Dehiscence ≥2 mm at discharge</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-green">RR = 0.226</span>
+            <span class="cs-pill pill-green">ARR = 15.5%</span>
+            <span class="cs-pill pill-yellow">φ = 0.220 (medium)</span>
+            <span class="cs-pill pill-green">NNT = 7</span>
+          </div>
+          <div class="cs-note">NNT of 7 is one of the strongest signals across all studies — highly actionable. 77% relative risk reduction in mechanical dehiscence.</div>
+        </div>
+        <!-- Re-op -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">Re-operation (mechanical)</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">ARR = 4.5%</span>
+            <span class="cs-pill pill-yellow">NNT = 22</span>
+            <span class="cs-pill pill-na">OR/RR undefined (zero cell)</span>
+          </div>
+          <div class="cs-note">Zero events in vest group prevent ratio calculation. ARR-based NNT = 22. Phi and RR undefined when one cell is zero.</div>
+        </div>
+        <!-- LOS -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">Hospital LOS</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-green">Cohen's d = 1.62 (very large)</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Pooled SD ≈ 3.08 d (from ±2.7 and ±3.4). 5-day mean reduction with a very large effect size — most striking LOS effect in this set of studies. NNT not applicable to continuous outcomes.</div>
+        </div>
+        <!-- Re-admission -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">Re-admission for sternal complications</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-yellow">RR = 0.375</span>
+            <span class="cs-pill pill-yellow">ARR = 6.5%</span>
+            <span class="cs-pill pill-yellow">NNT = 16</span>
+          </div>
+          <div class="cs-note">Re-admission LOS effect (Cohen's d): pooled SD ≈ 5.3 d → d = 3.02 (very large) — consistent with the primary LOS finding. However, absolute event counts are small (6 vs. 16).</div>
+        </div>
+        <!-- 5-yr KM -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">5-year freedom from mechanical events</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-green">ARR = 11.1%</span>
+            <span class="cs-pill pill-green">NNT = 9</span>
+            <span class="cs-pill pill-na">Hazard ratio not reported</span>
+          </div>
+          <div class="cs-note">Kaplan–Meier estimate; ARR = 95.8% − 84.7% = 11.1% absolute benefit in long-term event-free survival. Hazard ratio not calculable without raw survival data. NNT = 9 patients for 1 additional patient free of mechanical events at 5 years.</div>
+        </div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ROW 5: Selten 2021
+    ══════════════════════════════════════════════════════════ -->
+    <tr>
+      <td class="study-cell">
+        <div class="study-title">Selten et al., 2021</div>
+        <div class="study-journal">Ann Thorac Cardiovasc Surg</div>
+        <span class="study-badge badge-retro">Retrospective · Single Centre</span>
+      </td>
+      <td>
+        <span class="label">Design</span>
+        <span class="value">Retrospective comparative cohort (non-randomized); consecutive group assignment. Not a prospective RCT — sole study restricted to female patients.</span>
+        <span class="label">N</span>
+        <span class="value">145 high-risk females; SEF n=71 / Bandage n=74</span>
+        <span class="label">Follow-up</span>
+        <span class="value">Mean 12 weeks</span>
+        <span class="label">Setting</span>
+        <span class="value">RWTH Aachen, Germany (Nov 2009 – Nov 2012)</span>
+        <span class="label">Blinding</span>
+        <span class="value">Retrospective; unblinded; consecutive assignment</span>
+      </td>
+      <td>
+        <span class="label">Intervention</span>
+        <span class="value">Stern-E-Fix corset, 6 weeks post-surgery</span>
+        <span class="label">Comparator</span>
+        <span class="value">SanThorax elastic bandage, 6 weeks</span>
+        <span class="label">Population</span>
+        <span class="value">High-risk females only; 68% CABG; diabetes ~38%, COPD ~17%, BMI ~29, PAD ~19%, NYHA &gt;III ~93%. Groups balanced (all P&gt;0.05).</span>
+        <span class="label">Key context</span>
+        <span class="value">Extends Tewarie 2012 (male-only) to female population at same institution</span>
+      </td>
+      <td>
+        <ul class="outcome-list">
+          <li><span class="primary-tag">Primary ·</span> Total SWI incidence</li>
+          <li><span class="primary-tag">Primary ·</span> DSWI (CDC class II–III)</li>
+          <li><span class="primary-tag">Primary ·</span> Mediastinitis</li>
+          <li><span class="secondary-tag">Secondary ·</span> Operative wound therapy</li>
+          <li><span class="secondary-tag">Secondary ·</span> SWI recurrence</li>
+          <li><span class="secondary-tag">Secondary ·</span> Antibiotic duration</li>
+          <li><span class="secondary-tag">Secondary ·</span> Hospital LOS (overall &amp; SWI-related)</li>
+          <li><span class="secondary-tag">Secondary ·</span> Mortality (overall &amp; SWI-related)</li>
+        </ul>
+        <p class="notable">CDC classification used; POD of SWI diagnosis also recorded.</p>
+      </td>
+      <td>
+        <div class="stat-block">
+          <div class="stat-name">Statistical tests</div>
+          <div class="stat-desc">SPSS 24; Student's t-test (continuous); χ² or Fisher's exact (categorical). P&lt;0.05 significant.</div>
+        </div>
+        <hr class="cell-divider">
+        <div class="stat-block result-good">
+          <div class="stat-name">Total SWI</div>
+          <div class="stat-desc">SEF 7% (5/71) vs. Bandage 17.6% (13/74); p=0.025.</div>
+        </div>
+        <div class="stat-block result-neutral">
+          <div class="stat-name">DSWI (CDC II–III)</div>
+          <div class="stat-desc">SEF 1/71 vs. Bandage 7/74 (p=0.063). Non-significant trend.</div>
+        </div>
+        <div class="stat-block result-neutral">
+          <div class="stat-name">Mediastinitis</div>
+          <div class="stat-desc">SEF 0/71 vs. Bandage 4/74 (p=0.121). Non-significant trend.</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Operative wound therapy</div>
+          <div class="stat-desc">SEF 4.2% vs. Bandage 16.2% (p=0.026).</div>
+        </div>
+        <div class="stat-block result-good">
+          <div class="stat-name">Overall LOS</div>
+          <div class="stat-desc">15±9.2 d vs. 24.7±24.5 d (p=0.006). Antibiotic duration: 10±7.4 d vs. 20.2±15.5 d (p=0.001).</div>
+        </div>
+        <div class="stat-block result-neutral">
+          <div class="stat-name">Mortality</div>
+          <div class="stat-desc">Overall: 2.8% vs. 5.3% (p=0.681). SWI-related: 0% vs. 4.0% (p=0.245). Non-significant.</div>
+        </div>
+      </td>
+      <td>
+        <!-- Total SWI -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">Total SWI</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-yellow">RR = 0.401</span>
+            <span class="cs-pill pill-green">ARR = 10.5%</span>
+            <span class="cs-pill pill-yellow">φ = 0.146 (small)</span>
+            <span class="cs-pill pill-green">NNT = 10</span>
+          </div>
+          <div class="cs-note">60% relative risk reduction in total SWI. NNT = 10 is clinically actionable for a high-risk female population.</div>
+        </div>
+        <!-- DSWI -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">DSWI (CDC II–III)</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">ARR = 8.1%</span>
+            <span class="cs-pill pill-red">NNT = 12 (NS)</span>
+            <span class="cs-pill pill-na">p=0.063 — not significant</span>
+          </div>
+          <div class="cs-note">Not statistically significant. RR = 0.149 (1/71 vs. 7/74) but study underpowered for this endpoint. ARR-based NNT reported for orientation only.</div>
+        </div>
+        <!-- Mediastinitis -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Mediastinitis</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">ARR = 5.4%</span>
+            <span class="cs-pill pill-red">NNT = 19 (NS)</span>
+            <span class="cs-pill pill-na">OR/RR undefined (zero cell)</span>
+          </div>
+          <div class="cs-note">Zero events in SEF group prevent ratio calculation. Not statistically significant (p=0.121); small sample limits power for this low-frequency outcome.</div>
+        </div>
+        <!-- Op therapy -->
+        <div class="cs-block cs-large">
+          <div class="cs-outcome">Operative wound therapy</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-green">RR = 0.261</span>
+            <span class="cs-pill pill-green">ARR = 12.0%</span>
+            <span class="cs-pill pill-yellow">φ = 0.183 (small–medium)</span>
+            <span class="cs-pill pill-green">NNT = 8</span>
+          </div>
+          <div class="cs-note">74% relative risk reduction in need for surgical wound intervention. NNT = 8 is a strong actionable effect in this female cohort.</div>
+        </div>
+        <!-- LOS -->
+        <div class="cs-block cs-medium">
+          <div class="cs-outcome">Overall LOS</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-yellow">Cohen's d = 0.53 (medium)</span>
+            <span class="cs-pill pill-na">NNT — continuous outcome</span>
+          </div>
+          <div class="cs-note">Pooled SD ≈ 18.4 d (from ±9.2 and ±24.5). Mean reduction 9.7 days; medium effect. Very wide SD in control group (heterogeneous post-SWI courses) attenuates d. NNT not applicable to continuous outcomes.</div>
+        </div>
+        <!-- Mortality -->
+        <div class="cs-block cs-small">
+          <div class="cs-outcome">Mortality (overall)</div>
+          <div class="cs-row">
+            <span class="cs-pill pill-red">ARR = 2.5%</span>
+            <span class="cs-pill pill-red">NNT = 39 (NS)</span>
+            <span class="cs-pill pill-na">p=0.681 — not significant</span>
+          </div>
+          <div class="cs-note">Not statistically significant. Study was not powered to detect a mortality difference. ARR-based NNT reported for orientation only; interpret with caution in a non-significant result.</div>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="footnote">
+  <strong>Effect size interpretation:</strong> Cohen's d — small ≥0.20, medium ≥0.50, large ≥0.80, very large ≥1.30. Phi (φ) for 2×2 tables — small ≥0.10, medium ≥0.30, large ≥0.50. NNT = 1/ARR (rounded up). NNT is not calculable for continuous outcomes; ARR-based NNT from Kaplan–Meier curves is approximate. Zero-cell proportions prevent ratio-based (OR/RR) effect size calculation; ARR is used instead. &nbsp;|&nbsp;
+  <strong>Note on Selten et al.:</strong> Retrospective cohort, not a prospective RCT; included as the sole study restricted to female patients. &nbsp;|&nbsp;
+  <strong>Abbreviations:</strong> ARR = absolute risk reduction; BIMA = bilateral internal mammary artery; CABG = coronary artery bypass graft; CDC = Centers for Disease Control and Prevention; COPD = chronic obstructive pulmonary disease; CRF = chronic renal failure; d = Cohen's d; DSWI = deep sternal wound infection; dWC = deep wound complications; FEV1 = forced expiratory volume in 1 second; ITT = intention-to-treat; KM = Kaplan–Meier; LOS = length of stay; NNT = number needed to treat; NS = not significant; OR = odds ratio; PAD = peripheral arterial disease; φ = phi coefficient; POD = postoperative day; RR = risk ratio; RRR = relative risk reduction; SEF = Stern-E-Fix; SSWI = superficial sternal wound infection; SWI = sternal wound infection.
+</div>
+
+</body>
+</html>
