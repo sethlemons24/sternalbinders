@@ -306,6 +306,29 @@
   }
   .note-box-text strong { color: var(--black); }
 
+  /* ── SUPPLEMENTARY SECTION ADD-ONS ── */
+  .pill-warn { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+  .flag-cohort { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
+  .supp-banner {
+    background: var(--gray-dark);
+    padding: 56px 64px; margin: 72px auto 0; position: relative; overflow: hidden;
+  }
+  .supp-banner::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(255,255,255,0.04); pointer-events: none;
+  }
+  .supp-banner-inner { max-width: 1600px; margin: 0 auto; position: relative; z-index: 1; }
+  .supp-banner .header-eyebrow { margin-bottom: 16px; }
+  .supp-banner .header-title { margin-bottom: 20px; max-width: 760px; }
+  .supp-banner .header-desc { max-width: 660px; }
+  .supp-banner .scope-note {
+    margin-top: 20px; padding: 14px 18px;
+    background: rgba(187,0,0,0.22); border-left: 3px solid var(--scarlet);
+    font-size: 12.5px; line-height: 1.65; color: rgba(255,255,255,0.9);
+    max-width: 700px;
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--black); padding: 48px 64px;
@@ -1921,6 +1944,384 @@
   </div>
 
 
+  <!-- ══════════════════════════════════════════════════════
+       SUPPLEMENTARY SECTION BANNER
+  ══════════════════════════════════════════════════════ -->
+  <div class="supp-banner">
+    <div class="supp-banner-inner">
+      <div class="header-eyebrow">Supplementary &middot; Device Comfort &amp; Compliance</div>
+      <h1 class="header-title">Supplementary Outcome &amp; <em>Comparative Evidence Tables</em></h1>
+      <p class="header-desc">Outcomes and calculated effect sizes for 2 comfort/compliance studies identified outside the core 16-study PICO corpus, mapped across the outcome domains actually reported in each article &mdash; not the core 12-domain matrix above.</p>
+      <div class="scope-note">Scope note: Neither of these 2 studies evaluate the Posthorax vest. El-Ansary et al. (2008) was previously screened out of the core corpus for population/design mismatch; Siemens et al. (2026) evaluates the QualiBreath brace. Both are included here specifically for their comfort/compliance data.</div>
+    </div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="strip-stat"><div class="strip-number">2</div><div class="strip-label">Studies Included</div></div>
+    <div class="strip-stat"><div class="strip-number">8</div><div class="strip-label">Outcome Domains</div></div>
+    <div class="strip-stat"><div class="strip-number">1</div><div class="strip-label">Randomized Intervention</div></div>
+    <div class="strip-stat"><div class="strip-number">1</div><div class="strip-label">Prospective Cohort</div></div>
+  </div>
+
+  <div style="height:40px;"></div>
+
+  <div class="table-scroll">
+  <div class="table-wrapper">
+  <table id="supp-outcomes-table">
+    <colgroup>
+      <col class="col-study">
+      <col class="col-outcome"><col class="col-outcome"><col class="col-outcome">
+      <col class="col-outcome"><col class="col-outcome"><col class="col-outcome">
+      <col class="col-outcome"><col class="col-outcome">
+    </colgroup>
+    <thead>
+      <tr>
+        <th style="text-align:left;padding-left:16px;"><span style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.06em;text-transform:uppercase;">Study / Design</span></th>
+        <th><span class="th-inner">Comfort / Tolerability</span></th>
+        <th><span class="th-inner">Pain</span></th>
+        <th><span class="th-inner">Adherence / Compliance</span></th>
+        <th><span class="th-inner">Sternal Mechanical Stability</span></th>
+        <th><span class="th-inner">Sternal Complications (Clinical)</span></th>
+        <th><span class="th-inner">Quality of Life</span></th>
+        <th><span class="th-inner">Functional / Upper-Limb Recovery</span></th>
+        <th><span class="th-inner">Respiratory Function</span></th>
+      </tr>
+    </thead>
+    <tbody id="supp-table-body"></tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="legend-area">
+    <div class="legend-title">Legend</div>
+    <div class="legend-item"><span class="pill pill-green-down">&#8595; Favorable decrease</span>Clinically beneficial decrease (e.g., less pain, less separation)</div>
+    <div class="legend-item"><span class="pill pill-green-up">&#8593; Favorable increase</span>Clinically beneficial increase (e.g., more comfort, better function)</div>
+    <div class="legend-item"><span class="pill pill-blue">= No change</span>No statistically significant difference detected</div>
+    <div class="legend-item"><span class="pill pill-warn">&#10005; Unfavorable</span>Statistically or descriptively unfavorable finding for the device/intervention</div>
+    <div class="legend-item"><span class="pill pill-gray">NE</span>Not examined / not reported in this study</div>
+  </div>
+
+  <div class="note-box">
+    <div class="note-box-label">Reading this matrix</div>
+    <div class="note-box-text"><strong>El-Ansary 2008</strong> is the only study here with a device directly compared to no support, so it's the only row with favorable green pills &mdash; comfort, pain, mechanical stability, functional recovery, and respiratory ease all moved in the device's favor. <strong>Siemens 2026</strong> is the only study that isolates a support-device arm from a no-device arm in a modern high-risk population, and it's the only row with red "Unfavorable" pills &mdash; both flagged domains (comfort, adherence) reflect descriptive survey findings within the brace arm itself, not a formal between-group hypothesis test. Neither study reports on kinesiophobia, so that domain was dropped from this matrix rather than left as an all-NE column.</div>
+  </div>
+
+  <!-- ── COMPARATIVE EVIDENCE TABLE ── -->
+  <div style="margin-top:64px;">
+    <div class="section-label" style="max-width:1600px;margin-left:auto;margin-right:auto;">Comfort &amp; Compliance Studies &mdash; Comparative Evidence Table</div>
+    <p style="max-width:1600px;margin:0 auto 20px;font-size:13px;line-height:1.7;color:#3a3a3a;">Effect sizes calculated where the source data allow it, following the same audit-trail conventions used in the core Comparative Evidence Table. Where a study reports only a mean difference and 95% CI without SDs, an approximate Cohen's d is back-calculated from the CI width and clearly flagged as an estimate.</p>
+    <div style="max-width:1600px;margin:0 auto;background:#f5f5f5;padding:24px;border:1px solid #d0ccc6;">
+      <style>
+        /* ── COMFORT TABLE SCOPED STYLES ── */
+        :root {
+          --scarlet:      #BB0000;
+          --scarlet-dark: #8B0000;
+          --scarlet-lite: #F9EBEB;
+          --grey:         #666666;
+          --grey-dark:    #212121;
+          --grey-mid:     #444444;
+          --grey-lite:    #F0F0F0;
+          --silver:       #E0E0E0;
+          --divider:      #CCCCCC;
+          --paper:        #F5F5F5;
+          --cell-bg:      #FFFFFF;
+          --good-bg:    #EBF7F0; --good-border: #1a7a4a; --good-txt: #155a38;
+          --neutral-bg: #FDFAF0; --neutral-border: #a07d12; --neutral-txt: #7a5f0e;
+          --bad-bg:     #FDF0F0; --bad-border:  #BB0000; --bad-txt:   #8B0000;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--paper); font-family: 'DM Sans', sans-serif; color: var(--grey-dark); padding: 44px 28px; min-height: 100vh; }
+        .masthead { margin-bottom: 10px; padding-bottom: 16px; border-bottom: 3px solid var(--scarlet); display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+        .masthead-left { flex: 1; }
+        .masthead h1 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--grey-dark); line-height: 1.2; }
+        .masthead h1 em { font-style: italic; color: var(--scarlet); }
+        .masthead p { font-size: 11px; color: var(--grey); margin-top: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .legend { display: flex; gap: 14px; margin: 14px 0 16px; flex-wrap: wrap; }
+        .legend-item { font-size: 11px; font-weight: 600; letter-spacing: 0.3px; padding: 4px 10px; border-radius: 3px; border: 1px solid; }
+        .legend-good    { color: var(--good-txt);    background: var(--good-bg);    border-color: var(--good-border); }
+        .legend-neutral { color: var(--neutral-txt); background: var(--neutral-bg); border-color: var(--neutral-border); }
+        .legend-bad     { color: var(--bad-txt);     background: var(--bad-bg);     border-color: var(--bad-border); }
+        .table-wrap { overflow-x: auto; border-radius: 2px; box-shadow: 0 2px 18px rgba(0,0,0,0.10); border-top: 4px solid var(--scarlet); }
+        table { width: 100%; border-collapse: collapse; font-size: 12.5px; line-height: 1.55; background: var(--cell-bg); }
+        col.col-study { width: 12%; } col.col-type { width: 13%; } col.col-pico { width: 16%; }
+        col.col-outcomes { width: 17%; } col.col-stats { width: 21%; } col.col-clinical { width: 21%; }
+        thead tr.header-row th { background: var(--scarlet); color: #ffffff; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.9px; text-transform: uppercase; padding: 13px 14px; text-align: left; border-right: 1px solid rgba(255,255,255,0.18); }
+        thead tr.header-row th:last-child { border-right: none; }
+        tbody tr { border-bottom: 1px solid var(--divider); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:nth-child(even) td { background: #fafafa; }
+        tbody tr:nth-child(even) td.study-cell { background: #f0e8e8; }
+        td { padding: 16px 14px; vertical-align: top; border-right: 1px solid var(--silver); color: var(--grey-dark); }
+        td:last-child { border-right: none; }
+        td.study-cell { background: #FAF0F0; border-right: 3px solid var(--scarlet); min-width: 120px; }
+        .study-title { font-family: 'DM Serif Display', serif; font-size: 13.5px; color: var(--scarlet-dark); line-height: 1.3; margin-bottom: 4px; }
+        .study-journal { font-size: 10.5px; color: var(--grey); font-style: italic; margin-bottom: 6px; line-height: 1.4; }
+        .study-badge { display: inline-block; font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-top: 2px; }
+        .badge-rct-single { background: var(--grey-mid); color: #fff; }
+        .badge-cohort { background: #8B6914; color: #fff; }
+        .label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--grey); margin-bottom: 2px; margin-top: 9px; display: block; }
+        .label:first-child { margin-top: 0; }
+        .value { font-size: 12px; color: var(--grey-dark); line-height: 1.55; }
+        ul.outcome-list { padding-left: 13px; margin: 2px 0; }
+        ul.outcome-list li { font-size: 12px; margin-bottom: 3px; color: var(--grey-dark); line-height: 1.5; }
+        ul.outcome-list li span.primary-tag { font-weight: 700; color: var(--scarlet); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.3px; }
+        ul.outcome-list li span.secondary-tag { font-weight: 600; color: var(--grey); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.3px; }
+        .stat-block { margin-bottom: 7px; padding: 8px 11px; background: var(--grey-lite); border-left: 3px solid var(--grey); border-radius: 0 2px 2px 0; }
+        .stat-block:last-child { margin-bottom: 0; }
+        .stat-block .stat-name { font-size: 9.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 2px; }
+        .stat-block .stat-desc { font-size: 11.5px; color: var(--grey-dark); line-height: 1.5; }
+        .stat-block.result-good    { border-left-color: var(--good-border);    background: var(--good-bg); }
+        .stat-block.result-good    .stat-name { color: var(--good-txt); }
+        .stat-block.result-neutral { border-left-color: var(--neutral-border); background: var(--neutral-bg); }
+        .stat-block.result-neutral .stat-name { color: var(--neutral-txt); }
+        .stat-block.result-bad     { border-left-color: var(--bad-border);     background: var(--bad-bg); }
+        .stat-block.result-bad     .stat-name { color: var(--bad-txt); }
+        .cs-block { margin-bottom: 7px; padding: 8px 11px; background: #fafafa; border-left: 3px solid var(--grey); border-radius: 0 2px 2px 0; }
+        .cs-block:last-child { margin-bottom: 0; }
+        .cs-block.cs-large { background: var(--good-bg) !important; border-left-color: var(--good-border) !important; }
+        .cs-block.cs-large .cs-outcome { color: var(--good-txt) !important; }
+        .cs-block.cs-medium { background: var(--neutral-bg) !important; border-left-color: var(--neutral-border) !important; }
+        .cs-block.cs-medium .cs-outcome { color: var(--neutral-txt) !important; }
+        .cs-block.cs-small { background: var(--bad-bg) !important; border-left-color: var(--bad-border) !important; }
+        .cs-block.cs-small .cs-outcome { color: var(--bad-txt) !important; }
+        .cs-block .cs-outcome { font-size: 9.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 3px; }
+        .cs-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
+        .cs-pill { font-size: 10.5px; font-weight: 600; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+        .pill-green { background: #d0f0e0; color: #0f4f2a; border: 1px solid #6cc49a; }
+        .pill-yellow { background: #faefc0; color: #5c3d00; border: 1px solid #d4a820; }
+        .pill-red   { background: #fad0d0; color: #6b0000; border: 1px solid #d06060; }
+        .pill-na    { background: var(--grey-lite); color: var(--grey); border: 1px solid var(--divider); font-style: italic; }
+        .cs-note { font-size: 10.5px; color: var(--grey); line-height: 1.45; margin-top: 2px; font-style: italic; }
+        .cell-divider { border: none; border-top: 1px dashed var(--divider); margin: 9px 0; }
+        .notable { font-size: 10.5px; font-style: italic; color: var(--grey); margin-top: 6px; line-height: 1.5; }
+        .footnote { margin-top: 18px; font-size: 10.5px; color: var(--grey); border-top: 2px solid var(--scarlet); padding-top: 12px; line-height: 1.65; }
+      </style>
+
+      <div class="masthead">
+        <div class="masthead-left">
+          <h1>Comfort &amp; Compliance Studies &mdash; <em>Comparative Evidence Table</em></h1>
+          <p>External sternal support devices &nbsp;&middot;&nbsp; Supplementary to core review</p>
+        </div>
+      </div>
+
+      <div class="legend">
+        <strong style="font-size:11px;color:var(--grey-mid);align-self:center;">Statistical Results:</strong>
+        <span class="legend-item legend-good">&#9646; Significant improvement</span>
+        <span class="legend-item legend-neutral">&#9646; No change / non-significant</span>
+        <span class="legend-item legend-bad">&#9646; Worsening / harm / poor uptake</span>
+        <span style="width:1px;background:var(--divider);margin:0 4px;align-self:stretch;display:inline-block;"></span>
+        <strong style="font-size:11px;color:var(--grey-mid);align-self:center;">Clinical Significance:</strong>
+        <span class="legend-item legend-good">&#9646; Large (d&ge;0.80 / dz&ge;0.80 / NNT&le;10)</span>
+        <span class="legend-item legend-neutral">&#9646; Medium (d 0.50&ndash;0.79 / NNT 11&ndash;25)</span>
+        <span class="legend-item legend-bad">&#9646; Small / none / NS / not calculable</span>
+      </div>
+
+      <div class="table-wrap">
+      <table>
+        <colgroup>
+          <col class="col-study"><col class="col-type"><col class="col-pico">
+          <col class="col-outcomes"><col class="col-stats"><col class="col-clinical">
+        </colgroup>
+        <thead>
+          <tr class="header-row">
+            <th>Article</th><th>Study Type</th><th>Focus / PICO</th>
+            <th>Outcomes</th><th>Statistical Results</th><th>Clinical Significance</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ROW 1: El-Ansary 2008 -->
+          <tr>
+            <td class="study-cell">
+              <div class="study-title">El-Ansary et al., 2008</div>
+              <div class="study-journal">Arch Phys Med Rehabil</div>
+              <span class="study-badge badge-rct-single">Randomized Intervention</span>
+            </td>
+            <td>
+              <span class="label">Design</span>
+              <span class="value">Cross-sectional, randomized within-subject intervention study</span>
+              <span class="label">N</span>
+              <span class="value">15 patients (12 men, 3 women), age 49&ndash;80</span>
+              <span class="label">Follow-up</span>
+              <span class="value">Single-session, cross-sectional comparison</span>
+              <span class="label">Setting</span>
+              <span class="value">Community referrals from cardiac surgeon/cardiologist (Australia)</span>
+              <span class="label">Blinding</span>
+              <span class="value">Not blinded; ultrasound assessor role not specified</span>
+            </td>
+            <td>
+              <span class="label">Intervention</span>
+              <span class="value">Adjustable fastening brace, compression garment, sports tape (within-subject, randomized order)</span>
+              <span class="label">Comparator</span>
+              <span class="value">No support</span>
+              <span class="label">Population</span>
+              <span class="value">Chronic sternal instability after median sternotomy (not acute post-sternotomy prophylaxis)</span>
+              <span class="label">Exclusion</span>
+              <span class="value">Not reported in extracted abstract</span>
+            </td>
+            <td>
+              <ul class="outcome-list">
+                <li><span class="primary-tag">Primary &middot;</span> Sternal separation (ultrasound, movement-contingent)</li>
+                <li><span class="secondary-tag">Secondary &middot;</span> Self-report VAS: comfort, pain, feeling of support, ease of breathing, ease of upper-limb movement</li>
+              </ul>
+              <p class="notable">Only study in this table with an objective mechanical measure paired directly with self-reported comfort.</p>
+            </td>
+            <td>
+              <div class="stat-block">
+                <div class="stat-name">Statistical tests</div>
+                <div class="stat-desc">Ultrasound-based sternal separation measurement; VAS self-report ratings. Comparison vs. no support and across 3 devices.</div>
+              </div>
+              <hr class="cell-divider">
+              <div class="stat-block result-good">
+                <div class="stat-name">Sternal separation (brace vs. no support)</div>
+                <div class="stat-desc">Gap closed by 20% (2.7mm, 95% CI 1.5&ndash;3.9mm) &mdash; CI excludes 0, significant.</div>
+              </div>
+              <div class="stat-block result-good">
+                <div class="stat-name">Brace vs. compression garment</div>
+                <div class="stat-desc">Brace outperformed compression garment; exact magnitude not reported in extracted abstract.</div>
+              </div>
+              <div class="stat-block result-good">
+                <div class="stat-name">Self-report VAS (comfort, pain, support, breathing, movement)</div>
+                <div class="stat-desc">Ratings mirrored the objective separation findings for all 3 devices &mdash; self-report and objective measures in agreement. Exact means/SDs not reported in extracted abstract.</div>
+              </div>
+            </td>
+            <td>
+              <div class="cs-block cs-large">
+                <div class="cs-outcome">Sternal separation (brace vs. no support)</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-green">Mean diff = 2.7mm</span>
+                  <span class="cs-pill pill-green">dz &asymp; 1.14 (large, estimated)</span>
+                </div>
+                <div class="cs-note">Estimated paired Cohen's dz from reported mean difference and 95% CI (2.7mm, 1.5&ndash;3.9mm), n=15: SE=0.612mm &rarr; SD<sub>diff</sub>&asymp;2.37mm &rarr; dz&asymp;1.14. Paper did not report Cohen's d directly; this follows the same CI-derived estimation method used elsewhere in this project's audit trail.</div>
+              </div>
+              <div class="cs-block cs-small">
+                <div class="cs-outcome">Self-report VAS (comfort/pain/support/breathing/movement)</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-na">Not calculable from available data</span>
+                </div>
+                <div class="cs-note">No raw means or SDs published in the extracted abstract for VAS outcomes; only a qualitative statement that they "mirrored" the objective measure. Cannot estimate effect size without source values.</div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ROW 2: Siemens 2026 -->
+          <tr>
+            <td class="study-cell">
+              <div class="study-title">Siemens et al., 2026</div>
+              <div class="study-journal">JTCVS Open</div>
+              <span class="study-badge badge-cohort">Prospective Cohort</span>
+            </td>
+            <td>
+              <span class="label">Design</span>
+              <span class="value">Prospective, quasi-experimental, sequential (non-randomized) phase design</span>
+              <span class="label">N</span>
+              <span class="value">150 high-risk patients: Control n=53, Moving Safely n=53, Moving Safely+Brace n=44</span>
+              <span class="label">Follow-up</span>
+              <span class="value">Preop, discharge, 8&ndash;12 weeks</span>
+              <span class="label">Setting</span>
+              <span class="value">Single centre, Winnipeg, Canada (2017&ndash;2018 recruitment)</span>
+              <span class="label">Blinding</span>
+              <span class="value">Unblinded; sequential phase rollout (not randomized)</span>
+            </td>
+            <td>
+              <span class="label">Intervention</span>
+              <span class="value">QualiBreath Adjustable Fastening Brace + Moving Safely protocol, worn 24/7 for 6 weeks, fitted postoperatively</span>
+              <span class="label">Comparator</span>
+              <span class="value">Moving Safely alone; traditional sternal precautions (control)</span>
+              <span class="label">Population</span>
+              <span class="value">High-risk adults (insulin-dependent diabetes, PVD, BMI&ge;30, immunosuppressed, active smoker, COPD, chronic bronchodilator use, or redo-sternotomy)</span>
+              <span class="label">Exclusion</span>
+              <span class="value">Preop/perioperative cognitive impairment or language barrier precluding QoL survey completion</span>
+            </td>
+            <td>
+              <ul class="outcome-list">
+                <li><span class="primary-tag">Primary &middot;</span> Health-related quality of life (EQ-5D-5L, EQ-VAS)</li>
+                <li><span class="secondary-tag">Secondary &middot;</span> Spirometry (FVC, FEV1), sternal complications, hospital/ICU LOS, mortality, brace compliance/comfort survey</li>
+              </ul>
+              <p class="notable">Only study in this table isolating a support-device arm from a no-device arm in a modern high-risk population.</p>
+            </td>
+            <td>
+              <div class="stat-block">
+                <div class="stat-name">Statistical tests</div>
+                <div class="stat-desc">Repeated-measures ANOVA across 3 sequential phases; Kruskal-Wallis / chi-square for baseline comparisons; descriptive compliance survey.</div>
+              </div>
+              <hr class="cell-divider">
+              <div class="stat-block result-neutral">
+                <div class="stat-name">EQ-VAS (brace group effect)</div>
+                <div class="stat-desc">Group effect P=.59 &mdash; not significant. Group&times;Time interaction P=.01, but favoring the control (traditional precautions) arm's improvement, not the brace arm.</div>
+              </div>
+              <div class="stat-block result-neutral">
+                <div class="stat-name">EQ-5D-5L</div>
+                <div class="stat-desc">Group effect P=.13 &mdash; not significant.</div>
+              </div>
+              <div class="stat-block result-neutral">
+                <div class="stat-name">Sternal complications</div>
+                <div class="stat-desc">2% (control) vs. 5% (Moving Safely) vs. 7% (brace); P=.51 &mdash; not significant. Numerically highest in brace group but event counts tiny (1/53, 2/53, 3/44).</div>
+              </div>
+              <div class="stat-block result-neutral">
+                <div class="stat-name">Spirometry (FVC, FEV1)</div>
+                <div class="stat-desc">Group effects P=.55 (FVC) and P=.79 (FEV1) &mdash; not significant.</div>
+              </div>
+              <div class="stat-block result-bad">
+                <div class="stat-name">Brace compliance (descriptive, n=37 survey respondents)</div>
+                <div class="stat-desc">Only 14% wore the brace the full prescribed 6 weeks; 86% did not complete the prescribed course.</div>
+              </div>
+              <div class="stat-block result-bad">
+                <div class="stat-name">Brace comfort (descriptive, n=37 survey respondents)</div>
+                <div class="stat-desc">49% reported the brace "extremely uncomfortable," particularly around the axillary region.</div>
+              </div>
+            </td>
+            <td>
+              <div class="cs-block cs-small">
+                <div class="cs-outcome">EQ-VAS (brace group effect)</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-na">Cohen's d not calculable</span>
+                  <span class="cs-pill pill-red">Not significant (P=.59)</span>
+                </div>
+                <div class="cs-note">SDs presented graphically (error bars) in the source figure, not as text values &mdash; cannot back-calculate d. Result is non-significant regardless.</div>
+              </div>
+              <div class="cs-block cs-small">
+                <div class="cs-outcome">Sternal complications (brace vs. control, numeric contrast only)</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-na">Not meaningful (1 vs. 3 events)</span>
+                  <span class="cs-pill pill-red">Not significant (P=.51)</span>
+                </div>
+                <div class="cs-note">RR/ARR technically computable (RR&asymp;3.6) but uninterpretable given only 1 and 3 total events across arms of 53 and 44. Authors' own omnibus test is non-significant; do not over-interpret the numeric direction.</div>
+              </div>
+              <div class="cs-block cs-small">
+                <div class="cs-outcome">Brace compliance</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-red">86% non-completion</span>
+                  <span class="cs-pill pill-na">Descriptive proportion, no comparator arm</span>
+                </div>
+                <div class="cs-note">Single-arm survey (n=37 of 44 brace-group patients); not a between-group hypothesis test, so no RR/NNT applies. Reported here as a practically large adherence shortfall.</div>
+              </div>
+              <div class="cs-block cs-small">
+                <div class="cs-outcome">Brace comfort</div>
+                <div class="cs-row">
+                  <span class="cs-pill pill-red">49% "extremely uncomfortable"</span>
+                  <span class="cs-pill pill-na">Descriptive proportion, no comparator arm</span>
+                </div>
+                <div class="cs-note">Single-arm survey; no formal comparator group wore no device to test against. A near-majority reporting significant discomfort is treated as a practically large finding despite the absence of a formal effect-size statistic.</div>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      </div>
+
+      <div class="footnote">
+        <strong>Effect size interpretation:</strong> Cohen's d / dz &mdash; small &ge;0.20, medium &ge;0.50, large &ge;0.80, very large &ge;1.30. Per this project's convention, any non-significant p-value forces the clinical-significance pill red regardless of estimated magnitude. Estimated (rather than directly reported) effect sizes are explicitly labeled "estimated" and their derivation method is given in the accompanying note. &nbsp;|&nbsp;
+        <strong>Note on descriptive (single-arm) findings:</strong> Siemens et al. 2026 brace compliance and comfort figures come from a survey of the brace arm only, with no no-device comparator; these are reported as proportions, not RR/NNT, and are marked accordingly. &nbsp;|&nbsp;
+        <strong>Note on device scope:</strong> Neither study in this table evaluates the Posthorax vest. El-Ansary 2008 tests an adjustable fastening brace, compression garment, and sports tape; Siemens 2026 tests the QualiBreath brace. &nbsp;|&nbsp;
+        <strong>Abbreviations:</strong> ARR = absolute risk reduction; CI = confidence interval; d = Cohen's d; dz = Cohen's d for paired/within-subject data; EQ-5D-5L = EuroQol 5-Dimension 5-Level; EQ-VAS = EuroQol visual analogue scale; FEV1 = forced expiratory volume in 1 second; FVC = forced vital capacity; LOS = length of stay; MD = mean difference; NNT = number needed to treat; NS = not significant; RR = risk ratio; SD = standard deviation; SPPB = Short Physical Performance Battery; VAS = visual analogue scale.
+      </div>
+
+    </div>
+  </div>
+
+
   <!-- NEXT SECTION LINK -->
   <div class="next-section-wrap">
     <a href="guidelines_matrix.html" class="next-section">
@@ -2169,6 +2570,69 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.05 });
 reveals.forEach(el => observer.observe(el));
 </script>
+<script>
+const SUPP_STUDIES = [
+  {
+    group: "rct",
+    name: "El-Ansary et al., 2008",
+    flag: "flag-rct", flagLabel: "Randomized Intervention",
+    desc: "Adjustable brace vs. compression garment vs. sports tape (n=15, chronic instability)",
+    limit: "Chronic sternal-instability population; different device class than Posthorax; excluded from core 16-study PICO matrix.",
+    outcomes: ["gu","gd","ne","gd","ne","ne","gu","gu"]
+  },
+  {
+    group: "cohort",
+    name: "Siemens et al., 2026",
+    flag: "flag-cohort", flagLabel: "Prospective Cohort",
+    desc: "Moving Safely &plusmn; QualiBreath brace, high-risk patients (n=150)",
+    limit: "QualiBreath brace, not Posthorax; sequential (non-randomized) phase design.",
+    outcomes: ["rw","ne","rw","ne","b","b","ne","b"]
+  }
+];
+
+const SUPP_GROUP_LABELS = {
+  rct: "Randomized Controlled Trials &amp; Randomized Intervention Studies",
+  cohort: "Prospective Cohort Studies"
+};
+const SUPP_GROUP_ORDER = ["rct","cohort"];
+
+function suppPillHTML(val) {
+  if (val === "gd") return `<span class="pill pill-green-down">&#8595; Favorable</span>`;
+  if (val === "gu") return `<span class="pill pill-green-up">&#8593; Favorable</span>`;
+  if (val === "b")  return `<span class="pill pill-blue">= No change</span>`;
+  if (val === "rw") return `<span class="pill pill-warn">&#10005; Unfavorable</span>`;
+  return `<span class="pill pill-gray">NE</span>`;
+}
+
+function renderSuppTable() {
+  const tbody = document.getElementById("supp-table-body");
+  tbody.innerHTML = "";
+  SUPP_GROUP_ORDER.forEach(group => {
+    const studies = SUPP_STUDIES.filter(s => s.group === group);
+    if (studies.length === 0) return;
+    const gtr = document.createElement("tr");
+    gtr.className = "group-header";
+    gtr.innerHTML = `<td colspan="9">${SUPP_GROUP_LABELS[group]}</td>`;
+    tbody.appendChild(gtr);
+    studies.forEach(study => {
+      const tr = document.createElement("tr");
+      let html = `<td class="cell-study">
+        <span class="study-flag ${study.flag}">${study.flagLabel}</span>
+        <div class="study-name">${study.name}</div>
+        <div class="study-desc">${study.desc}</div>
+        ${study.limit ? `<div class="study-limit">&#9888; ${study.limit}</div>` : ""}
+      </td>`;
+      study.outcomes.forEach(val => {
+        html += `<td class="cell-outcome">${suppPillHTML(val)}</td>`;
+      });
+      tr.innerHTML = html;
+      tbody.appendChild(tr);
+    });
+  });
+}
+renderSuppTable();
+</script>
+
 
 </body>
 </html>
